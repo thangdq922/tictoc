@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css';
-import Layout from "./component/Layout/Common/index";
-import User from "./component/Layout/User";
+import Layout from "./component/Layouts/Common/index";
+import User from "./component/Layouts/User";
 import { publicR, errorR, privateR } from "./route/routes";
 
 
