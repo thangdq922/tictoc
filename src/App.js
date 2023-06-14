@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
+import Layout from "./component/Layout/Common/index";
+import User from "./component/Layout/User";
+import { publicR, errorR, privateR } from "./route/routes";
+
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {publicR.map((route, index) => {
+            const Page = route.component
+            return <Route key={index} path={route.path} element={<Page />} />
+          })}
+        </Route>
+        <Route path="/u" element={<User />}>
+          {privateR.map((route, index) => {
+            const Page = route.component
+            return <Route key={index} path={route.path} element={<Page />} />
+          })}
+        </Route>
+        {errorR.map((route, index) => {
+          const Page = route.component
+          return <Route key={index} path={route.path} element={<Page />} />
+        })}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
