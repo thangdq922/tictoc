@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./component/Layouts/Common/index";
-import User from "./component/Layouts/User";
+import User from "./Layouts/User";
 import { publicR, errorR, privateR } from "./route/routes";
+import Default from "./Layouts/Default";
 
 
 
@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Default />}>
           {publicR.map((route, index) => {
             const Page = route.component
             return <Route key={index} path={route.path} element={<Page />} />

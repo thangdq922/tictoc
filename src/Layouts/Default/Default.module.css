@@ -7,9 +7,12 @@
 
 .container {
     width: 1150px;
-   display: flex;
+    padding: 0 24px;
+    display: flex;
+    
 }
 
-.content{
+.content {
     flex: 1;
+    
 }

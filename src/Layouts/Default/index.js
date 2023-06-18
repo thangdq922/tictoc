@@ -1,10 +1,10 @@
-import Header from "./Header";
-import SideBar from "./Sidebar";
+import Header from "../Common/Header";
+import SideBar from "../Common/Sidebar";
 import { Outlet } from "react-router-dom";
-import styles from "./Common.module.css"
+import styles from "./Default.module.css"
 
 
-function Common() {
+function Default() {
     return (
         <div className={styles.wrapper}>
             <Header />
@@ -18,4 +18,4 @@ function Common() {
     )
 }
 
-export default Common
+export default Default
