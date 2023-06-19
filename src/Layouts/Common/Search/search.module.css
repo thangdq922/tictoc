@@ -62,7 +62,19 @@ input:not(:placeholder-shown)~.search-btn {
     right: 13%;
     top: 50%;
     transform: translateY(-50%);
-    opacity: 0;
+}
+
+.loading {
+    animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
 
 .spilter {

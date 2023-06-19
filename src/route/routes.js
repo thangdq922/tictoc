@@ -9,13 +9,13 @@ const publicR = [
     {path: '/', component: Home},
     {path: '/following', component: Following},
     {path: '/search', component: Searchs},
-
+    {path: '/:nickname', component: Profile},
     
 ]
 
 const privateR =[
     {path: '/u/upload', component: Upload},
-    {path: '/u/profile', component: Profile},
+    // {path: '/u/profile', component: Profile},
 
 
 ]
