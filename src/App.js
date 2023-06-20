@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import User from "./layouts/User";
 import { publicR, errorR, privateR } from "./route/index";
-import Default from "./layouts/Default";
+import {DefaultLayout, User} from "./layouts";
 
 
 
@@ -11,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Default />}>
+        <Route path="/" element={<DefaultLayout />}>
           {publicR.map((route, index) => {
             const Page = route.component
             return <Route key={index} path={route.path} element={<Page />} />

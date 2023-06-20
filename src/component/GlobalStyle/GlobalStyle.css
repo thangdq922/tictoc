@@ -68,7 +68,7 @@ input,
   border: none;
 }
 
-a[href] {
+a {
   color: #383737;
   text-decoration: none;
 }
