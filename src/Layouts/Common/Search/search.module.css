@@ -38,7 +38,7 @@ form {
 }
 
 input {
-    font-family: "IBM Plex Sans", ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+    font-family: var(--font-family);    
     border: none;
     background: transparent;
     outline: none;

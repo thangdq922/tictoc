@@ -4,12 +4,14 @@ import NoPage from "../pages/ErrorPage/noPage";
 import Upload from "../pages/User/Upload/upload";
 import Profile from "../pages/User/Profile/profile";
 import Searchs from "../pages/Common/Search/search";
+import Config from '../config';
+
 
 const publicR = [
-    {path: '/', component: Home},
-    {path: '/following', component: Following},
-    {path: '/search', component: Searchs},
-    {path: '/:nickname', component: Profile},
+    { path: Config.routes.home, component: Home },
+    { path: Config.routes.following, component: Following },
+    { path: Config.routes.profile, component: Profile },
+    { path: Config.routes.search, component: Searchs, layout: null },
     
 ]
 

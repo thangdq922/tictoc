@@ -8,7 +8,7 @@ import { Wrapper as PopperWrapper } from '../../../component/Popper';
 import { SearchIcon } from "../../../component/Icons";
 import styles from './search.module.css'
 import { useDebounce } from "../../../hooks";
-import * as searchServices from '../../../apiServices/searchServices';
+import * as searchService from '../../../services/searchService';
 
 
 
@@ -32,7 +32,7 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const result = await searchServices.search(debounced);
+            const result = await searchService.search(debounced);
 
             setSearchResult(result);
             setLoading(false);
@@ -50,8 +50,17 @@ function Search() {
         setShowResult(false)
     }
 
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+
+
 
     return (
+        <div>
         <HeadlessTippy
             interactive
             visible={showResult && searchResult.length > 0}
@@ -74,10 +83,7 @@ function Search() {
                         placeholder='Search accounts or videos'
                         value={searchValue}
                         spellCheck={false}
-                        onChange={(e) => {
-                            setSearchValue(e.target.value)
-                            setShowResult(true)
-                        }}
+                        onChange={handleChange}
                         onFocus={() => setShowResult(true)}
                     />
                     {searchValue && !loading && (<FontAwesomeIcon
@@ -92,6 +98,7 @@ function Search() {
                 </form>
             </div>
         </HeadlessTippy>
+        </div>
     )
 }
 

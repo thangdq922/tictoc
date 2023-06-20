@@ -11,6 +11,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
+
 
 import styles from './Header.module.css'
 import images from '../../../assets/image';
@@ -19,6 +21,8 @@ import Menu from '../../../component/Popper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '../../../component/Icons';
 import Image from '../../../component/Image';
 import Search from '../Search';
+import Config from '../../../config';
+
 
 
 
@@ -95,12 +99,12 @@ function Header() {
     <header className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles['logo']}>
-          <a aria-label="Vào bảng tin Cho bạn trên TikTok" href="/">
+          <Link aria-label="Vào bảng tin Cho bạn trên TikTok" to={Config.routes.home}>
             <img src={images.logo} alt="TikTok" />
-          </a>
+          </Link>
         </div>
 
-    <Search/>
+        <Search />
 
         <div className={styles.actions}>
 
