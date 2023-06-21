@@ -1,13 +1,14 @@
-
-
 import Menu, {MenuItem} from "./Menu";
 import styles from "./Sidebar.module.css"
 import config from '../../../config'
 import {HomeIcon,UserGroupIcon,LiveIcon} from '../../../component/Icons'
+import SuggestedAccounts from "../../../component/SuggestedAccounts/SuggestedAccounts";
 
 
 
 function SideBar() {
+
+  
     return (
         <aside className={styles.wrapper}>
             <Menu>
@@ -15,6 +16,9 @@ function SideBar() {
                 <MenuItem to= {config.routesPublic.following} icon ={<UserGroupIcon/>} >Following</MenuItem>
                 <MenuItem to= {config.routesPublic.live} icon ={<LiveIcon/>} >LIVE</MenuItem>
             </Menu>
+
+            <SuggestedAccounts label="Suggested Accounts" />
+            <SuggestedAccounts label="Following Accounts" />
         </aside>
     )
 };
