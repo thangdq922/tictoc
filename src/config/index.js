@@ -1,7 +1,8 @@
-import routes from './routes';
+import {routesPrivate,routesPublic} from './routes';
 
 const config = {
-    routes,
+    routesPrivate,
+    routesPublic
 };
 
 export default config;

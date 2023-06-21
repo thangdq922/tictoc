@@ -27,7 +27,7 @@ import Config from '../../../config';
 
 
 function Header() {
-  const currentUser = false;
+  const currentUser = true;
 
   const MENU_ITEMS = [
     {
@@ -99,7 +99,7 @@ function Header() {
     <header className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles['logo']}>
-          <Link aria-label="Vào bảng tin Cho bạn trên TikTok" to={Config.routes.home}>
+          <Link aria-label="Vào bảng tin Cho bạn trên TikTok" to={Config.routesPublic.home}>
             <img src={images.logo} alt="TikTok" />
           </Link>
         </div>
@@ -140,8 +140,7 @@ function Header() {
             {currentUser ? (
               <Image
                 className={styles['user-avatar']}
-                src="adda"
-                // src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/8e3372004a5850a78ee347f0d24e85c5~c5_100x100.jpeg?x-expires=1687143600&x-signature=iyiBzmWVAUGs%2BYQAyuweSm6bkrQ%3D"
+                src="aaa"
                 alt="Nguyen Van A"
               />
             ) : (

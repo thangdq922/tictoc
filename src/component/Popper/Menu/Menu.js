@@ -33,28 +33,31 @@ function Menu({ children, items = [], onChange = defaultFn }) {
         });
     };
 
+    const renderResult = (attrs) => (
+        <div className={styles['menu-list']} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={styles['menu-popper']}>
+                {history.length > 1 && (
+                    <Header
+                        title="Language"
+                        onBack={() => {
+                            setHistory((prev) => prev.slice(0, prev.length - 1));
+                        }}
+                    />
+                )}
+                <div className={styles['menu-body']}>{renderItems()}</div>
+            </PopperWrapper>
+        </div>
+    )
+
     return (
         <Tippy
             interactive
             delay={[0, 700]}
             offset={[12, 8]}
-            hideOnClick = {false}
+            hideOnClick={false}
             placement="bottom-end"
-            render={(attrs) => (
-                <div className={styles['menu-list']} tabIndex="-1" {...attrs}>
-                    <PopperWrapper className={styles['menu-popper']}>
-                        {history.length > 1 && (
-                            <Header
-                                title="Language"
-                                onBack={() => {
-                                    setHistory((prev) => prev.slice(0, prev.length - 1));
-                                }}
-                            />
-                        )}
-                          <div className={styles['menu-body']}>{renderItems()}</div>
-                    </PopperWrapper>
-                </div>
-            )}
+            render={renderResult}
+            //reset menu when click out
             onHide={() => setHistory((prev) => prev.slice(0, 1))}
         >
             {children}
