@@ -1,20 +1,34 @@
-import axios from "axios";
+import { useEffect, useState } from "react";
 
-
+import httpRequest from '../../utils/httpRequest';
 import AccountItem from './AccountItem'
 import styles from './SuggestedAccount.module.css'
-import { useEffect, useState } from "react";
 
 function SuggestedAccounts({ label }) {
     const [accounts, setAccounts] = useState([])
+    const [viewAccount, setViewAccount] = useState('less')
+
+    const showAccount = () =>
+        {viewAccount === 'less' ? setViewAccount('more') : setViewAccount('less')}
+    
+    
 
     useEffect(() => {
-        axios.get(`https://tiktok.fullstack.edu.vn/api/users/search?q=uu&type=less`)
-            .then(res => {
-                setAccounts(res.data.data);
+        // httpRequest.get(`https://tiktok.fullstack.edu.vn/api/users/search?q=uu&type=less`)
+        httpRequest({
+            method: 'get',
+            url: 'users/search',
+            params: {
+                q: 'uu',
+                type: viewAccount,
+            },
+        })
+            .then((response) => {
+                setAccounts(response.data.data);
             })
             .catch(error => console.log(error))
-    }, []
+
+    }, [viewAccount]
     )
 
     return (
@@ -23,7 +37,9 @@ function SuggestedAccounts({ label }) {
             {accounts.map((result) =>
                 <AccountItem key={result.id} data={result} />
             )}
-            <p className={styles['more-btn']}>See more</p>
+            <p className={styles['more-btn']} onClick={showAccount}>
+                See {viewAccount === 'less' ? 'more' : 'less'}
+            </p>
         </div>
     )
 }
