@@ -1,9 +1,9 @@
-import Following from "../pages/Common/Following/index";
-import Home from "../pages/Common/Home/index";
-import NoPage from "../pages/ErrorPage/noPage";
-import Upload from "../pages/User/Upload/upload";
-import Profile from "../pages/User/Profile/profile";
-import Searchs from "../pages/Common/Search/search";
+import Following from "../pages/Default/Following/Following";
+import Home from "../pages/Default/Home/Home";
+import NoPage from "../pages/ErrorPage";
+import Upload from "../pages/User/Upload";
+import Profile from "../pages/User/Profile";
+import Searchs from "../pages/Default/Search";
 import Config from '../config';
 import { LiveIcon } from "../component/Icons";
 

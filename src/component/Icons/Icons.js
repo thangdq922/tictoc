@@ -113,3 +113,71 @@ export const LiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => 
         <path d="M15 15.134C15.6667 15.5189 15.6667 16.4811 15 16.866L12 18.5981C11.3333 18.983 10.5 18.5019 10.5 17.7321L10.5 14.2679C10.5 13.4981 11.3333 13.017 12 13.4019L15 15.134Z"></path>
     </svg>
 );
+
+export const MusicIcon = ({ width = '1em', height = '1.6rem', className }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={width}
+        height={height}
+        viewBox="0 0 48 48"
+        fill="rgba(22, 24, 35, 1)"
+        styletype="0"
+        className={className}
+    >
+        <path d="M35 10.76a1 1 0 0 0-1.22-.98l-15.99 3.64a1 1 0 0 0-.78.97V38c.03 2.17-2.2 4.43-5.4 5.28-3.56.96-6.96-.2-7.6-2.57-.63-2.37 1.74-5.07 5.3-6.02a9.2 9.2 0 0 1 3.7-.25V14.39a5 5 0 0 1 3.9-4.87l15.98-3.64A5 5 0 0 1 39 10.76v22.36c.08 2.2-2.17 4.5-5.4 5.36-3.56.95-6.96-.2-7.6-2.57-.63-2.38 1.74-5.08 5.3-6.03a9.2 9.2 0 0 1 3.7-.25V10.76Z"></path>
+    </svg>
+)
+
+export const HeartIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={width}
+        height={height}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className={className}
+    >
+        <g fillRule="evenodd" clipPath="url(#heart-fill-03bd63df_a)" clipRule="evenodd">
+            <path d="M7.5 2.25c3 0 4.5 2 4.5 2s1.5-2 4.5-2c3.5 0 6 2.75 6 6.25 0 4-3.269 7.566-6.25 10.25C14.41 20.407 13 21.5 12 21.5s-2.45-1.101-4.25-2.75C4.82 16.066 1.5 12.5 1.5 8.5c0-3.5 2.5-6.25 6-6.25Z"></path>
+            <path fill="black" fillOpacity=".03" d="M2.402 12.2c1.187 2.497 3.357 4.727 5.348 6.55C9.55 20.399 11 21.5 12 21.5s2.41-1.093 4.25-2.75c2.98-2.684 6.25-6.25 6.25-10.25 0-.087-.002-.174-.005-.26C20.567 13.661 13.68 18.5 11.75 18.5c-1.437 0-6.14-2.687-9.348-6.3Z"></path>
+        </g><defs><clipPath id="heart-fill-03bd63df_a">
+            <path fill="white" d="M0 0h24v24H0z"></path>
+        </clipPath>
+        </defs>
+    </svg>
+)
+
+export const CommentIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={width}
+        height={height}
+        viewBox="0 0 48 48"
+        fill="currentColor"
+        className={className}
+    >
+        <path d="M3.5 21.44C3.5 11.47 13.04 4 24 4s20.5 7.47 20.5 17.44c0 5.85-2.93 10.69-6.47 14.37a41.67 41.67 0 0 1-11.06 7.97A2.05 2.05 0 0 1 24 41.95v-3.08c-10.96 0-20.5-7.47-20.5-17.43Zm11.79 3.07a2.56 2.56 0 1 0 0-5.12 2.56 2.56 0 0 0 0 5.12Zm8.71 0a2.56 2.56 0 1 0 0-5.12 2.56 2.56 0 0 0 0 5.12Zm11.27-2.56a2.56 2.56 0 1 0-5.12 0 2.56 2.56 0 0 0 5.12 0Z"></path>
+    </svg>
+)
+
+export const ShareIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={width}
+        height={height}
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        className={className}
+    >
+        <path fill="currentColor" fillRule="evenodd" d="M10.938 3.175a.674.674 0 0 1 1.138-.488l6.526 6.215c.574.547.554 1.47-.043 1.991l-6.505 5.676a.674.674 0 0 1-1.116-.508V13.49s-6.985-1.258-9.225 2.854c-.209.384-1.023.518-.857-1.395.692-3.52 2.106-9.017 10.082-9.017V3.175Z" clipRule="evenodd"></path>
+        <path fill="#161823" fillRule="evenodd" d="m15.754 6.212 1.295 2.59a1.122 1.122 0 0 1-.268 1.349l-5.799 5.042s-.28 1.403.562 1.403c.842 0 7.578-6.174 7.578-6.174s.28-.842-.561-1.684c-.843-.842-2.807-2.526-2.807-2.526Z" clipRule="evenodd" opacity=".03"></path>
+        <path fill="url(#pc-share-44d9fe83_a)" fillRule="evenodd" d="M10.937 6.23v7.297s-6.683-.942-8.777 2.246C.146 18.839.331 12.309 3.363 9.057c3.033-3.252 7.574-2.827 7.574-2.827Z" clipRule="evenodd" opacity=".09"></path>
+        <defs><radialGradient id="pc-share-44d9fe83_a" cx="0" cy="0" r="1" gradientTransform="rotate(-113.046 11.628 5.43) scale(8.93256 8.78076)" gradientUnits="userSpaceOnUse">
+            <stop></stop>
+            <stop offset=".995" stopOpacity=".01"></stop>
+            <stop offset="1" stopOpacity=".01"></stop>
+        </radialGradient>
+        </defs>
+    </svg>
+)
+
