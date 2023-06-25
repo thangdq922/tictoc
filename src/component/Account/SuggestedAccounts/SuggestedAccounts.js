@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import httpRequest from '../../utils/httpRequest';
+import httpRequest from '../../../utils/httpRequest';
 import AccountItem from './AccountItem'
 import styles from './SuggestedAccount.module.css'
 

@@ -3,13 +3,14 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../Button';
 import styles from './AccountPreview.module.css';
+import Image from '../../Image/Image';
 
 
 function AccountPreview({data}) {
     return (
         <div className={styles['wrapper']}>
             <div className={styles['header']}>
-                <img
+                <Image
                     className={styles['avatar']}
                     src={data.avatar}
                     alt=""
@@ -25,7 +26,7 @@ function AccountPreview({data}) {
                 </p>
                 <p className={styles['name']}>{data.full_name}</p>
                 <p className={styles['analytics']}>
-                    <strong className={styles['value']}>8.2M </strong>
+                    <strong className={styles['value']}>{data['followers_count']}M </strong>
                     <span className={styles['label']}>Followers</span>
                     <strong className={styles['value']}>8.2M </strong>
                     <span className={styles['label']}>Likes</span>

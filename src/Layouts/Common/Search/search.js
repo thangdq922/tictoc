@@ -31,9 +31,7 @@ function Search() {
 
         const fetchApi = async () => {
             setLoading(true);
-
             const result = await searchService.search(debouncedValue);
-
             setSearchResult(result);
             setLoading(false);
         };

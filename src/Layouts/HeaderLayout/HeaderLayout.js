@@ -2,7 +2,7 @@ import Header from "../Common/Header";
 import { Outlet } from "react-router-dom";
 
 
-function User() {
+function HeaderLayout() {
     return (
         <div>
             <Header />
@@ -13,4 +13,4 @@ function User() {
     )
 }
 
-export default User
+export default HeaderLayout

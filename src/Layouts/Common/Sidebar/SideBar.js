@@ -2,7 +2,7 @@ import Menu, {MenuItem} from "./Menu";
 import styles from "./Sidebar.module.css"
 import config from '../../../config'
 import {HomeIcon,UserGroupIcon,LiveIcon} from '../../../component/Icons'
-import SuggestedAccounts from "../../../component/SuggestedAccounts/SuggestedAccounts";
+import SuggestedAccounts from "../../../component/Account/SuggestedAccounts";
 
 
 

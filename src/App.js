@@ -1,6 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { Suspense } from "react";
+
 import { publicR, errorR, privateR } from "./route/index";
-import {DefaultLayout, User} from "./layouts";
+import Loader from "./component/Loader/Loader";
+import config from "./config";
 
 
 
@@ -8,26 +11,55 @@ import {DefaultLayout, User} from "./layouts";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<DefaultLayout />}>
-          {publicR.map((route, index) => {
-            const Page = route.component
-            return <Route key={index} path={route.path} element={<Page />} />
-          })}
-        </Route>
-        <Route path="/u" element={<User />}>
-          {privateR.map((route, index) => {
-            const Page = route.component
-            return <Route key={index} path={route.path} element={<Page />} />
-          })}
-        </Route>
+  
+    <Suspense fallback={<Loader />}>
+      <Routes location={videoDetail || location}>
+        {publicR.map((route, index) => {
+          const Page = route.component;
+          let Layout = route.layout;
+          return (
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <Layout>
+                  <Page />
+                </Layout>
+              }
+            />
+          );
+        })}
+        {privateR.map((route, index) => {
+          const Page = route.component;
+          let Layout = route.layout;
+
+          return (
+            <Route
+              path={route.path}
+              key={index}
+              element={
+                <Layout>
+                  {/* <ProtectedRoute user={user}> */}
+                  <Page />
+                  {/* </ProtectedRoute> */}
+                </Layout>
+              }
+            />
+          );
+        })}
+
         {errorR.map((route, index) => {
           const Page = route.component
           return <Route key={index} path={route.path} element={<Page />} />
         })}
+
       </Routes>
-    </BrowserRouter>
+      {videoDetail && (
+        <Routes>
+          <Route exact path={config.routesPublic.video} element={<ModalVideo />} />
+        </Routes>
+      )}
+    </Suspense>
   );
 }
 

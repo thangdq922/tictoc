@@ -1,13 +1,17 @@
 export const routesPublic = {
     home: '/',
-    following: '/following',
-    profile: '/@:nickname',
+    video: "/@:nickname/videos/:id",
     upload: '/upload',
     search: '/search',
-    live : '/live'
+    live: '/live',
+    register: '/register',
+    login: '/login',
+    messages: "/messages",
 };
 
 export const routesPrivate = {
-    upload: '/u/upload'
+    upload: '/upload',
+    following: '/following',
+    profile: "/@:nickname"
 };
 

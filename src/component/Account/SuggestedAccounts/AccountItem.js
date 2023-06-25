@@ -5,9 +5,9 @@ import Tippy from '@tippyjs/react/headless';
 
 
 import styles from './SuggestedAccount.module.css'
-import Image from '../Image';
-import AccountPreview from './AccountPreview/AccountPreview';
-import { Wrapper as PopperWrapper } from '../../component/Popper';
+import Image from '../../Image';
+import AccountPreview from '../AccountPreview/';
+import { Wrapper as PopperWrapper } from '../../Popper';
 
 
 

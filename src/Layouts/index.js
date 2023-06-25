@@ -1,2 +1,2 @@
 export {default as DefaultLayout} from './Default/Default';
-export {default as User} from './User/User';
+export {default as HeaderLayout} from './HeaderLayout/HeaderLayout';
