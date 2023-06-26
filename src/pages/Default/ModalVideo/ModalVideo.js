@@ -13,8 +13,6 @@ function ModalVideo() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log('cc')
-
   return (
     <CustomModal fullScreen>
       <VideoDetail data={location.state?.video} />

@@ -16,8 +16,7 @@ const fullScreen = {
   zIndex: "10",
   position: "relative",
   content: {
-    // position: "fixed",
-    position: "relative",
+    position: "fixed",
     inset: "0px",
     background: "rgb(255, 255, 255)",
     zIndex: "10",

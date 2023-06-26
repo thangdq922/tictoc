@@ -136,7 +136,7 @@ function Header() {
 
 
 
-          <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+          <Menu items={currentUser ? userMenu : MENU_ITEMS}  offset={[12, 8]} onChange={handleMenuChange}>
             {currentUser ? (
               <Image
                 className={styles['user-avatar']}

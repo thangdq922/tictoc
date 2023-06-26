@@ -7,6 +7,8 @@ export const routesPublic = {
     register: '/register',
     login: '/login',
     messages: "/messages",
+    profileLink: (nickname) => `/@${nickname}`,
+    videoLink: (content) => `/@${content.user.nickname}/videos/${content.id}`
 };
 
 export const routesPrivate = {

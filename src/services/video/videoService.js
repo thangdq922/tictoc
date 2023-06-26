@@ -21,9 +21,35 @@ export async function getVideo(id) {
     try {
         const res = await httpRequest({
             method: 'get',
-            url: `videos/${id}`,          
+            url: `videos/${id}`,
         })
         return res.data.data;
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export async function postVideo(formData) {
+    try {
+        await httpRequest({
+            method: 'post',
+            url: 'videos',
+            data: formData,
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export async function deleteVideo(id) {
+    try {
+        await httpRequest({
+            method: 'delete',
+            url: `videos/${id}`,
+        })
     } catch (err) {
         console.log(err);
     }

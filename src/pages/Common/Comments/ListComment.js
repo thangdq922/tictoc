@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { commentService } from "~/features/comments/services/commentService";
-import { getFullName } from "~/utils/common";
-import Button from "../../../../components/Core/Button";
-import Image from "../../../../components/Image";
-import Loader from "../../../../components/Core/Loader";
-import WrapperAuth from "../../../../components/WrapperAuth";
-import styles from "./ListComment.module.scss";
 import { FaRegHeart } from "react-icons/fa";
-import { config } from "~/config";
-import { useSelector } from "react-redux";
-import { videosService } from "~/features/videos/services/videosService";
+// import { useSelector } from "react-redux";
+
+
+import * as commentService from "../../../services/video/commentService";
+import { getFullName } from "../../../utils/common";
+import Button from "../../../component/Button";
+import Image from "../../../component/Image";
+import Loader from "../../../component/Loader";
+// import WrapperAuth from "../../../../components/WrapperAuth";
+import styles from "./ListComment.module.css";
+import config from "../../../config";
+import * as videosService from "../../../services/video/videoService";
 
 function ListComment({ video }) {
   const [listComment, setListComment] = useState({});
@@ -21,10 +23,8 @@ function ListComment({ video }) {
     const fetchApi = async () => {
       const result = await commentService.getListComment(video.id);
       setListComment(result);
-
       setLoading(false);
     };
-
     fetchApi();
   }, [video]);
 
@@ -39,16 +39,16 @@ function ListComment({ video }) {
   };
 
   // Delete a video
-  const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+  // const { user } = useSelector((state) => state.user);
+  // const navigate = useNavigate();
 
-  const deleteVideo = async () => {
-    if (user.id === video.user_id) {
-      await videosService.deleteVideo(video.id);
-      const userProfile = config.routes.profileLink(user.nickname);
-      navigate(userProfile);
-    }
-  };
+  // const deleteVideo = async () => {
+  //   if (user.id === video.user_id) {
+  //     await videosService.deleteVideo(video.id);
+  //     const userProfile = config.routes.profileLink(user.nickname);
+  //     navigate(userProfile);
+  //   }
+  // };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ function ListComment({ video }) {
 
   return (
     <div className={styles.content_container}>
-      <Button type="submit" primary onClick={deleteVideo}>
+      <Button type="submit" primary className={styles.button} >
         Delete Video
       </Button>
       <div className={styles.comment_list_container}>
@@ -67,10 +67,10 @@ function ListComment({ video }) {
               listComment.map((comment) => (
                 <div className={styles.comment_item_container} key={comment.id}>
                   <div className={styles.comment_content_container}>
-                    <Image src={comment.user.avatar} />
+                    <Image src={comment.user.avatar} className={styles.img} />
                     <div className={styles.comment_container}>
                       <Link
-                        to={config.routes.profileLink(comment.user.nickname)}
+                        to={config.routesPublic.profileLink(comment.user.nickname)}
                         className={styles.account_item}
                       >
                         <p className={styles.comment_user}>
@@ -78,8 +78,8 @@ function ListComment({ video }) {
                         </p>
                       </Link>
 
-                      <p className={styles.comment_text}>{comment.comment}</p>
-                      <p className={styles.created_at}>{comment.created_at}</p>
+                      <p className={styles.comment_text}>{comment.comment}cc</p>
+                      <p className={styles.created_at}>{comment.created_at}cc</p>
                     </div>
                     <div className={styles.action_container}>
                       <div className={styles.like_wrapper}>
@@ -108,21 +108,25 @@ function ListComment({ video }) {
           <Loader />
         )}
       </div>
-      <WrapperAuth>
+      {/* <WrapperAuth> */}
+      <div>
         <form onSubmit={onFormSubmit}>
           <div className={styles.bottom_comment_container}>
             <input
+              className={styles.input}
               type="text"
               placeholder="Add comment..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <Button type="submit" primary>
+            <Button type="submit" primary className={styles.submit}>
               Post
             </Button>
           </div>
         </form>
-      </WrapperAuth>
+      </div>
+      {/* </WrapperAuth> */}
+
     </div>
   );
 }

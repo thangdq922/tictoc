@@ -59,43 +59,44 @@ function Search() {
 
     return (
         <div>
-        <HeadlessTippy
-            interactive
-            visible={showResult && searchResult.length > 0}
-            render={(attrs) => (
-                <div className={styles['search-result']} tabIndex="-1" {...attrs} >
-                    <PopperWrapper>
-                        <h4 className={styles['search-title']}>Accounts</h4>
-                        {searchResult.map((result) =>
-                            <AccountItem key={result.id} data={result} />
-                        )}
-                    </PopperWrapper>
+            <HeadlessTippy
+                interactive
+                visible={showResult && searchResult.length > 0}
+                render={(attrs) => (
+                    <div className={styles['search-result']} tabIndex="-1" {...attrs} >
+                        <PopperWrapper>
+                            <h4 className={styles['search-title']}>Accounts</h4>
+                            {searchResult.map((result) =>
+                                <AccountItem key={result.id} data={result} />
+                            )}
+                        </PopperWrapper>
+                    </div>
+                )}
+                onClickOutside={handleHideResult}
+            >
+                <div className={styles.search}>
+                    <form className={styles.form}>
+                        <input
+                            className={styles.input}
+                            ref={inputRef}
+                            placeholder='Search accounts or videos'
+                            value={searchValue}
+                            spellCheck={false}
+                            onChange={handleChange}
+                            onFocus={() => setShowResult(true)}
+                        />
+                        {searchValue && !loading && (<FontAwesomeIcon
+                            icon={faCircleXmark}
+                            className={styles['reset-search']}
+                            onClick={handleClear} />)}
+                        {loading && <FontAwesomeIcon icon={faSpinner} className={styles.loading} />}
+                        <span className={styles.spilter}></span>
+                        <button className={styles['search-btn']}>
+                            <SearchIcon />
+                        </button>
+                    </form>
                 </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            <div className={styles.search}>
-                <form>
-                    <input
-                        ref={inputRef}
-                        placeholder='Search accounts or videos'
-                        value={searchValue}
-                        spellCheck={false}
-                        onChange={handleChange}
-                        onFocus={() => setShowResult(true)}
-                    />
-                    {searchValue && !loading && (<FontAwesomeIcon
-                        icon={faCircleXmark}
-                        className={styles['reset-search']}
-                        onClick={handleClear} />)}
-                    {loading && <FontAwesomeIcon icon={faSpinner} className={styles.loading} />}
-                    <span className={styles.spilter}></span>
-                    <button className={styles['search-btn']}>
-                        <SearchIcon />
-                    </button>
-                </form>
-            </div>
-        </HeadlessTippy>
+            </HeadlessTippy>
         </div>
     )
 }

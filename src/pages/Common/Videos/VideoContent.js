@@ -6,6 +6,8 @@ import styles from './Video.module.css'
 // import handleFollowFunc from "../../../../services/user/followService";
 import handleLikeFunc from "../../../services/video/likeService";
 import Video from "./VideoDetail/Video";
+import Menu from "../../../component/Popper/Menu/Menu";
+import { MENU_ITEMS_SHARE } from "../../../component/DataMenu/dataMenu";
 
 
 function VideoContent({ data }) {
@@ -45,7 +47,7 @@ function VideoContent({ data }) {
                     }}
                 >
                     <div className={styles['wrapper-video']}>
-                    <Video data={dataChange} />
+                        <Video className={styles.video} data={dataChange} />
                     </div>
                 </Link>
             </div>
@@ -71,11 +73,13 @@ function VideoContent({ data }) {
                     </button>
                 </Link>
 
-                <button className={styles['action-btn']}>
-                    <span className={styles['icon-btn']}>
-                        <ShareIcon /></span>
-                    <b>{data.shares_count}</b>
-                </button>
+                <Menu items={MENU_ITEMS_SHARE} offset={[150, 0]} >
+                    <button className={styles['action-btn']}>
+                        <span className={styles['icon-btn']}>
+                            <ShareIcon /></span>
+                        <b>{data.shares_count}</b>
+                    </button>
+                </Menu>
 
             </div>
         </div>
