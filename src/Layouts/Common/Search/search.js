@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HeadlessTippy from '@tippyjs/react/headless';
 import { useEffect, useRef, useState } from 'react';
 
-import AccountItem from "../../../component/AccountItem"
+import AccountItem from "../../../component/Account/AccountItem"
 import { Wrapper as PopperWrapper } from '../../../component/Popper';
 import { SearchIcon } from "../../../component/Icons";
 import styles from './search.module.css'

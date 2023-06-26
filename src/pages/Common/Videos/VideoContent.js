@@ -10,7 +10,6 @@ import Video from "./VideoDetail/Video";
 
 function VideoContent({ data }) {
 
-
     const [dataChange, setDataChange] = useState(data);
     const [user, setUser] = useState(dataChange.user);
 
@@ -42,7 +41,7 @@ function VideoContent({ data }) {
                     state={{
                         videoDetail: true,
                         video: dataChange,
-                        // prevPath: location.pathname,
+                        prevPath: window.location.pathname,
                     }}
                 >
                     <div className={styles['wrapper-video']}>
@@ -62,7 +61,7 @@ function VideoContent({ data }) {
                     state={{
                         videoDetail: true,
                         video: dataChange,
-                        // prevPath: location.pathname,
+                        prevPath: window.location.pathname,
                     }}
                 >
                     <button className={styles['action-btn']}>

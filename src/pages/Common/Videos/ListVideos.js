@@ -17,7 +17,6 @@ function ListVideos({ type }) {
     useEffect(() => {
         async function getListVideo() {
             const result = await videosService.getListVideo(type);
-            console.log(result)
             setVideos(result)
         }
 
@@ -38,7 +37,6 @@ function ListVideos({ type }) {
         }
         setPage((prev) => prev + 1);
     };
-
 
     return (
 

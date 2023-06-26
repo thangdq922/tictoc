@@ -1,15 +1,21 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Suspense } from "react";
 
 import { publicR, errorR, privateR } from "./route/index";
 import Loader from "./component/Loader/Loader";
 import config from "./config";
+import ModalVideo from "./pages/Default/ModalVideo";
+
 
 
 
 
 
 function App() {
+  const location = useLocation();
+  const videoDetail = location.state && location.state.videoDetail;
+  // const { user } = useSelector((state) => state.user);
+
   return (
   
     <Suspense fallback={<Loader />}>
@@ -29,6 +35,7 @@ function App() {
             />
           );
         })}
+          
         {privateR.map((route, index) => {
           const Page = route.component;
           let Layout = route.layout;

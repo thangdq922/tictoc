@@ -13,6 +13,7 @@ export async function getListVideo(type = 'for-you', page) {
         return res.data.data;
     } catch (err) {
         console.log(err);
+        return []
     }
 };
 

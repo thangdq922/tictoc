@@ -7,6 +7,7 @@ function Video({data}) {
 
     const videoRef = useRef();
     const [playing, setPlaying] = useState(false);
+    const videoTime = data.meta?.playtime_seconds || 0;
 
     const handleVideo = () => {
         if (playing) {
@@ -43,7 +44,7 @@ function Video({data}) {
         <video
             ref={videoRef}
             onClick={handleVideo}
-            className={styles.video}
+            className={videoTime < 20 ? `${styles['video_short']}  ${styles.video}`  :  `${styles.video}`}
             src={data.file_url}
             poster={data.thumb_url || ""}
             controls

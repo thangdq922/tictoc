@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 Modal.setAppElement("div");
 
-const redirectModal = (location, navigate) => {
+export const redirectModal = (location, navigate) => {
   if (location.state.prevPath) {
     return navigate(-1);
   } else navigate("/");
@@ -16,7 +16,7 @@ const fullScreen = {
   zIndex: "10",
   position: "relative",
   content: {
-    position: "fixed",
+    // position: "fixed",
     position: "relative",
     inset: "0px",
     background: "rgb(255, 255, 255)",

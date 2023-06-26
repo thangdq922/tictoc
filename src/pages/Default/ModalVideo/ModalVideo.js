@@ -1,16 +1,19 @@
 import React, { memo } from "react";
 import { IoClose } from "react-icons/io5";
-import styles from "./ModalVideo.module.scss";
-import Tiktok2 from "~/assets/images/Tiktok2.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import Image from "~/components/Image";
-import VideoDetail from "~/features/videos/components/VideoDetail";
-import CustomModal from "~/components/CustomModal";
-import { redirectModal } from "~/utils/common";
+
+import styles from "./ModalVideo.module.css";
+import images from "../../../assets/image/";
+import Image from "../../../component/Image";
+import VideoDetail from "../../Common/Videos/VideoDetail";
+import CustomModal from "./CustomModal";
+import { redirectModal } from "./CustomModal";
 
 function ModalVideo() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  console.log('cc')
 
   return (
     <CustomModal fullScreen>
@@ -25,7 +28,7 @@ function ModalVideo() {
         className={styles.home_button}
         onClick={() => redirectModal(location, navigate)}
       >
-        <Image src={Tiktok2} />
+        <Image className ={styles.cc} src={images.logoModal} />
       </div>
     </CustomModal>
   );

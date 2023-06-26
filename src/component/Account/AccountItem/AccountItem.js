@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import styles from './AccountItem.module.css';
-import Image from '../Image';
+import Image from '../../Image';
 
 
 function AccountItem({ data }) {

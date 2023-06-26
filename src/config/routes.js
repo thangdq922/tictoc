@@ -1,6 +1,6 @@
 export const routesPublic = {
     home: '/',
-    video: "/@:nickname/videos/:id",
+    video: '/:nickname/video/:id',
     upload: '/upload',
     search: '/search',
     live: '/live',
@@ -12,6 +12,6 @@ export const routesPublic = {
 export const routesPrivate = {
     upload: '/upload',
     following: '/following',
-    profile: "/@:nickname"
+    profile: "/:nickname"
 };
 

@@ -22,7 +22,7 @@ const publicR = [
     { path: Config.routesPublic.login, component: Login, layout: HeaderLayout },
     { path: Config.routesPublic.register, component: Register, layout: HeaderLayout },
     {
-        path: Config.routes.video,
+        path: Config.routesPublic.video,
         component: ModalVideo,
         layout: HeaderLayout,
     },
@@ -31,7 +31,7 @@ const publicR = [
 ]
 
 const privateR = [
-    { path: Config.routesPrivate.upload, component: Upload, ayout: HeaderLayout },
+    { path: Config.routesPrivate.upload, component: Upload, layout: HeaderLayout },
     { path: Config.routesPrivate.profile, component: Profile, layout: DefaultLayout },
     { path: Config.routesPrivate.following, component: Following, layout: DefaultLayout }
 
