@@ -6,14 +6,14 @@ export const routesPublic = {
     live: '/live',
     register: '/register',
     login: '/login',
-    messages: "/messages",
     profileLink: (nickname) => `/@${nickname}`,
-    videoLink: (content) => `/@${content.user.nickname}/videos/${content.id}`
+    videoLink: (content) => `/@${content.user.nickname}/video/${content.id}`
 };
 
 export const routesPrivate = {
     upload: '/upload',
     following: '/following',
+    messages: "/messages",
     profile: "/:nickname"
 };
 

@@ -12,7 +12,7 @@ import {
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
-
+import { FaPlus } from "react-icons/fa";
 
 import styles from './Header.module.css'
 import images from '../../../assets/image';
@@ -21,7 +21,7 @@ import Menu from '../../../component/Popper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '../../../component/Icons';
 import Image from '../../../component/Image';
 import Search from '../Search';
-import Config from '../../../config';
+import config from '../../../config';
 
 
 
@@ -99,7 +99,7 @@ function Header() {
     <header className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles['logo']}>
-          <Link aria-label="Vào bảng tin Cho bạn trên TikTok" to={Config.routesPublic.home}>
+          <Link aria-label="Vào bảng tin Cho bạn trên TikTok" to={config.routesPublic.home}>
             <img src={images.logo} alt="TikTok" />
           </Link>
         </div>
@@ -111,32 +111,32 @@ function Header() {
           {currentUser ? (
             <>
               <Tippy delay={[0, 50]} content="Upload video" placement="bottom">
-                <button className={styles['action-btn']}>
+                <Link className={styles['action-btn']} to={config.routesPublic.upload}>
                   <UploadIcon />
-                </button>
+                </Link>
               </Tippy>
               <Tippy delay={[0, 50]} content="Message" placement="bottom">
-                <button className={styles['action-btn']}>
+                <Link className={styles['action-btn']} to={config.routesPrivate.messages}>
                   <MessageIcon />
-                </button>
+                </Link>
               </Tippy>
-              <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
-                <button className={styles['action-btn']}>
+              <Tippy delay={[0, 50]} content="Notification" placement="bottom">
+                <Link className={styles['action-btn']}>
                   <InboxIcon />
                   <span className={styles['badge']}>12</span>
-                </button>
+                </Link>
               </Tippy>
             </>
           ) : (
             <>
-              <Button text >Upload</Button>
-              <Button primary to='/login'>Log in</Button>
+              <Button text leftIcon={<FaPlus />} to={config.routesPublic.login}>Upload</Button>
+              <Button style={{ height: 36 }} primary to='/login'>Log in</Button>
             </>
           )}
 
 
 
-          <Menu items={currentUser ? userMenu : MENU_ITEMS}  offset={[12, 8]} onChange={handleMenuChange}>
+          <Menu items={currentUser ? userMenu : MENU_ITEMS} offset={[12, 8]} onChange={handleMenuChange}>
             {currentUser ? (
               <Image
                 className={styles['user-avatar']}

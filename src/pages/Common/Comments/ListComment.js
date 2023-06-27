@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 // import { useSelector } from "react-redux";
 
@@ -12,7 +12,7 @@ import Loader from "../../../component/Loader";
 // import WrapperAuth from "../../../../components/WrapperAuth";
 import styles from "./ListComment.module.css";
 import config from "../../../config";
-import * as videosService from "../../../services/video/videoService";
+// import * as videosService from "../../../services/video/videoService";
 
 function ListComment({ video }) {
   const [listComment, setListComment] = useState({});
@@ -119,7 +119,7 @@ function ListComment({ video }) {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <Button type="submit" primary className={styles.submit}>
+            <Button type="submit" primary className={styles.button}>
               Post
             </Button>
           </div>

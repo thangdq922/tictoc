@@ -4,10 +4,11 @@
     justify-content: center;
     min-width: 100px;
     padding: 9px 16px;
+    line-height: 10px;
     border-radius: 4px;
     font-size: 1.6rem;
     font-weight: 700;
-    font-family:  Arial, Tahoma, sans-serif;;
+    font-family: "IBM Plex Sans" ,Arial, 'ProximaNova', Tahoma, sans-serif;
     cursor: pointer;
     background-color: var(--white);
     border: 1px solid transparent;
@@ -49,7 +50,7 @@
 .primary {
     color: var(--white);
     background-color: var(--primary);
-    border-color: var(--primary);
+    border: none;
 
     &:hover {
         border-color: var(--primary);
@@ -68,8 +69,10 @@
 }
 
 .text {
+    border: 1px solid rgba(22, 24, 35, 0.12);
     &:hover {
         text-decoration: underline;
+        background-color: var(--gray);
     }
 }
 
