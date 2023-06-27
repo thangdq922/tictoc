@@ -1,8 +1,36 @@
 .wrapper{
-    width: 240px;
+    width: 270px;
     padding: 20px 0 26px 8px;
     margin-left: -18px;
     position: fixed;
     
- 
 }
+
+.sidebar_login {
+    position: relative;
+    padding: 20px 8px;
+    margin: 0;
+
+    .login_tip {
+      color: rgba(22, 24, 35, 0.5);
+      font-size: 16px;
+      line-height: 22px;
+      display: flex;
+    }
+
+    .button_login {
+      margin-top: 20px;
+      height: 47px;
+      width: 100%;
+    }
+  }
+
+  .contact {
+    padding-left: 10px;
+  
+    .facebook {
+      color: red !important;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { BiUserCheck, BiCheckCircle } from "react-icons/bi";
+import { BiUserCheck, BiSolidCheckCircle } from "react-icons/bi";
 import { FaRegEdit } from "react-icons/fa";
 import Tippy from "@tippyjs/react";
 // import { useSelector } from "react-redux";
@@ -63,7 +63,7 @@ function Profile() {
                     <div className={styles.title_container}>
                         <h2 className={styles.user_title}>
                             {user.nickname}
-                            {user.tick && <BiCheckCircle className={styles.verify} />}
+                            {user.tick && <BiSolidCheckCircle className={styles.verify} />}
                         </h2>
                         <h4 className={styles.user_fullname}>{getFullName(user)}</h4>
                         {/* userRedux?.id !== user?.id */false  ? (
