@@ -103,11 +103,11 @@ function Profile() {
                 <h2 className={styles.count_info}>
                     <div className={styles.number_container}>
                         <strong>{user.followings_count}</strong>
-                        <span>Followings</span>
+                        <span className={styles.span}> Followings</span>
                     </div>
                     <div className={styles.number_container}>
                         <strong>{user.followers_count}</strong>
-                        <span>Follower</span>
+                        <span className={styles.span}> Follower</span>
                     </div>
                     <div className={styles.number_container}>
                         <strong>{user.likes_count}</strong>

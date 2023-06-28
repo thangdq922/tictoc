@@ -12,7 +12,7 @@ import {
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
-import { FaPlus } from "react-icons/fa";
+import { HiOutlinePlus } from "react-icons/hi";
 
 import styles from './Header.module.css'
 import images from '../../../assets/image';
@@ -27,7 +27,7 @@ import config from '../../../config';
 
 
 function Header() {
-  const currentUser = true;
+  const currentUser = false;
 
   const MENU_ITEMS = [
     {
@@ -129,7 +129,7 @@ function Header() {
             </>
           ) : (
             <>
-              <Button text leftIcon={<FaPlus />} to={config.routesPublic.login}>Upload</Button>
+              <Button text leftIcon={<HiOutlinePlus style={{width:24}} />} to={config.routesPublic.login}>Upload</Button>
               <Button style={{ height: 36 }} primary to='/login'>Log in</Button>
             </>
           )}
