@@ -38,7 +38,7 @@ const privateR = [
 ]
 
 const errorR = [
-    { path: '*', component: ErrorPage }
+    { path: '*', component: ErrorPage, layout: HeaderLayout }
 ]
 
 export { publicR, privateR, errorR }

@@ -17,7 +17,7 @@ function App() {
   // const { user } = useSelector((state) => state.user);
 
   return (
-  
+
     <Suspense fallback={<Loader />}>
       <Routes location={videoDetail || location}>
         {publicR.map((route, index) => {
@@ -35,7 +35,7 @@ function App() {
             />
           );
         })}
-          
+
         {privateR.map((route, index) => {
           const Page = route.component;
           let Layout = route.layout;
@@ -57,7 +57,8 @@ function App() {
 
         {errorR.map((route, index) => {
           const Page = route.component
-          return <Route key={index} path={route.path} element={<Page />} />
+          let Layout = route.layout;
+          return <Route key={index} path={route.path} element={<Layout> <Page /> </Layout>} />
         })}
 
       </Routes>

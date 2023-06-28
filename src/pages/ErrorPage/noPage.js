@@ -1,8 +1,10 @@
+import styles from './ErrorPage.module.css'
 
+function NoPage() {
+    return (
+        <div className={styles.container}>
 
-function NoPage(){
-    return(
-        <h1>404</h1>
+        </div>
     )
 }
 

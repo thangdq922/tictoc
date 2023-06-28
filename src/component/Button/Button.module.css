@@ -37,8 +37,8 @@
 }
 
 .icon {
-    /* display: inline-block; */
-    width: 24px;
+    display: flex;
+    width: 20px;
     text-align: center;
 }
 

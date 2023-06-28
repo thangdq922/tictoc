@@ -1,14 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCircleQuestion,
-  faCoins,
-  faEarthAsia,
-  faEllipsisVertical,
-  faGear,
-  faKeyboard,
-  faSignOut,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
@@ -22,44 +13,11 @@ import { InboxIcon, MessageIcon, UploadIcon } from '../../../component/Icons';
 import Image from '../../../component/Image';
 import Search from '../Search';
 import config from '../../../config';
-
-
+import { MENU_ITEMS_1, MENU_ITEMS_2 } from '../../../component/DataMenu/dataMenu'
 
 
 function Header() {
-  const currentUser = false;
-
-  const MENU_ITEMS = [
-    {
-      icon: <FontAwesomeIcon icon={faEarthAsia} />,
-      title: 'English',
-      children: {
-        title: 'Language',
-        data: [
-          {
-            type: 'language',
-            code: 'en',
-            title: 'English',
-          },
-          {
-            type: 'language',
-            code: 'vi',
-            title: 'Tiếng Việt',
-          },
-        ],
-      },
-    },
-    {
-      icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-      title: 'Feedback and help',
-      to: '/feedback',
-    },
-    {
-      icon: <FontAwesomeIcon icon={faKeyboard} />,
-      title: 'Keyboard shortcuts',
-    },
-  ];
-
+  const currentUser = true;
 
   const handleMenuChange = (menuItem) => {
     switch (menuItem.type) {
@@ -69,31 +27,6 @@ function Header() {
       default:
     }
   };
-
-  const userMenu = [
-    {
-      icon: <FontAwesomeIcon icon={faUser} />,
-      title: 'View profile',
-      to: '/@hoaa',
-    },
-    {
-      icon: <FontAwesomeIcon icon={faCoins} />,
-      title: 'Get coins',
-      to: '/coin',
-    },
-    {
-      icon: <FontAwesomeIcon icon={faGear} />,
-      title: 'Settings',
-      to: '/settings',
-    },
-    ...MENU_ITEMS,
-    {
-      icon: <FontAwesomeIcon icon={faSignOut} />,
-      title: 'Log out',
-      to: '/logout',
-      separate: true,
-    },
-  ];
 
   return (
     <header className={styles.wrapper}>
@@ -129,14 +62,13 @@ function Header() {
             </>
           ) : (
             <>
-              <Button text leftIcon={<HiOutlinePlus style={{width:24}} />} to={config.routesPublic.login}>Upload</Button>
+              <Button text leftIcon={<HiOutlinePlus style={{ width: 24 }} />} to={config.routesPublic.login}>Upload</Button>
               <Button style={{ height: 36 }} primary to='/login'>Log in</Button>
             </>
           )}
 
 
-
-          <Menu items={currentUser ? userMenu : MENU_ITEMS} offset={[12, 8]} onChange={handleMenuChange}>
+          <Menu items={currentUser ? MENU_ITEMS_2 : MENU_ITEMS_1} offset={[12, 8]} onChange={handleMenuChange}>
             {currentUser ? (
               <Image
                 className={styles['user-avatar']}
