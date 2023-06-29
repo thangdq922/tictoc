@@ -8,6 +8,7 @@ import styles from './SuggestedAccount.module.css'
 import Image from '../../Image';
 import AccountPreview from '../AccountPreview/';
 import { Wrapper as PopperWrapper } from '../../Popper';
+import config from '../../../config';
 
 
 
@@ -16,7 +17,7 @@ function AccountItem({ data }) {
         return (
             <div tabIndex="-1" {...props}>
                 <PopperWrapper>
-                    <AccountPreview data={data}/>
+                    <AccountPreview data={data} />
                 </PopperWrapper>
             </div>
         );
@@ -25,7 +26,7 @@ function AccountItem({ data }) {
     return (
         <div>
             <Tippy interactive delay={[800, 0]} offset={[-20, 0]} placement="bottom" render={renderPreview}>
-                <Link to={`/@${data.nickname}`} className={styles['account-item']}>
+                <Link to={config.routesPublic.profileLink(data.nickname)} className={styles['account-item']}>
                     <Image
                         className={styles['avatar']}
                         src={data.avatar}

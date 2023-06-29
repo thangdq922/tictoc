@@ -8,6 +8,7 @@ import handleLikeFunc from "../../../services/video/likeService";
 import Video from "./VideoDetail/Video";
 import Menu from "../../../component/Popper/Menu/Menu";
 import { MENU_ITEMS_SHARE } from "../../../component/DataMenu/dataMenu";
+import config from "../../../config";
 
 
 function VideoContent({ data }) {
@@ -39,7 +40,7 @@ function VideoContent({ data }) {
         <div className={styles['video-content']}>
             <div className={styles['video-container']}>
                 <Link
-                    to={`/@${user.nickname}/video/${data.id}`}
+                    to={config.routesPublic.videoLink(data)}
                     state={{
                         videoDetail: true,
                         video: dataChange,
@@ -59,7 +60,7 @@ function VideoContent({ data }) {
                 </button>
 
                 <Link
-                    to={`/@${user.nickname}/video/${data.id}`}
+                    to={config.routesPublic.videoLink(data)}
                     state={{
                         videoDetail: true,
                         video: dataChange,

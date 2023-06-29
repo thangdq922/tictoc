@@ -10,6 +10,7 @@ import styles from './Video.module.css'
 import Button from '../../../component/Button'
 import { Wrapper as PopperWrapper } from '../../../component/Popper';
 import AccountPreview from "../../../component/Account/AccountPreview"
+import config from "../../../config"
 
 
 function VideoInfo({ user, description, music }) {
@@ -28,7 +29,7 @@ function VideoInfo({ user, description, music }) {
   };
   return (
     <div className={styles['video-info']}>
-      <Link to={`/@${user.nickname}`} className={styles['author-name']} >
+      <Link to={config.routesPublic.profileLink(user.nickname)} className={styles['author-name']} >
         <Tippy singleton={target} offset={[130, 3]}>
           <Image className={styles.avatar} src={user.avatar} alt="avt" />
         </Tippy>
@@ -37,7 +38,7 @@ function VideoInfo({ user, description, music }) {
       <div className={styles['video-info-content']}>
         <div>
           <Tippy singleton={target} offset={[-178, 30]}>
-            <Link to={`/@${user.nickname}`} className={styles['author-name']} >
+            <Link to={config.routesPublic.profileLink(user.nickname)} className={styles['author-name']} >
               <span className={styles.name}>{user.nickname}</span>
               {user.tick && < FontAwesomeIcon className={styles['check']} icon={faCheckCircle} />}
               <span className={styles.nickname}>{user.last_name}</span>

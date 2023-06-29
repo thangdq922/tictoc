@@ -14,6 +14,6 @@ export const routesPrivate = {
     upload: '/upload',
     following: '/following',
     messages: "/messages",
-    profile: "/:nickname"
+    profile: `/:nickname`
 };
 

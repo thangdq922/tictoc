@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 
 import styles from './AccountItem.module.css';
 import Image from '../../Image';
+import config from '../../../config';
 
 
 function AccountItem({ data }) {
     return (
-        <Link to={`/@${data.nickname}`} className={styles['wrapper']}>
+        <Link to={config.routesPublic.profileLink(data.nickname)} className={styles['wrapper']}>
             <Image
                 className={styles['avatar']}
                 src={data.avatar}
