@@ -1,6 +1,6 @@
 export const routesPublic = {
     home: '/',
-    video: `/@:nickname/video/:id`,
+    video: `/:nickname/video/:id`,
     upload: '/upload',
     search: '/search',
     live: '/live',

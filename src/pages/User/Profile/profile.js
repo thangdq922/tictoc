@@ -106,7 +106,7 @@ function Profile() {
                         <span className={styles.span}> Followings</span>
                     </div>
                     <div className={styles.number_container}>
-                        <strong>{user.followers_count}</strong>
+                        {user.followers_count}
                         <span className={styles.span}> Follower</span>
                     </div>
                     <div className={styles.number_container}>

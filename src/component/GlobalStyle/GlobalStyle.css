@@ -71,6 +71,7 @@ input,
 a {
   color: rgba(22, 24, 35, 1);
   text-decoration: none;
+  transition: color 250ms ease 0s;
   cursor: pointer;
 }
 

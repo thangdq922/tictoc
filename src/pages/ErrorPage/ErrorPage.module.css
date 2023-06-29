@@ -1,0 +1,154 @@
+.container {
+    padding-top: 60px;
+}
+
+.wrapper {
+    font-family: SofiaPro, Arial, Tahoma, PingFangSC, sans-serif;
+    font-weight: 500;
+    padding-top: 116px;
+    padding-bottom: 130px;
+    background:
+        url(https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/tiktok/site/static/webapp-static-site/532e06c8382fb6011df0.png) center center / cover no-repeat transparent;
+    text-align: center;
+
+
+    .not-found {
+        font-size: 300px;
+        line-height: 244px;
+        white-space: nowrap;
+        color: rgb(22, 24, 35);
+    }
+
+    .img {
+        width: 244px;
+        height: 244px;
+        vertical-align: middle;
+        display: inline;
+    }
+
+    .p2 {
+        font-family: ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 25px;
+        margin: 24px auto 0px;
+        color: rgba(22, 24, 35, 0.5);
+    }
+
+    .p3 {
+        font-family: SofiaPro, Arial, Tahoma, PingFangSC, sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 28px;
+        color: rgb(22, 24, 35);
+        max-width: 622px;
+        word-break: break-word;
+        margin: 40px auto 0px;
+        text-align: center;
+    }
+
+    .Button {
+        font-family: SofiaPro, PingFangSC, sans-serif;
+        font-size: 20px;
+        line-height: 25px;
+        width: 360px;
+        height: 48px;
+        margin: 24px auto 0px;
+    }
+
+}
+
+.footer {
+    width: 100%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    padding-bottom: 24px;
+    padding: 29px 26px 48px;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(151, 151, 151);
+
+    .fwrappers {
+        display: flex;
+        flex-direction: column;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    .p {
+        font-size: 24px;
+        line-height: 24px;
+        margin-bottom: 16px;
+        font-family: SofiaPro, Arial, Tahoma, PingFangSC, sans-serif;
+        font-weight: 600;
+    }
+
+    .icon-container {
+        display: flex;
+        flex-direction: row;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+    }
+
+    .a {
+        margin: 0px 4px;
+        width: 170px;
+        height: 50px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 8px;
+        color: rgb(255, 255, 255);
+        font-family: SofiaPro, Arial, Tahoma, PingFangSC, sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+
+        .qr {
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .microsoft-store {
+            width: 170px;
+            height: 50px;
+            background-size: 170px;
+            object-fit: cover;
+            background-repeat: no-repeat;
+            box-sizing: border-box;
+            line-height: 0;
+        }
+
+        .google-store,
+        .amazon-store,
+        .apple-store {
+            background-position: 0px -53px;
+            background-image: url(https://p16-ttug-sg.ibyteimg.com/img/ttfe-malisg/tiktok_web/store-badge/en.png~296x0.image);
+            width: 170px;
+            height: 50px;
+            background-size: 170px;
+            object-fit: cover;
+            background-repeat: no-repeat;
+            box-sizing: border-box;
+            line-height: 0;
+        }
+
+        .amazon-store {
+            background-position: 0px 0px;
+        }
+
+        .google-store {
+            background-position: 0px -106px;
+        }
+    }
+}

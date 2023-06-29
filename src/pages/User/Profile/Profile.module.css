@@ -101,8 +101,9 @@
       color: rgba(18, 18, 18, 0.75);
 
       .number_container {
+        font-family: TikTokFont, Arial, Tahoma, PingFangSC, sans-serif;
         color: rgba(22, 24, 35, 1);
-        font-weight: 600;
+        font-weight: 900;
         font-size: 18px;
         line-height: 25px;
         display: flex;
@@ -121,7 +122,7 @@
 
     .bio {
       color: rgba(22, 24, 35, 1);
-      font-weight: 400;
+      font-weight: 600;
       font-size: 16px;
       white-space: pre-line;
       margin-top: 10px;
@@ -192,7 +193,7 @@
         grid-template-columns: repeat(auto-fill, minmax(184px, 1fr));
 
         .video_container {
-          
+
           .video {
             height: 260px;
             object-fit: cover;

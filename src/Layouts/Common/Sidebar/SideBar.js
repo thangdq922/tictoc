@@ -15,7 +15,7 @@ function SideBar() {
   return (
     <aside className={styles.wrapper}>
       <Menu>
-        <MenuItem to={config.routesPublic.home} icon={<HomeIcon />} >For Your</MenuItem>
+        <MenuItem to={config.routesPublic.home} icon={<HomeIcon />} >For You</MenuItem>
         <MenuItem to={config.routesPrivate.following} icon={<UserGroupIcon />} >Following</MenuItem>
         <MenuItem to={config.routesPublic.live} icon={<LiveIcon />} >LIVE</MenuItem>
       </Menu>

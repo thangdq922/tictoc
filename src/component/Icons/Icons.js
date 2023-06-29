@@ -181,3 +181,15 @@ export const ShareIcon = ({ width = '2.4rem', height = '2.4rem', className }) =>
     </svg>
 )
 
+export const PlayIcon = ({ width = '1em', height = '1em', className }) => (
+    <svg fill="currentColor"
+        viewBox="0 0 48 48"
+        xmlns="http://www.w3.org/2000/svg"
+        width={width}
+        height={height}
+        className={className}>
+        <path d="M43 26.6a3 3 0 0 0 0-5.2L14.5 4.95a3 3 0 0 0-4.5 2.6v32.9a3 3 0 0 0 4.5 2.6L43 26.6Z"></path>
+    </svg>
+)
+
+
