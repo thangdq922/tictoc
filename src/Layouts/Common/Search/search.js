@@ -6,17 +6,18 @@ import { useEffect, useRef, useState } from 'react';
 import AccountItem from "../../../component/Account/AccountItem"
 import { Wrapper as PopperWrapper } from '../../../component/Popper';
 import { SearchIcon } from "../../../component/Icons";
-import styles from './search.module.css'
+import styles from './Search.module.css'
 import { useDebounce } from "../../../hooks";
 import * as searchService from '../../../services/searchService';
-
-
+import { Link } from "react-router-dom";
+import config from "../../../config/routes";
 
 
 function Search() {
 
     const [searchValue, setSearchValue] = useState('')
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchUser, setSearchUser] = useState([]);
+    const [searchVideo, setSearchVideo] = useState([]);
     const [showResult, setShowResult] = useState(false)
     const [loading, setLoading] = useState(false)
     const debouncedValue = useDebounce(searchValue, 500);
@@ -25,22 +26,28 @@ function Search() {
 
     useEffect(() => {
         if (!debouncedValue.trim()) {
-            setSearchResult([])
+            setSearchUser([])
             return
         }
-
         const fetchApi = async () => {
             setLoading(true);
-            const result = await searchService.search(debouncedValue);
-            setSearchResult(result);
+            const result = await searchService.searchUser(debouncedValue);
+            const result1 = await searchService.searchVideo(debouncedValue);
+            setSearchVideo(result1)
+            setSearchUser(result);
             setLoading(false);
         };
         fetchApi();
     }, [debouncedValue])
 
+    const handleSubmit = (e) => {
+        console.log(searchUser)
+        e.preventDefault();
+    }
+
     const handleClear = () => {
         setSearchValue('')
-        setSearchResult([])
+        setSearchUser([])
         inputRef.current.focus()
     }
 
@@ -55,18 +62,23 @@ function Search() {
         }
     };
 
-
-
     return (
         <div>
             <HeadlessTippy
                 interactive
-                visible={showResult && searchResult.length > 0}
+                visible={showResult && (searchUser.length > 0 || searchVideo.length > 0)}
                 render={(attrs) => (
                     <div className={styles['search-result']} tabIndex="-1" {...attrs} >
                         <PopperWrapper>
+                            {searchVideo?.map((result) =>
+                                <div className={styles['search-video']} key={result.id}>
+                                    <Link to={config.searchLink(result.caption, 'video')} style={{ display: 'flex' }}>
+                                        <SearchIcon className={styles.icon} /> {result.caption}
+                                    </Link>
+                                </div>
+                            )}
                             <h4 className={styles['search-title']}>Accounts</h4>
-                            {searchResult.map((result) =>
+                            {searchUser?.map((result) =>
                                 <AccountItem key={result.id} data={result} />
                             )}
                         </PopperWrapper>
@@ -75,7 +87,7 @@ function Search() {
                 onClickOutside={handleHideResult}
             >
                 <div className={styles.search}>
-                    <form className={styles.form}>
+                    <form className={styles.form} onSubmit={handleSubmit}>
                         <input
                             className={styles.input}
                             ref={inputRef}
@@ -91,9 +103,11 @@ function Search() {
                             onClick={handleClear} />)}
                         {loading && <FontAwesomeIcon icon={faSpinner} className={styles.loading} />}
                         <span className={styles.spilter}></span>
-                        <button className={styles['search-btn']}>
-                            <SearchIcon />
-                        </button>
+                        <Link to={config.searchLink(searchValue, 'video')}>
+                            <button className={styles['search-btn']} type="submit">
+                                <SearchIcon />
+                            </button>
+                        </Link>
                     </form>
                 </div>
             </HeadlessTippy>

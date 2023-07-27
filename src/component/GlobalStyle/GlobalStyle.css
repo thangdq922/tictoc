@@ -22,7 +22,7 @@ html {
 
 body {
   font-family: var(--font-family);
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
   color: #383737;
@@ -35,24 +35,9 @@ html *::-webkit-scrollbar {
   width: 8px;
 }
 
-html *::-webkit-scrollbar {
-  border-radius: 0;
-  width: 8px;
-}
-
 html *::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.15);
-}
-
-html *::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.15);
-}
-
-html *::-webkit-scrollbar-track {
-  border-radius: 0;
-  background-color: rgba(0, 0, 0, 0);
 }
 
 html *::-webkit-scrollbar-track {
@@ -122,4 +107,8 @@ body {
   .tippy-box[data-placement^='bottom']>.tippy-arrow:before {
     top: -8px;
   }
+}
+
+select option:hover {
+  background-color: rgba(22, 24, 35, 0.03);
 }

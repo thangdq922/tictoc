@@ -94,31 +94,21 @@
     }
 }
 
-
-.button-login {
+.button {
     width: 50%;
+    line-height: 64px;
     left: 25%;
-    height: 70px;
-    margin-top: 150px;
     position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    font-weight: 900;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.2);
 
-
-    .button {
-        width: 100%;
-        line-height: 64px;
-        left: 0%;
-        position: relative;
-        cursor: pointer;
-        background-color: transparent;
-        border: 3px solid rgba(0, 0, 0, 0.1);
-        font-weight: 900;
-        font-size: 18px;
-        color: rgba(0, 0, 0, 0.2);
-
-        &:hover {
-            color: #ed2553;
-            border-color: #ed2553;
-        }
+    &:hover {
+        color: #ed2553;
+        border-color: #ed2553;
     }
 }
 

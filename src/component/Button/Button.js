@@ -18,6 +18,7 @@ function Button({
     leftIcon,
     rightIcon,
     onClick,
+    noAction = false,
     ...passProps
 }) {
     let Comp = 'button';
@@ -41,6 +42,10 @@ function Button({
     } else if (href) {
         props.href = href;
         Comp = 'a';
+    }
+
+    if (noAction) {
+        Comp = "div";
     }
 
     const classes =

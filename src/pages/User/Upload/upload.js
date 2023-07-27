@@ -22,7 +22,7 @@ function Upload() {
     setFilePreview(src);
     setFile(e.target.files[0]);
   };
-
+console.log(filePreview)
   const handleUploadVideo = async (data) => {
     setIsLoading(true);
     await videosService.postVideo(data);
@@ -62,7 +62,7 @@ function Upload() {
               file ? `${styles['preview']}` : `${styles['upload-content-left']}`
             }
           >
-            <label htmlFor="upload-file">
+            <label htmlFor="upload_file">
               <div className={styles['upload-state']}>
                 {file ? (
                   <div className={styles['preview-v2']}>
@@ -110,8 +110,8 @@ function Upload() {
             <input
               className={styles['input']}
               onChange={handleFile}
-              name="upload-file"
-              id="upload-file"
+              name="upload_file"
+              id="upload_file"
               required
               type="file"
               accept="video/*"
@@ -144,9 +144,9 @@ function Upload() {
               <div className={styles['form-footer']}>
                 <input
                   className={styles['form-input']}
-                  name="thumbnail-time"
-                  id="thumbnail-time"
-                  {...register("thumbnail-time")}
+                  name="thumbnail_time"
+                  id="thumbnail_time"
+                  {...register("thumbnail_time")}
                   type="number"
                   placeholder="Thumbnail capture position, units of seconds (Ex: 2)"
                   defaultValue={1}

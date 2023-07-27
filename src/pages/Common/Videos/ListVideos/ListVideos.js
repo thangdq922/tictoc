@@ -5,8 +5,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import VideoContent from "./VideoContent"
 import VideoInfo from "./VideoInfo"
 import styles from './Video.module.css'
-import * as videosService from '../../../services/video/videoService'
-import Loader from "../../../component/Loader/Loader";
+import * as videosService from '../../../../services/video/videoService'
+import Loader from "../../../../component/Loader/Loader";
 
 function ListVideos({ type }) {
 
@@ -16,7 +16,7 @@ function ListVideos({ type }) {
 
     useEffect(() => {
         async function getListVideo() {
-            const result = await videosService.getListVideo(type);
+            const result = await videosService.getListVideo(type,1);
             setVideos(result)
         }
 

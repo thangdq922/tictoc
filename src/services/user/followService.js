@@ -7,7 +7,9 @@ async function follow(id) {
             url: `users/${id}/follow`,
             data: id
         })
-        return res.data.data;
+        console.log(res.data)
+        return res.data;
+        
     } catch (err) {
         console.log(err);
     }
@@ -20,7 +22,7 @@ async function unfollow(id) {
             url: `users/${id}/unfollow`,
             data: id
         })
-        return res.data.data;
+        return res.data;
     } catch (err) {
         console.log(err);
     }
@@ -28,13 +30,13 @@ async function unfollow(id) {
 
 const handleFollowFunc = async (user) => {
     let newUser;
-    if (user && user.is_followed) {
+    if (user && user.isFollowed) {
         newUser = await unfollow(user.id);
     } else {
         newUser = await follow(user.id);
     }
 
-    return newUser && newUser.is_followed;
+    return newUser && newUser.isFollowed;
 };
 
 export default handleFollowFunc;

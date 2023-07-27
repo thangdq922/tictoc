@@ -1,30 +1,20 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-// import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./Login.module.css";
-
-// import config from "../../../config";
-// import { userLogin } from "~/features/authentication/userAction";
 import Error from "../../../component/Error";
+import useLogin from "../../../hooks/auth/useLogIn";
 
 function Login() {
-    //   const { loading, user, error } = useSelector((state) => state.user);
-    //   const dispatch = useDispatch();
-    const { register, handleSubmit } = useForm();
-    //   const navigate = useNavigate();
 
-    //   useEffect(() => {
-    //     if (user) {
-    //       navigate(config.routes.home);
-    //     }
-    //   }, [navigate, user]);
+    const { register, handleSubmit } = useForm();
+
+    const logIn = useLogin()
 
     const submitForm = (data) => {
-        // dispatch(userLogin(data));
-        console.log('cc')
+        logIn.mutate(data)
     };
+
 
     return (
         <form onSubmit={handleSubmit(submitForm)} className={styles['login-form']}>
@@ -54,15 +44,12 @@ function Login() {
                         />
                     </div>
 
-                    {/* error */ true && <Error>Wrong email or password</Error>}
+                    {!!logIn.error && <Error>Wrong email or password</Error>}
 
                 </div>
-
-                <div className={styles['button-login']}>
-                    <button className={styles.button} type="submit" disabled=/* {loading} */ {false}>
-                        <span>Login</span> <i className="fa fa-check"></i>
-                    </button>
-                </div>
+                <button className={styles.button} type="submit" disabled={logIn.isLoading}>
+                    <span>Login</span> <i className="fa fa-check"></i>
+                </button>
             </div>
         </form>
     );

@@ -1,80 +1,138 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
-// import { useSelector } from "react-redux";
 
 
-import * as commentService from "../../../services/video/commentService";
-import { getFullName } from "../../../utils/common";
+import * as commentService from "../../../services/comment/commentService";
 import Button from "../../../component/Button";
 import Image from "../../../component/Image";
 import Loader from "../../../component/Loader";
-// import WrapperAuth from "../../../../components/WrapperAuth";
 import styles from "./ListComment.module.css";
 import config from "../../../config";
-// import * as videosService from "../../../services/video/videoService";
+import WrapperAuth from "../../../component/WrapperAuth";
+import VideoInfo from "../Videos/ListVideos/VideoInfo";
+import { CommentIcon, HeartIcon, ShareIcon } from "../../../component/Icons";
+import Menu from "../../../component/Popper/Menu/Menu";
+import { useQuery } from "@tanstack/react-query";
+import handleLikeFunc from "../../../services/video/likeService";
+import { MENU_ITEMS_SHARE } from "../../../component/DataMenu/dataMenu";
+import { getUser } from "../../../hooks/auth/user.localstore";
 
 function ListComment({ video }) {
   const [listComment, setListComment] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [dataChange, setDataChange] = useState(video);
   const [comment, setComment] = useState("");
+  const userCurent = getUser()?.data
 
-  useEffect(() => {
-    const fetchApi = async () => {
-      const result = await commentService.getListComment(video.id);
+  const data = useQuery({
+    queryKey: ['listComment', dataChange],
+    queryFn: async () => {
+      const result = await commentService.getListComment(dataChange.id);
       setListComment(result);
-      setLoading(false);
-    };
-    fetchApi();
-  }, [video]);
+      if (!result) {
+        throw new Error('Network response was not ok')
+      }
+      return listComment
+
+    }
+  })
 
   const handleComment = async () => {
-    const result = await commentService.postComment(video.id, {
+    const result = await commentService.postComment(dataChange.id, {
       comment: comment,
     });
     setComment("");
-    setListComment((prev) => [result, ...prev]);
-
-    setLoading(false);
+    setDataChange((prev) => [result, ...prev]);
   };
-
-  // Delete a video
-  // const { user } = useSelector((state) => state.user);
-  // const navigate = useNavigate();
-
-  // const deleteVideo = async () => {
-  //   if (user.id === video.user_id) {
-  //     await videosService.deleteVideo(video.id);
-  //     const userProfile = config.routes.profileLink(user.nickname);
-  //     navigate(userProfile);
-  //   }
-  // };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
     handleComment();
   };
 
+
+  const toLogin = (e) => {
+    if (!userCurent) {
+      e.preventDefault()
+    }
+  }
+
+  const handleLike = async () => {
+    if (!userCurent) {
+      return;
+    }
+    const newdataChange = await handleLikeFunc(dataChange);
+    setDataChange((dataChange) => ({
+      ...dataChange,
+      ...newdataChange,
+    }));
+  };
+
   return (
     <div className={styles.content_container}>
-      <Button type="submit" primary className={styles.button} >
-        Delete Video
-      </Button>
+      <div className={styles.info}>
+        <VideoInfo {...video} />
+      </div>
+
+      <WrapperAuth>
+        <div className={styles.action} >
+          <button className={styles['action-btn']} onClick={() => handleLike(dataChange)} >
+            <span className={styles['icon-btn']}>
+              {<HeartIcon className={dataChange.isLiked ? styles.liked : ''} />}   </span>
+            <b>{dataChange.likesCount}</b>
+          </button>
+
+          <Link
+            to={config.videoLink(dataChange)}
+            state={{
+              videoDetail: true,
+              video: dataChange,
+              prevPath: window.location.pathname,
+              openModel: true,
+            }}
+            onClick={toLogin}
+          >
+            <button className={styles['action-btn']}>
+              <span className={styles['icon-btn']}>
+                < CommentIcon /></span>
+              <b>{dataChange.commentsCount}</b>
+            </button>
+          </Link>
+
+          <Menu items={MENU_ITEMS_SHARE} offset={[150, 0]} >
+            <button className={styles['action-btn']} onClick={toLogin}>
+              <span className={styles['icon-btn']}>
+                <ShareIcon /></span>
+              <b>{dataChange.sharesCount}</b>
+            </button>
+          </Menu>
+        </div>
+      </WrapperAuth>
+      <div className={styles.linkCopy}>
+        <p className={styles.link}>{window.location.href}</p>
+        <button className={styles.button}>Copy Link</button>
+      </div>
+
       <div className={styles.comment_list_container}>
-        {!loading ? (
+        {!data.isLoading ? (
           listComment ? (
-            listComment.length > 0 ? (
-              listComment.map((comment) => (
+            listComment?.length > 0 ? (
+              listComment?.map((comment) => (
                 <div className={styles.comment_item_container} key={comment.id}>
                   <div className={styles.comment_content_container}>
-                    <Image src={comment.user.avatar} className={styles.img} />
+                    <Link
+                      to={config.profileLink(comment.user.userName)}
+                      className={styles.account_item}
+                    >
+                      <Image src={comment.user.avatar} className={styles.img} />
+                    </Link>
                     <div className={styles.comment_container}>
                       <Link
-                        to={config.routesPublic.profileLink(comment.user.nickname)}
+                        to={config.profileLink(comment.user.userName)}
                         className={styles.account_item}
                       >
                         <p className={styles.comment_user}>
-                          {getFullName(comment.user)}
+                          {comment.user.name}
                         </p>
                       </Link>
 
@@ -85,14 +143,14 @@ function ListComment({ video }) {
                       <div className={styles.like_wrapper}>
                         <div
                           className={
-                            comment.is_liked
+                            comment.isLiked
                               ? `${styles.icon} ${styles.liked}`
                               : `${styles.icon}`
                           }
                         >
                           <FaRegHeart />
                         </div>
-                        <span>{comment.likes_count}</span>
+                        <span>{comment.likesCount}</span>
                       </div>
                     </div>
                   </div>
@@ -108,8 +166,7 @@ function ListComment({ video }) {
           <Loader />
         )}
       </div>
-      {/* <WrapperAuth> */}
-      <div>
+      <WrapperAuth>
         <form onSubmit={onFormSubmit}>
           <div className={styles.bottom_comment_container}>
             <input
@@ -124,8 +181,7 @@ function ListComment({ video }) {
             </Button>
           </div>
         </form>
-      </div>
-      {/* </WrapperAuth> */}
+      </WrapperAuth>
 
     </div>
   );

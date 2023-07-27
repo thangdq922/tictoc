@@ -10,7 +10,7 @@ import config from '../../../config';
 
 function AccountItem({ data }) {
     return (
-        <Link to={config.routesPublic.profileLink(data.nickname)} className={styles['wrapper']}>
+        <Link to={config.profileLink(data.userName)} className={styles['wrapper']}>
             <Image
                 className={styles['avatar']}
                 src={data.avatar}
@@ -21,7 +21,7 @@ function AccountItem({ data }) {
                     <span>{data.full_name}</span>
                     {data.tick && < FontAwesomeIcon className={styles['check']} icon={faCheckCircle} />}
                 </h4>
-                <span className={styles['username']}>{data.nickname}</span>
+                <span className={styles['username']}>{data.userName}</span>
             </div>
         </Link>
     );

@@ -45,8 +45,8 @@ function Video({data}) {
             ref={videoRef}
             onClick={handleVideo}
             className={videoTime < 20 ? `${styles['video_short']}  ${styles.video}`  :  `${styles.video}`}
-            src={data.file_url}
-            poster={data.thumb_url || ""}
+            src={data.fileUrl}
+            poster={data.thumbUrl || ""}
             controls
             muted
             controlsList="nofullscreen nodownload noremoteplayback noplaybackrate"

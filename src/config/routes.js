@@ -1,19 +1,19 @@
-export const routesPublic = {
+export const config = {
     home: '/',
-    video: `/:nickname/video/:id`,
-    upload: '/upload',
-    search: '/search',
+    video: `/:userName/video/:id`,
+    search: '/search/:type',
     live: '/live',
     register: '/register',
     login: '/login',
-    profileLink: (nickname) => `/@${nickname}`,
-    videoLink: (content) => `/@${content.user.nickname}/video/${content.id}`
-};
+    profileLink: (userName) => `/@/${userName}`,
+    videoLink: (content) => `/@${content.user.userName}/video/${content.id}`,
+    searchLink: (q, type) => `/search/${type}?q=${q}`,
 
-export const routesPrivate = {
     upload: '/upload',
     following: '/following',
     messages: "/messages",
-    profile: `/:nickname`
+    profile: `/@/:userName`
 };
+
+export default config
 

@@ -1,14 +1,13 @@
 import httpRequest from "../../utils/httpRequest";
 
  async function like(id) {
-    console.log(id)
     try {
         const res = await httpRequest({
             method: 'post',
             url: `videos/${id}/like`,
             data: id
         })
-        return res.data.data;
+        return res.data;
     } catch (err) {
         console.log(err);
     }
@@ -21,7 +20,7 @@ import httpRequest from "../../utils/httpRequest";
             url: `videos/${id}/unlike`,
             data: id
         })
-        return res.data.data;
+        return res.data;
     } catch (err) {
         console.log(err);
     }
@@ -29,7 +28,7 @@ import httpRequest from "../../utils/httpRequest";
 
 export async function handleLikeFunc(video) {
     let newVideo;
-    if (video && video.is_liked) {
+    if (video && video.isLiked) {
         newVideo = await unlike(video.id);
     } else {
         newVideo = await like(video.id);

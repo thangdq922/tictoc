@@ -1,4 +1,4 @@
-import ListVideos from "../../Common/Videos"
+import ListVideos from "../../Common/Videos/ListVideos"
 import styles from './Home.module.css'
 
 function Home() {

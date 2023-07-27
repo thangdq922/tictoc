@@ -1,8 +1,5 @@
-import {routesPrivate,routesPublic} from './routes';
+export { authApi } from "./authApi";
+export {default} from './routes';
 
-const config = {
-    routesPrivate,
-    routesPublic
-};
 
-export default config;
+

@@ -7,14 +7,9 @@ import config from "./config";
 import ModalVideo from "./pages/Default/ModalVideo";
 
 
-
-
-
-
 function App() {
   const location = useLocation();
   const videoDetail = location.state && location.state.videoDetail;
-  // const { user } = useSelector((state) => state.user);
 
   return (
 
@@ -46,9 +41,7 @@ function App() {
               key={index}
               element={
                 <Layout>
-                  {/* <ProtectedRoute user={user}> */}
                   <Page />
-                  {/* </ProtectedRoute> */}
                 </Layout>
               }
             />
@@ -64,7 +57,7 @@ function App() {
       </Routes>
       {videoDetail && (
         <Routes>
-          <Route exact path={config.routesPublic.video} element={<ModalVideo />} />
+          <Route exact path={config.video} element={<ModalVideo />} />
         </Routes>
       )}
     </Suspense>

@@ -13,16 +13,18 @@ const Login = lazy(() => import("../pages/Default/Login"));
 const Register = lazy(() => import("../pages/Default/Register"));
 const Searchs = lazy(() => import("../pages/Default/Search"));
 const ModalVideo = lazy(() => import("../pages/Default/ModalVideo"));
+// const ModalAuth = lazy(() => import("../pages/Default/ModalAuth"));
+
 
 
 const publicR = [
-    { path: Config.routesPublic.home, component: Home, layout: DefaultLayout },
-    { path: Config.routesPublic.search, component: Searchs , layout: DefaultLayout},
-    { path: Config.routesPublic.live, component: Live, layout: DefaultLayout },
-    { path: Config.routesPublic.login, component: Login, layout: HeaderLayout },
-    { path: Config.routesPublic.register, component: Register, layout: HeaderLayout },
+    { path: Config.home, component: Home, layout: DefaultLayout },
+    { path: Config.search, component: Searchs , layout: DefaultLayout},
+    { path: Config.live, component: Live, layout: DefaultLayout },
+    { path: Config.login, component: Login, layout: HeaderLayout },
+    { path: Config.register, component: Register, layout: HeaderLayout },
     {
-        path: Config.routesPublic.video,
+        path: Config.video,
         component: ModalVideo,
         layout: HeaderLayout,
     },
@@ -31,9 +33,9 @@ const publicR = [
 ]
 
 const privateR = [
-    { path: Config.routesPrivate.upload, component: Upload, layout: HeaderLayout },
-    { path: Config.routesPrivate.profile, component: Profile, layout: DefaultLayout },
-    { path: Config.routesPrivate.following, component: Following, layout: DefaultLayout }
+    { path: Config.upload, component: Upload, layout: HeaderLayout },
+    { path: Config.profile, component: Profile, layout: DefaultLayout },
+    { path: Config.following, component: Following, layout: DefaultLayout }
 
 ]
 

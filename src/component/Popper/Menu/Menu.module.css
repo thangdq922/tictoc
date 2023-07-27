@@ -34,6 +34,24 @@
         border-top: 1px solid rgba(22, 24, 35, 0.12);
     }
 
+    &.settingV{
+        padding-left: 30px;
+
+        &.separate {
+            border-top: 0.5px solid rgba(126, 126, 128, 0.12);
+            width: 80%;
+            margin-left: 10%;
+            padding-left: 10px;
+            
+        }
+
+        &:hover {
+           color: red;
+           background: white;
+        }
+
+    }
+
     &:hover {
         background-color: rgba(22, 24, 35, 0.03);
     }

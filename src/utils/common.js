@@ -3,7 +3,7 @@ export const getFullName = (user) => {
     user &&
     (user.fullname ||
       (user.first_name !== "" && user.first_name + " " + user.last_name) ||
-      user.nickname)
+      user.userName)
   );
 };
 

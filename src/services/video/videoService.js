@@ -10,7 +10,7 @@ export async function getListVideo(type = 'for-you', page) {
                 page: page
             }
         })
-        return res.data.data;
+        return res.data;
     } catch (err) {
         console.log(err);
         return []
@@ -23,7 +23,7 @@ export async function getVideo(id) {
             method: 'get',
             url: `videos/${id}`,
         })
-        return res.data.data;
+        return res.data;
     } catch (err) {
         console.log(err);
     }
@@ -33,11 +33,11 @@ export async function postVideo(formData) {
     try {
         await httpRequest({
             method: 'post',
-            url: 'videos',
+            url: "videos",
             data: formData,
             headers: {
                 "Content-Type": "multipart/form-data",
-            },
+            }
         })
     } catch (err) {
         console.log(err);

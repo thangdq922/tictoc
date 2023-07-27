@@ -1,87 +1,74 @@
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import config from '../../../config';
-import styles from '../Home/Home.module.css'
+import styles from './Following.module.css'
 import * as usersService from "../../../services/user/usersService";
 import Loader from '../../../component/Loader';
-import handleFollowFunc from '../../../services/user/followService';
-
+import ListVideos from '../../Common/Videos/ListVideos'
+import { getUser } from '../../../hooks/auth/user.localstore';
+import SuggestedVideo from '../../Common/Videos/SuggestedVideo';
 
 function Following() {
 
-    const [user, setUser] = useState({});
-    const [loading, setLoading] = useState(true);
-    const nickname = '@tranhuutoan';
+    const [users, setUsers] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(1);
+    const userCurrent = getUser()?.data
 
-    useEffect(() => {
-        const fetchApi = async () => {
-            const result = await usersService.user(nickname);
-            setUser(result);
-            setLoading(false);
-        };
+    const query = useQuery({
+        queryKey: ['userRecommend'],
+        queryFn: async () => {
+            const data = await usersService.suggestedList(page, 20)
+            setUsers(data)
+            return users
+        }
+    })
 
-        fetchApi();
-    }, [nickname /*userRedux*/, user.is_followed]);
-
-    const handleFollow = async () => {
-        const isFollowed = await handleFollowFunc(user);
-        setUser((user) => ({ ...user, is_followed: isFollowed }));
+    const fetchListVideo = async () => {
+        const result = await usersService.suggestedList(page, 20);
+        return result;
     };
 
-    const handleVideoPlay = (e) => {
-        e.target.play();
+    const fetchData = async () => {
+        const listVideoNext = await fetchListVideo();
+
+        setUsers([...users, ...listVideoNext]);
+        if (listVideoNext.length === 0) {
+            setHasMore(false);
+        }
+        setPage((prev) => prev + 1);
     };
 
-    const handleVideoPause = (e) => {
-        e.target.pause();
-        e.target.currentTime = 0;
-    };
-
-    if (loading) {
+    if (query.isLoading) {
         return <Loader />;
     }
 
     return (
-        <div className={styles.wrapper} >
-            <div className={styles['list-video-wrapper']}>
-                <div className={styles['title-wrapper']}>
-                    <p className={styles.title}>Videos</p>
-                    <p className={styles.title}>Liked</p>
-                </div>
-                <div className={styles['list-video-container']}>
-                    <div className={styles['list-video']}>
-                        {user?.videos?.map((video) => (
-                            <Link
-                                key={video.id}
-                                to={config.routesPublic.videoLink(video)}
-                                state={{
-                                    videoDetail: true,
-                                    video: video,
-                                    prevPath: window.location.pathname,
-                                }}
-                            >
-                                <div className={styles['video-container']}>
-                                    <video
-                                        className={styles.video}
-                                        src={video.file_url}
-                                        muted
-                                        loop
-                                        onMouseEnter={handleVideoPlay}
-                                        onMouseLeave={handleVideoPause}
-                                        poster={video.thumb_url}
-                                    />
-                                    <div className={styles['video-desc']}>
-                                        <p>{video.description}</p>
-                                    </div>
-                                </div>
-                            </Link>
+        <div className={styles.wrapper}>
+            {!userCurrent
+                ? <InfiniteScroll
+                    dataLength={users.length}
+                    next={fetchData}
+                    hasMore={hasMore}
+                    loader={<Loader />}
+                    endMessage={<h4>Yay! You have seen it all</h4>}
+                    style={{ overflow: "inherit" }}
+                >
+                    <div className={styles['list-video-container']}>
+                        {users?.map((user) => (
+                            <SuggestedVideo key={user.id} user={user} />
                         ))}
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </div >
+                </InfiniteScroll>
+                : <ListVideos type="following" />}
+        </div >
     );
 }
 
-export default Following
+
+
+
+
+
+export default Following;

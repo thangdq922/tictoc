@@ -1,0 +1,248 @@
+.title {
+    color: rgb(22, 24, 35);
+    font-family: "IBM Plex Sans", Tahoma, sans-serif;
+    font-size: 32px;
+    margin: 16px auto;
+    font-weight: bold;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.divTitle {
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 4px;
+}
+
+.divAgeSelector {
+    display: flex;
+    margin-bottom: 4px;
+    font-family: Arial, Tahoma, PingFangSC, sans-serif;
+
+    .selector {
+        background: rgba(22, 24, 35, 0.06);
+        border-radius: 4px;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        margin: 0 8px 0 0;
+        width: 120px;
+        height: 44px;
+
+        .selectLabel {
+            width: 120px;
+            height: 44px;
+            padding: 0px 12px;
+            display: flex;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            align-items: center;
+            color: rgba(22, 24, 35, 0.34);
+            font-size: 16px;
+
+            .icon {
+                color: black;
+            }
+
+        }
+
+        .optionWrapper {
+            left: 0px;
+            right: 0px;
+            width: 120px;
+            height: 44px;
+            position: absolute;
+            background: none;
+            border-radius: 4px;
+            transition: display 0.3s ease 0s;
+
+            appearance: none;
+            outline: 0;
+            box-shadow: none;
+            border: 0 !important;
+            flex: 1;
+            padding: 0 .5em;
+            cursor: pointer;
+            font-size: 1em;
+
+        }
+
+    }
+}
+
+
+
+select::-ms-expand {
+    display: none;
+}
+
+.description {
+    color: rgba(22, 24, 35, 0.5);
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 16px;
+}
+
+.divDescription {
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    .ALink {
+        color: rgba(9, 10, 14, 0.75);
+        font-weight: 600;
+        font-size: 13px;
+        display: inline-block;
+    }
+}
+
+.divEmailContainer {
+    margin-bottom: 9px;
+    position: relative;
+}
+
+.passwordContainer,
+.divUsernameContainer {
+    margin-bottom: 9px;
+}
+
+.inputContainer {
+    position: relative;
+    margin-bottom: 9px;
+
+    .input {
+        border-radius: 2px;
+        background-color: rgba(22, 24, 35, 0.06);
+        border: 1px solid rgba(22, 24, 35, 0.12);
+        padding-inline-start: 12px;
+        color: rgb(22, 24, 35);
+        line-height: 100%;
+        outline: none;
+        font-size: 16px;
+        height: 44px;
+        caret-color: rgb(254, 44, 85);
+        width: 100%;
+        padding-inline-end: unset;
+    }
+
+    .iconContainer {
+        right: 0px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        position: absolute;
+        top: 0px;
+        height: 44px;
+        padding-inline-end: 16px;
+
+        .icon {
+            line-height: 0;
+            margin-inline-start: 16px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    }
+}
+
+.divCodeInputContainer {
+    transition: all 0.3s ease 0s;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+
+    .divInputContainer {
+        position: relative;
+        margin-bottom: 9px;
+        flex: 1 1 0%;
+        width: 0px;
+
+        .input {
+            border-radius: 2px 0px 0px 2px;
+            background-color: rgba(22, 24, 35, 0.06);
+            border: 1px solid rgba(22, 24, 35, 0.12);
+            padding-inline-start: 12px;
+            color: rgb(22, 24, 35);
+            line-height: 100%;
+            outline: none;
+            font-size: 16px;
+            height: 47px;
+            caret-color: rgb(254, 44, 85);
+            width: 100%;
+            padding-inline-end: unset;
+        }
+
+        .iconContainer {
+            right: 0px;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            position: absolute;
+            top: 0px;
+            height: 44px;
+            padding-inline-end: 16px;
+        }
+    }
+
+    .ButtonSendCode {
+        color: rgba(22, 24, 35);
+        font-family: TikTokFont, PingFangSC, sans-serif;
+        font-weight: 600;
+        margin: 0px;
+        background-color: rgba(22, 24, 35, 0.06);
+        border-color: rgba(22, 24, 35, 0.12);
+        border-width: 1.5px;
+        border-style: solid;
+        border-radius: 0px 4px 4px 0px;
+        border-inline-start-width: 1.5px;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 0px 16px;
+        height: 44px;
+        flex-shrink: 0;
+        box-sizing: content-box;
+
+        &:disabled {
+            color: rgba(22, 24, 35, 0.34);
+            cursor: not-allowed;
+        }
+    }
+}
+
+.submit {
+    border-radius: 4px;
+    border: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(254, 44, 85);
+    min-width: 120px;
+    min-height: 46px;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    font-family: TikTokFont, PingFangSC, sans-serif;
+    display: flex;
+    position: relative;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 6px 8px;
+    user-select: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 35px;
+
+    &:disabled {
+        border: none;
+        color: rgba(22, 24, 35, 0.34);
+        background-color: rgba(22, 24, 35, 0.06);
+        pointer-events: none;
+    }
+}

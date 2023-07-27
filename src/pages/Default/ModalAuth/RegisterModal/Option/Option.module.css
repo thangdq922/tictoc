@@ -1,0 +1,37 @@
+/* .optionWrapper {
+    left: 0px;
+    right: 0px;
+    width: 120px;
+    max-height: 320px;
+    overflow: auto;
+    position: absolute;
+    background: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
+    top: 50px;
+    z-index: 12;
+    display: block;
+    transition: display 0.3s ease 0s;
+
+   
+} */
+
+
+.divOption {
+    height: 34px;
+    overflow: auto;
+    font-size: 16px;
+    padding: 0px 12px;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(22, 24, 35);
+    background: unset;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+option:hover {
+    background-color: rgba(22, 24, 35, 0.03);
+}

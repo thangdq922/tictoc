@@ -1,44 +1,36 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import httpRequest from '../../../utils/httpRequest';
+
 import AccountItem from './AccountItem'
 import styles from './SuggestedAccount.module.css'
+import * as userService from '../../../services/user/usersService'
 
 function SuggestedAccounts({ label }) {
-    const [accounts, setAccounts] = useState([])
-    const [viewAccount, setViewAccount] = useState('less')
+    const [perpage, setPerpage] = useState(5);
 
-    const showAccount = () =>
-        {viewAccount === 'less' ? setViewAccount('more') : setViewAccount('less')}
-    
-    
+    const handleSeeMore = () => {
+        if (perpage !== 20) {
+            setPerpage((prev) => prev + 5);
+        } else {
+            setPerpage(5);
+        }
+    }
 
-    useEffect(() => {
-        // httpRequest.get(`https://tiktok.fullstack.edu.vn/api/users/search?q=uu&type=less`)
-        httpRequest({
-            method: 'get',
-            url: 'users/search',
-            params: {
-                q: 'uu',
-                type: viewAccount,
-            },
-        })
-            .then((response) => {
-                setAccounts(response.data.data);
-            })
-            .catch(error => console.log(error))
+    const { data: accounts } = useQuery({
+        queryKey: ['accountSuggested', perpage],
+        queryFn: () => userService.suggestedList(1, perpage)
+    })
 
-    }, [viewAccount]
-    )
 
     return (
         <div className={styles.wrapper}>
             <p className={styles.label}>{label}</p>
-            {accounts.map((result) =>
+            {accounts?.map((result) =>
                 <AccountItem key={result.id} data={result} />
             )}
-            <p className={styles['more-btn']} onClick={showAccount}>
-                See {viewAccount === 'less' ? 'more' : 'less'}
+            <p className={styles['more-btn']} onClick={handleSeeMore}>
+            {perpage === 20  ? "See less" : "See more"}
             </p>
         </div>
     )

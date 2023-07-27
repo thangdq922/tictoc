@@ -1,0 +1,274 @@
+.container {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: center;
+    max-height: 100vh;
+    overflow: visible;
+    max-width: 100vw;
+
+
+    .section {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        -webkit-box-align: stretch;
+        align-items: stretch;
+        -webkit-box-pack: start;
+        justify-content: flex-start;
+        position: relative;
+        outline: 0px;
+        max-width: calc(100vw - 32px);
+        background: rgba(255, 255, 255, 1);
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
+        border-radius: 8px;
+        overflow: hidden;
+        width: auto;
+        transition-property: transform, opacity;
+        transition-duration: 300ms;
+        transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+        opacity: 1;
+        transform: none;
+
+        .dialog {
+            height: 700px;
+
+            .header {
+                padding: 24px 24px 12px;
+                line-height: 36px;
+                border-bottom: 0.5px solid rgba(22, 24, 35, 0.2);
+                display: flex;
+                -webkit-box-pack: justify;
+                justify-content: space-between;
+                -webkit-box-align: center;
+                align-items: center;
+
+                .H1Header {
+
+                    font-weight: 600;
+                    font-size: 24px;
+                    color: rgb(22, 24, 35);
+                }
+
+                .close-button {
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                    margin-right: 12px;
+                }
+            }
+
+            .content {
+                width: 700px;
+                padding: 8px 24px 0px;
+
+                .itemContainer {
+                    padding: 16px 0px;
+                    display: flex;
+                    border-bottom: 0.5px solid rgba(22, 24, 35, 0.12);
+
+                    .label {
+
+                        font-weight: 600;
+                        line-height: 24px;
+                        width: 120px;
+                        margin-right: 24px;
+
+                    }
+
+                    .editAvatar {
+                        position: relative;
+                        height: 96px;
+
+                        .divContainer {
+                            width: 96px;
+                            height: 96px;
+                            position: relative;
+                            display: flex;
+                            -webkit-box-align: center;
+                            align-items: center;
+                            -webkit-box-pack: center;
+                            justify-content: center;
+                            margin-left: 128px;
+
+                            .avatarContainer {
+                                width: 96px;
+                                height: 96px;
+                                display: inline-block;
+                                box-sizing: border-box;
+                                margin: 0px;
+                                padding: 0px;
+                                font-feature-settings: "tnum";
+                                position: relative;
+                                overflow: hidden;
+                                color: rgb(255, 255, 255);
+                                white-space: nowrap;
+                                text-align: center;
+                                vertical-align: middle;
+                                line-height: 32px;
+                                border-radius: 50%;
+                                border-color: rgba(22, 24, 35, 0.12);
+                                border-width: 0.5px;
+                                cursor: pointer;
+                                background-color: rgba(136, 136, 136, 0.5);
+
+                                .img {
+
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+
+                        }
+
+                        .editIcon {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 16px;
+                            background: rgb(255, 255, 255);
+                            border: 1px solid rgb(208, 208, 211);
+                            box-sizing: border-box;
+                            display: flex;
+                            -webkit-box-align: center;
+                            align-items: center;
+                            -webkit-box-pack: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            position: absolute;
+                            bottom: 0px;
+                            margin-left: 192px;
+
+                            .input {
+                                display: none;
+                            }
+                        }
+                    }
+
+                }
+
+                .itemContainer {
+
+
+                    .inputContainer {
+                        position: relative;
+
+                        .input {
+                            width: 360px;
+                            height: 38px;
+                            border-radius: 4px;
+                            background: rgba(22, 24, 35, 0.06);
+                            caret-color: rgb(254, 44, 85);
+                            color: rgb(0, 0, 0);
+                            line-height: 24px;
+                            font: inherit;
+                            outline: none;
+                            border: none;
+                            padding: 7px 12px;
+                            box-sizing: border-box;
+                            font-family: TikTokFont, Arial, Tahoma, PingFangSC, sans-serif;
+                        }
+
+                        .link {
+                            font-size: 13px;
+                            color: rgba(0, 0, 0, 0.75);
+                            line-height: 18px;
+                            margin-top: 16px;
+                            max-width: 460px;
+                            overflow: hidden;
+                        }
+
+                        .tip {
+                            font-size: 13px;
+                            color: rgba(0, 0, 0, 0.75);
+                            line-height: 18px;
+                            max-width: 460px;
+                            overflow: hidden;
+                            margin-top: 8px;
+                            width: 360px;
+                        }
+
+                        .textCount {
+                            color: black;
+                            font-size: 12px;
+                            line-height: 18px;
+                        }
+                    }
+                }
+
+            }
+
+            .footer {
+                height: 86px;
+                display: flex;
+                padding: 0px 24px;
+                -webkit-box-pack: end;
+                justify-content: flex-end;
+                border-top: 0.5px solid rgba(22, 24, 35, 0.2);
+                -webkit-box-align: center;
+                align-items: center;
+                position: absolute;
+                width: 100%;
+                bottom: 0px;
+
+                .cancel {
+                    border-width: 1px;
+                    border-style: solid;
+                    border-radius: 4px;
+                    color: rgb(22, 24, 35);
+                    border-color: rgba(22, 24, 35, 0.12);
+                    background-color: rgb(255, 255, 255);
+                    min-height: 28px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    display: flex;
+                    position: relative;
+                    -webkit-box-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    justify-content: center;
+                    user-select: none;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    line-height: 24px;
+                    padding: 7px 16px;
+                    min-width: 96px;
+                    height: 36px;
+                    margin-left: 16px;
+                }
+
+                .save {
+                    border-radius: 4px;
+                    border: none;
+                    color: rgb(255, 255, 255);
+                    background-color: rgb(254, 44, 85);
+                    min-height: 28px;
+                    font-family: TikTokFont, PingFangSC, sans-serif;
+                    font-size: 14px;
+                    font-weight: 600;
+                    display: flex;
+                    position: relative;
+                    -webkit-box-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    justify-content: center;
+                    user-select: none;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    line-height: 24px;
+                    padding: 7px 16px;
+                    min-width: 96px;
+                    height: 36px;
+                    margin-left: 16px;
+
+                    &:disabled {
+                        border: none;
+                        color: rgba(22, 24, 35, 0.34);
+                        background-color: rgba(22, 24, 35, 0.06);
+                        pointer-events: none;
+                    }
+                }
+            }
+        }
+    }
+}

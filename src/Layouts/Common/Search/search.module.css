@@ -10,6 +10,17 @@
     width: 500px;
 }
 
+.search-video{
+    padding: 9px 16px;
+    display: flex;
+    font-weight: 600;
+
+    .icon{
+        width: 16px;
+        margin: 0 10px;
+    }
+}
+
 .search-title {
     padding: 5px 12px;
     font-size: 1.4rem;

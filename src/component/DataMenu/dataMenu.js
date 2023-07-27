@@ -29,17 +29,17 @@ export const MENU_ITEMS_1 = [
 ];
 
 export const MENU_ITEMS_2 = [
-  { title: "View profile", icon: <RiUserLine />, to: /* config.routesPublic.profileLink(user.nickname) */ '/'},
+  { title: "View profile", icon: <RiUserLine />, type: 'toProfile' },
   { title: "Get coins", icon: <AiOutlinePound /> },
   { title: "Settings", icon: <FaRegSun /> },
   ...MENU_ITEMS_1,
-  { title: "Log out", icon: <PiSignInBold />, to: "/logout", separate: true },
+  { title: "Log out", icon: <PiSignInBold />, type: 'logout', separate: true },
 ];
 
 export const MENU_ITEMS_SHARE = [
-  { title: "Embed", icon: <FaCode style={{color: `gray`}} /> },
-  { title: "Send to friends", icon: <FaRegPaperPlane style={{color:'red'}} /> },
-  { title: "Share to Facebook", icon: <FaFacebook  style={{color:'blue'}}/> },
-  { title: "Share to Instagram", icon: <FaInstagram style={{color:'pink'}} /> },
-  { title: "Copy link", icon: <FaLink style={{color:'red'}} /> },
+  { title: "Embed", icon: <FaCode fill="rgb(22, 24, 35)" fillOpacity={0.75} size={19} /> },
+  { title: "Send to friends", icon: <FaRegPaperPlane fill="rgb(254, 44, 85)" size={19} /> },
+  { title: "Share to Facebook", icon: <FaFacebook fill="rgb(0, 117, 250)" size={19} /> },
+  { title: "Share to Instagram", icon: <FaInstagram style={{ color: 'pink' }} size={19} /> },
+  { title: "Copy link", icon: <FaLink style={{ color: 'rgb(254, 44, 85)' }} size={19} /> },
 ];

@@ -12,12 +12,12 @@ import config from '../../../config';
 
 
 
-function AccountItem({ data }) {
+function AccountItem({ data: account }) {
     const renderPreview = (props) => {
         return (
             <div tabIndex="-1" {...props}>
                 <PopperWrapper>
-                    <AccountPreview data={data} />
+                    <AccountPreview data={account} />
                 </PopperWrapper>
             </div>
         );
@@ -26,18 +26,18 @@ function AccountItem({ data }) {
     return (
         <div>
             <Tippy interactive delay={[800, 0]} offset={[-20, 0]} placement="bottom" render={renderPreview}>
-                <Link to={config.routesPublic.profileLink(data.nickname)} className={styles['account-item']}>
+                <Link to={config.profileLink(account.userName)} className={styles['account-item']}>
                     <Image
                         className={styles['avatar']}
-                        src={data.avatar}
-                        alt={data.full_name}
+                        src={account.avatar}
+                        alt=""
                     />
                     <div className={styles['info']}>
                         <h4 className={styles['name']}>
-                            <span>{data.full_name}</span>
-                            {data.tick && < FontAwesomeIcon className={styles['check']} icon={faCheckCircle} />}
+                            <span>{account.name}</span>
+                            {account.tick && < FontAwesomeIcon className={styles['check']} icon={faCheckCircle} />}
                         </h4>
-                        <span className={styles['nickname']}>{data.nickname}</span>
+                        <span className={styles['userName']}>{account.userName}</span>
                     </div>
                 </Link>
             </Tippy>
