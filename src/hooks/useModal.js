@@ -7,9 +7,14 @@ const useModal = () => {
         setIsOpen(!isOpen);
     }
 
+    function open(){
+        setIsOpen(true)
+    }
+
     return {
         isOpen,
         toggle,
+        open
     }
 };
 

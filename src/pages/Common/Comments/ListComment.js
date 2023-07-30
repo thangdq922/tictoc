@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
-
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { BsTrash } from "react-icons/bs";
 
 import * as commentService from "../../../services/comment/commentService";
 import Button from "../../../component/Button";
@@ -18,11 +19,12 @@ import handleLikeFunc from "../../../services/video/likeService";
 import { MENU_ITEMS_SHARE } from "../../../component/DataMenu/dataMenu";
 import { getUser } from "../../../hooks/auth/user.localstore";
 
+
 function ListComment({ video }) {
   const [listComment, setListComment] = useState({});
   const [dataChange, setDataChange] = useState(video);
   const [comment, setComment] = useState("");
-  const userCurent = getUser()?.data
+  const userCurrent = getUser()?.data
 
   const data = useQuery({
     queryKey: ['listComment', dataChange],
@@ -38,11 +40,9 @@ function ListComment({ video }) {
   })
 
   const handleComment = async () => {
-    const result = await commentService.postComment(dataChange.id, {
-      comment: comment,
-    });
+    const result = await commentService.postComment(dataChange.id, comment);
     setComment("");
-    setDataChange((prev) => [result, ...prev]);
+    setListComment((prev) => [result, ...prev]);
   };
 
   const onFormSubmit = (e) => {
@@ -52,13 +52,13 @@ function ListComment({ video }) {
 
 
   const toLogin = (e) => {
-    if (!userCurent) {
+    if (!userCurrent) {
       e.preventDefault()
     }
   }
 
   const handleLike = async () => {
-    if (!userCurent) {
+    if (!userCurrent) {
       return;
     }
     const newdataChange = await handleLikeFunc(dataChange);
@@ -67,6 +67,29 @@ function ListComment({ video }) {
       ...newdataChange,
     }));
   };
+
+  const deleteComment = async (comment) => {
+    await commentService.deleteComment(dataChange.id, comment.id);
+    setListComment(([comment, ...prev]) => prev);
+  };
+
+  const copy = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+    alert('Link Copied');
+  }
+
+  const handleMenuChange = (menuItem) => {
+    switch (menuItem.title) {
+      case 'Delete':
+        deleteComment(menuItem.comment)
+        break;
+      case 'Copy link':
+        copy()
+        break;
+      default:
+    }
+  }
+
 
   return (
     <div className={styles.content_container}>
@@ -78,7 +101,7 @@ function ListComment({ video }) {
         <div className={styles.action} >
           <button className={styles['action-btn']} onClick={() => handleLike(dataChange)} >
             <span className={styles['icon-btn']}>
-              {<HeartIcon className={dataChange.isLiked ? styles.liked : ''} />}   </span>
+              {<HeartIcon className={dataChange.liked ? styles.liked : ''} />}   </span>
             <b>{dataChange.likesCount}</b>
           </button>
 
@@ -99,18 +122,18 @@ function ListComment({ video }) {
             </button>
           </Link>
 
-          <Menu items={MENU_ITEMS_SHARE} offset={[150, 0]} >
+          <Menu items={MENU_ITEMS_SHARE} offset={[150, 0]} onChange={handleMenuChange} >
             <button className={styles['action-btn']} onClick={toLogin}>
               <span className={styles['icon-btn']}>
                 <ShareIcon /></span>
-              <b>{dataChange.sharesCount}</b>
+              <b>{dataChange.sharesCount}0</b>
             </button>
           </Menu>
         </div>
       </WrapperAuth>
       <div className={styles.linkCopy}>
         <p className={styles.link}>{window.location.href}</p>
-        <button className={styles.button}>Copy Link</button>
+        <button className={styles.button} onClick={copy}>Copy Link</button>
       </div>
 
       <div className={styles.comment_list_container}>
@@ -119,39 +142,49 @@ function ListComment({ video }) {
             listComment?.length > 0 ? (
               listComment?.map((comment) => (
                 <div className={styles.comment_item_container} key={comment.id}>
-                  <div className={styles.comment_content_container}>
+                  <Link
+                    to={config.profileLink(comment.user.userName)}
+                    className={styles.account_item}
+                  >
+                    <Image src={comment.user.avatar} className={styles.img} />
+                  </Link>
+                  <div className={styles.comment_container}>
                     <Link
                       to={config.profileLink(comment.user.userName)}
                       className={styles.account_item}
                     >
-                      <Image src={comment.user.avatar} className={styles.img} />
+                      <p className={styles.comment_user}>
+                        {comment.user.name}
+                      </p>
                     </Link>
-                    <div className={styles.comment_container}>
-                      <Link
-                        to={config.profileLink(comment.user.userName)}
-                        className={styles.account_item}
-                      >
-                        <p className={styles.comment_user}>
-                          {comment.user.name}
-                        </p>
-                      </Link>
 
-                      <p className={styles.comment_text}>{comment.comment}cc</p>
-                      <p className={styles.created_at}>{comment.created_at}cc</p>
-                    </div>
-                    <div className={styles.action_container}>
-                      <div className={styles.like_wrapper}>
-                        <div
-                          className={
-                            comment.isLiked
-                              ? `${styles.icon} ${styles.liked}`
-                              : `${styles.icon}`
-                          }
+                    <p className={styles.commentText}>{comment.comment}</p>
+                    <p className={styles.createdAt}>{comment.createdDate}</p>
+                  </div>
+                  <div className={styles.action_container}>
+                    <div style={{ display: 'flex', height: 20 }}>
+                      {userCurrent?.id === comment.user.id &&
+                        <Menu
+                          items={[{ icon: <BsTrash size={30}/>, title: "Delete", settingV: true, comment: comment }]}
+                          onChange={handleMenuChange}
                         >
-                          <FaRegHeart />
-                        </div>
-                        <span>{comment.likesCount}</span>
+                          <div >
+                            <HiOutlineDotsHorizontal size={20} style={{ cursor: 'pointer', }} />
+                          </div>
+                        </Menu>
+                      }
+                    </div>
+                    <div className={styles.like_wrapper}>
+                      <div
+                        className={
+                          comment.liked
+                            ? `${styles.icon} ${styles.liked}`
+                            : `${styles.icon}`
+                        }
+                      >
+                        <FaRegHeart />
                       </div>
+                      <span style={{ fontSize: 16 }}>{comment.likesCount}</span>
                     </div>
                   </div>
                 </div>

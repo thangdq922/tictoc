@@ -50,6 +50,7 @@ const profile = {
   overlay:
   {
     zIndex: 10,
+    background: 'rgba(0, 0, 0, 0.5)',
     boxSizing: 'border-box'
   },
   content: {
@@ -60,7 +61,7 @@ const profile = {
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'auto',
-    
+    background: 'none'
   },
 }
 

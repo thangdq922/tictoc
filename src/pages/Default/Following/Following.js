@@ -19,14 +19,17 @@ function Following() {
     const query = useQuery({
         queryKey: ['userRecommend'],
         queryFn: async () => {
-            const data = await usersService.suggestedList(page, 20)
+            const data = await usersService.suggestedList(page, 15)
+            if (data.length  < 30) {
+                setHasMore(false);
+            }
             setUsers(data)
             return users
         }
     })
 
     const fetchListVideo = async () => {
-        const result = await usersService.suggestedList(page, 20);
+        const result = await usersService.suggestedList(page, 15);
         return result;
     };
 

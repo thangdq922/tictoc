@@ -9,7 +9,7 @@ import Error from '../../../../component/Error/Error';
 
 function LoginModal() {
     const { register, handleSubmit, formState: { dirtyFields }
-    } = useForm({ defaultValues: { email: "", password: '' } });
+    } = useForm({ defaultValues: { usernameOrEmail: "", password: '' } });
 
     const [showPass, setShowPass] = useState(true)
 
@@ -30,10 +30,10 @@ function LoginModal() {
             <form onSubmit={handleSubmit(submitForm)}>
                 <div className={styles.inputContainer}>
                     <input
-                        type="email"
+                        type="text"
                         placeholder="Email or username"
-                        {...register("email")}
-                        name="email"
+                        {...register("usernameOrEmail")}
+                        name="usernameOrEmail"
                         className={styles.input}
                     />
                     <div className={styles.iconContainer}> </div>
@@ -62,7 +62,7 @@ function LoginModal() {
                 <button
                     type="submit"
                     className={styles.submit}
-                    disabled={logIn.isLoading || !(dirtyFields.email && dirtyFields.password)}
+                    disabled={logIn.isLoading || !(dirtyFields.usernameOrEmail && dirtyFields.password)}
                 >
                     Log in
                 </button>

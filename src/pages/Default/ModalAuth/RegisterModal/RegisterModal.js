@@ -14,7 +14,7 @@ function RegisterModal() {
     const defaultValues = {
         email: "",
         password: '',
-        username: '',
+        userName: '',
         day: 'Day',
         month: 'Month',
         year: 'Year',
@@ -35,10 +35,10 @@ function RegisterModal() {
     const signUp = useRegister()
 
     const submitForm = (data) => {
-        const birthDay = new Date(`${data.year}-${data.month}-${data.day}`).toJSON()
+        const birthDay= `${data.year}-${data.month}-${data.day}`
         const { year, month, day, ...dataRest } = data;
-        // signUp.mutate(data)
-        console.log({ ...dataRest, birthDay })
+        signUp.mutate({ ...dataRest, birthDay: birthDay })
+        
     };
 
     const disable = signUp.isLoading || !(dirtyFields.email && dirtyFields.password)
@@ -107,13 +107,13 @@ function RegisterModal() {
                     <a href="/signup/phone-or-email/email" className={styles.ALink}>Sign up with phone</a>
                 </div>
 
-                <input
+                {/* <input
                     value="email"
                     type="hidden"
                     name="type"
                     id="type"
                     {...register("type")}
-                />
+                /> */}
                 <div className={styles.divEmailContainer}>
                     <div className={styles.inputContainer}>
                         <input
@@ -131,7 +131,7 @@ function RegisterModal() {
                         <input
                             type="text"
                             placeholder="Username"
-                            {...register("username")}
+                            {...register("userName")}
                             className={styles.input} />
                         <div className={styles.iconContainer}> </div>
                     </div>

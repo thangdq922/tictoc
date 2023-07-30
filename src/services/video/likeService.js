@@ -28,7 +28,7 @@ import httpRequest from "../../utils/httpRequest";
 
 export async function handleLikeFunc(video) {
     let newVideo;
-    if (video && video.isLiked) {
+    if (video && video.liked) {
         newVideo = await unlike(video.id);
     } else {
         newVideo = await like(video.id);

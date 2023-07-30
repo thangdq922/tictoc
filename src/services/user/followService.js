@@ -7,7 +7,6 @@ async function follow(id) {
             url: `users/${id}/follow`,
             data: id
         })
-        console.log(res.data)
         return res.data;
         
     } catch (err) {
@@ -30,13 +29,13 @@ async function unfollow(id) {
 
 const handleFollowFunc = async (user) => {
     let newUser;
-    if (user && user.isFollowed) {
+    if (user && user.followed) {
         newUser = await unfollow(user.id);
     } else {
         newUser = await follow(user.id);
     }
 
-    return newUser && newUser.isFollowed;
+    return newUser && newUser.followed;
 };
 
 export default handleFollowFunc;

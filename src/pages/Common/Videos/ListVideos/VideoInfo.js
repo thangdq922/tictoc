@@ -34,9 +34,9 @@ function VideoInfo({ id, user, caption, music }) {
   const handleFollow = async () => {
     if (!userCurrent) {
       return;
-  }
+    }
     const isFollowed = await handleFollowFunc(userChange);
-    setUserChange((user) => ({ ...user, isFollowed: isFollowed }));
+    setUserChange((user) => ({ ...user, followed: isFollowed }));
   };
 
   const renderPreview = (props) => {
@@ -63,7 +63,7 @@ function VideoInfo({ id, user, caption, music }) {
 
   return (
     <div className={styles['video-info']}>
-      <Link to={config.profileLink('@lyhuong2002')} className={styles['author-name']} >
+      <Link to={config.profileLink(userChange.userName)} className={styles['author-name']} >
         <Tippy singleton={target} offset={[130, 3]}>
           <Image className={styles.avatar} src={userChange.avatar} alt="avt" />
         </Tippy>
@@ -90,26 +90,28 @@ function VideoInfo({ id, user, caption, music }) {
         </div>
       </div>
       <Tippy interactive delay={[800, 200]} placement="bottom" render={renderPreview} singleton={source} />
-      <WrapperAuth>
-        {(  userCurrent?.id === userChange.id) ?
-          <Menu items={videoSetting} onChange={handleMenuChange}>
-            <div style={{ marginTop: 10 }} >
-              <HiOutlineDotsHorizontal size={24} />
-            </div>
-          </Menu>
-          : <div onClick={handleFollow} style={{ cursor: 'pointer' }}>
-            {userChange.isFollowed ? (
-              <Button text small className={styles['follow-btn']}>
-                Following
-              </Button>
-            ) : (
+
+      {(userCurrent?.id === userChange.id) ?
+        <Menu items={videoSetting} onChange={handleMenuChange} offset={[10,-70]} >
+          <div style={{ marginTop: 10 }} >
+            <HiOutlineDotsHorizontal size={24} style={{cursor: 'pointer'}} />
+          </div>
+        </Menu>
+        : <div onClick={handleFollow} style={{ cursor: 'pointer' }}>
+          {userChange.followed ? (
+            <Button text small className={styles['follow-btn']}>
+              Following
+            </Button>
+          ) : (
+            <WrapperAuth>
               <Button outline small className={styles['follow-btn']} >
                 Follow
               </Button>
-            )}
-          </div>
-        }
-      </WrapperAuth>
+            </WrapperAuth>
+          )}
+        </div>
+      }
+
     </div>
   )
 }

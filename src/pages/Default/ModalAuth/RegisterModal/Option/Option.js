@@ -5,16 +5,16 @@ function Option({ type }) {
         case 'Day':
             return (
                 <>
-                    <option id="Day-options-item-0" aria-selected="false" className={styles.divOption}>1</option>
-                    <option id="Day-options-item-1" aria-selected="false" className={styles.divOption}>2</option>
-                    <option id="Day-options-item-2" aria-selected="false" className={styles.divOption}>3</option>
-                    <option id="Day-options-item-3" aria-selected="false" className={styles.divOption}>4</option>
-                    <option id="Day-options-item-4" aria-selected="false" className={styles.divOption}>5</option>
-                    <option id="Day-options-item-5" aria-selected="false" className={styles.divOption}>6</option>
-                    <option id="Day-options-item-6" aria-selected="false" className={styles.divOption}>7</option>
-                    <option id="Day-options-item-7" aria-selected="false" className={styles.divOption}>8</option>
-                    <option id="Day-options-item-8" aria-selected="false" className={styles.divOption}>9</option>
-                    <option id="Day-options-item-9" aria-selected="false" className={styles.divOption}>10</option>
+                    <option id="Day-options-item-0" aria-selected="false" className={styles.divOption} value={'01'}>1</option>
+                    <option id="Day-options-item-1" aria-selected="false" className={styles.divOption} value={'02'}>2</option>
+                    <option id="Day-options-item-2" aria-selected="false" className={styles.divOption} value={'03'}>3</option>
+                    <option id="Day-options-item-3" aria-selected="false" className={styles.divOption} value={'04'}>4</option>
+                    <option id="Day-options-item-4" aria-selected="false" className={styles.divOption} value={'05'}>5</option>
+                    <option id="Day-options-item-5" aria-selected="false" className={styles.divOption} value={'06'}>6</option>
+                    <option id="Day-options-item-6" aria-selected="false" className={styles.divOption} value={'07'}>7</option>
+                    <option id="Day-options-item-7" aria-selected="false" className={styles.divOption} value={'08'}>8</option>
+                    <option id="Day-options-item-8" aria-selected="false" className={styles.divOption} value={'09'}>9</option>
+                    <option id="Day-options-item-9" aria-selected="false" className={styles.divOption} >10</option>
                     <option id="Day-options-item-10" aria-selected="false" className={styles.divOption}>11</option>
                     <option id="Day-options-item-11" aria-selected="false" className={styles.divOption}>12</option>
                     <option id="Day-options-item-12" aria-selected="false" className={styles.divOption}>13</option>
@@ -41,18 +41,18 @@ function Option({ type }) {
         case 'Month':
             return (
                 <>
-                    <option id="Month-options-item-0" aria-selected="false" className={styles.divOption}>January</option>
-                    <option id="Month-options-item-1" aria-selected="false" className={styles.divOption}>February</option>
-                    <option id="Month-options-item-2" aria-selected="false" className={styles.divOption}>March</option>
-                    <option id="Month-options-item-3" aria-selected="false" className={styles.divOption}>April</option>
-                    <option id="Month-options-item-4" aria-selected="false" className={styles.divOption}>May</option>
-                    <option id="Month-options-item-5" aria-selected="false" className={styles.divOption}>June</option>
-                    <option id="Month-options-item-6" aria-selected="false" className={styles.divOption}>July</option>
-                    <option id="Month-options-item-7" aria-selected="false" className={styles.divOption}>August</option>
-                    <option id="Month-options-item-8" aria-selected="false" className={styles.divOption}>September</option>
-                    <option id="Month-options-item-9" aria-selected="false" className={styles.divOption}>October</option>
-                    <option id="Month-options-item-10" aria-selected="false" className={styles.divOption}>November</option>
-                    <option id="Month-options-item-11" aria-selected="false" className={styles.divOption}>December</option>
+                    <option id="Month-options-item-0" aria-selected="false" className={styles.divOption} value={'01'}>January</option>
+                    <option id="Month-options-item-1" aria-selected="false" className={styles.divOption} value={'02'}>February</option>
+                    <option id="Month-options-item-2" aria-selected="false" className={styles.divOption} value={'03'}>March</option>
+                    <option id="Month-options-item-3" aria-selected="false" className={styles.divOption} value={'04'}>April</option>
+                    <option id="Month-options-item-4" aria-selected="false" className={styles.divOption} value={'05'}>May</option>
+                    <option id="Month-options-item-5" aria-selected="false" className={styles.divOption} value={'06'}>June</option>
+                    <option id="Month-options-item-6" aria-selected="false" className={styles.divOption} value={'07'}>July</option>
+                    <option id="Month-options-item-7" aria-selected="false" className={styles.divOption} value={'08'}>August</option>
+                    <option id="Month-options-item-8" aria-selected="false" className={styles.divOption} value={'09'}>September</option>
+                    <option id="Month-options-item-9" aria-selected="false" className={styles.divOption} value={10}>October</option>
+                    <option id="Month-options-item-10" aria-selected="false" className={styles.divOption} value={11}>November</option>
+                    <option id="Month-options-item-11" aria-selected="false" className={styles.divOption} value={12}>December</option>
                 </>
             )
         case 'Year':

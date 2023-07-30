@@ -31,7 +31,7 @@ export const MENU_ITEMS_1 = [
 export const MENU_ITEMS_2 = [
   { title: "View profile", icon: <RiUserLine />, type: 'toProfile' },
   { title: "Get coins", icon: <AiOutlinePound /> },
-  { title: "Settings", icon: <FaRegSun /> },
+  { title: "Settings", icon: <FaRegSun />, type: 'setting' },
   ...MENU_ITEMS_1,
   { title: "Log out", icon: <PiSignInBold />, type: 'logout', separate: true },
 ];

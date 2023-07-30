@@ -1,6 +1,7 @@
 import httpRequest from '../../utils/httpRequest'
 
 export async function getListVideo(type = 'for-you', page) {
+    console.log('cc')
     try {
         const res = await httpRequest({
             method: 'get',
@@ -49,6 +50,17 @@ export async function deleteVideo(id) {
         await httpRequest({
             method: 'delete',
             url: `videos/${id}`,
+        })
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export async function setView(id) {
+    try {
+        await httpRequest({
+            method: 'patch',
+            url: `videos/${id}/view`,
         })
     } catch (err) {
         console.log(err);

@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useElementOnScreen } from "../../../../hooks";
+import * as videoService from '../../../../services/video/videoService'
 
 import styles from './VideoDetail.module.css'
 
-function Video({data}) {
+function Video({ data }) {
 
     const videoRef = useRef();
     const [playing, setPlaying] = useState(false);
-    const videoTime = data.meta?.playtime_seconds || 0;
+    const videoTime = videoRef.current?.duration || 0;
 
     const handleVideo = () => {
         if (playing) {
@@ -18,6 +19,12 @@ function Video({data}) {
             setPlaying(true);
         }
     };
+
+    const handleVideoEnded = () => {
+        videoRef.current.play()
+        videoService.setView(data.id)
+      };
+
     const options = {
         root: null,
         rootMargin: "0px",
@@ -26,6 +33,7 @@ function Video({data}) {
     const isVisibile = useElementOnScreen(options, videoRef);
 
     useEffect(() => {
+
         if (isVisibile) {
             if (!playing) {
                 videoRef.current.play();
@@ -36,6 +44,7 @@ function Video({data}) {
                 videoRef.current.pause();
                 setPlaying(false);
             }
+
         }
         // eslint-disable-next-line
     }, [isVisibile]);
@@ -44,7 +53,7 @@ function Video({data}) {
         <video
             ref={videoRef}
             onClick={handleVideo}
-            className={videoTime < 20 ? `${styles['video_short']}  ${styles.video}`  :  `${styles.video}`}
+            className={videoTime < 10 ? `${styles['video_short']}  ${styles.video}` : `${styles.video}`}
             src={data.fileUrl}
             poster={data.thumbUrl || ""}
             controls
@@ -52,7 +61,8 @@ function Video({data}) {
             controlsList="nofullscreen nodownload noremoteplayback noplaybackrate"
             playsInline
             disablePictureInPicture
-            loop
+            onEnded={handleVideoEnded}
+            
         />
     )
 

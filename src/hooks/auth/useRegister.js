@@ -1,25 +1,24 @@
-import { useNavigate } from "react-router-dom";
-import { userRegister } from "../../services/user/usersService"
-import config from "../../config/routes";
+import { userLogin, userRegister } from "../../services/user/usersService"
 import { useMutation } from "@tanstack/react-query";
 
 
 function useRegister() {
 
-    const navigate = useNavigate();
-
     const registerMutation = useMutation({
-        mutationFn:  (data) => {
-            return userRegister(data)
+        mutationFn: async (data) => {
+            await userRegister(data)
+            return userLogin(
+                {
+                    usernameOrEmail: data.userName,
+                    password: data.password
+                }
+            ) 
         },
         onSuccess: (data) => {
             localStorage.setItem("user", JSON.stringify(data));
-            navigate(config.home);
+            window.location.reload()
         },
-        // onError: (error) => {
-        //     console.log(error)
 
-        // }
     })
 
     return registerMutation

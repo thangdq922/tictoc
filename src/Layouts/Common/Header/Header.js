@@ -38,11 +38,12 @@ function Header() {
       case 'logout':
         logout.mutate()
         break
+      case 'setting':
+        navigate(config.setting);
+        break;
       default:
     }
   };
-
-
 
   return (
     <>
@@ -81,7 +82,7 @@ function Header() {
               </>
             ) : (
               <>
-                <Button text leftIcon={<HiOutlinePlus style={{ width: 24 }} />} to={config.login}>Upload</Button>
+                <Button text leftIcon={<HiOutlinePlus style={{ width: 24 }} />} onClick={toggle}>Upload</Button>
                 <Button style={{ height: 36 }} primary onClick={toggle}>Log in</Button>
               </>
             )}

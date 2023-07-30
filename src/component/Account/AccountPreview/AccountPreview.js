@@ -19,7 +19,7 @@ function AccountPreview({ data }) {
             return;
         }
         const isFollowed = await handleFollowFunc(userChange);
-        setUserChange((user) => ({ ...user, isFollowed: isFollowed }));
+        setUserChange((user) => ({ ...user, followed: isFollowed }));
     };
 
     return (
@@ -33,7 +33,7 @@ function AccountPreview({ data }) {
 
                 <WrapperAuth>
                     <div onClick={handleFollow} style={{ cursor: 'pointer' }}>
-                        {userChange.isFollowed ? (
+                        {userChange.followed ? (
                             <Button text className={styles['follow-btn']}>
                                 Following
                             </Button>

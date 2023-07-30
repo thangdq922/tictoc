@@ -3,10 +3,9 @@ export const config = {
     video: `/:userName/video/:id`,
     search: '/search/:type',
     live: '/live',
-    register: '/register',
-    login: '/login',
+    setting:'/setting',
     profileLink: (userName) => `/@/${userName}`,
-    videoLink: (content) => `/@${content.user.userName}/video/${content.id}`,
+    videoLink: (content) => `@${content.user.userName}/video/${content.id}`,
     searchLink: (q, type) => `/search/${type}?q=${q}`,
 
     upload: '/upload',

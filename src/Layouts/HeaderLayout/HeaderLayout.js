@@ -5,7 +5,7 @@ function HeaderLayout({children}) {
     return (
         <div>
             <Header />
-            <div className="container">
+            <div style={{width:'100%'}}>
                 {children}
             </div>
         </div>

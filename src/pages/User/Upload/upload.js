@@ -22,7 +22,7 @@ function Upload() {
     setFilePreview(src);
     setFile(e.target.files[0]);
   };
-console.log(filePreview)
+
   const handleUploadVideo = async (data) => {
     setIsLoading(true);
     await videosService.postVideo(data);
@@ -31,21 +31,13 @@ console.log(filePreview)
   };
 
   const submitForm = (data) => {
-    const fullData = { ...data, upload_file: file };
 
     const formData = new FormData();
 
-    for (const key in fullData) {
-      if (key === "allows") {
-        if (fullData[key])
-          fullData.allows.forEach(function (value) {
-            formData.append("allows[]", value);
-          });
-      } else {
-        formData.append(key, fullData[key]);
-      }
-    }
-
+    formData.append('video', new Blob([JSON.stringify(data)], {
+      type: "application/json"
+    }));
+    formData.append('upFile', file)
     handleUploadVideo(formData);
   };
 

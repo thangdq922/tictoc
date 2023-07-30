@@ -2,12 +2,12 @@ import { FaCircleCheck } from 'react-icons/fa6'
 
 import config from '../../../../config';
 import Image from '../../../../component/Image/Image';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './SuggestedVideo.module.css'
+import WrapperAuth from '../../../../component/WrapperAuth';
 
 function SuggestedVideo({ user }) {
 
-    const navigate = useNavigate();
 
     const handleVideoPlay = (e) => {
         e.target.play();
@@ -19,14 +19,14 @@ function SuggestedVideo({ user }) {
     };
 
     return (
-        <div className={styles['video-container']} key={user.id}>
+        <div className={styles['video-container']} >
             <div className={styles.link}>
                 <Link
                     to={config.profileLink(user.userName)}
                     target='_blank'
                     className={styles['video-wrapper']}
                 >
-                    <video
+                    {user.popularVideo && <video
                         className={styles.video}
                         src={user.popularVideo.fileUrl}
                         muted
@@ -35,6 +35,7 @@ function SuggestedVideo({ user }) {
                         onMouseLeave={handleVideoPause}
                         poster={user.popularVideo.thumb_url}
                     />
+                    }
                 </Link>
                 <div className={styles['info-container']}>
                     <Link
@@ -50,7 +51,9 @@ function SuggestedVideo({ user }) {
                             {true && < FaCircleCheck className={styles.check} />}
                         </h4>
                     </Link>
-                    <button className={styles.button} onClick={() => navigate(config.login)} >Follow</button>
+                    <WrapperAuth>
+                        <button className={styles.button} >Follow</button>
+                    </WrapperAuth>
                 </div>
             </div>
         </div>

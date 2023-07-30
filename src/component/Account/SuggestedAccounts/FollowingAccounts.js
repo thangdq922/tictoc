@@ -7,38 +7,33 @@ import * as userService from '../../../services/user/usersService'
 
 
 function FollowingAccounts({ label }) {
-    const [page, setPage] = useState(1);
-    const [accounts, setAccounts] = useState([])
+    const [perpage, setPerpage] = useState(5);
 
     const handleSeeMore = () => {
-        if (data?.length === 0) {
-            setPage(1)
-            setAccounts([])
+        if (perpage % 5 !== 0 || perpage === 20) {
+            setPerpage(5);
         } else {
-            setPage(page + 1);
-            setAccounts((rest) => [...rest, ...data])
+            setPerpage((prev) => prev + 5);
         }
+    }
 
-    };
-
-    const { data } = useQuery({
-        queryKey: ['followingAccounts', page],
-        queryFn: () => userService.followingList(page)
+    const { data: accounts } = useQuery({
+        queryKey: ['followingAccounts', perpage],
+        queryFn: () => userService.followingList(1, perpage)
     })
 
     return (
         <div className={styles.wrapper}>
             <p className={styles.label}>{label}</p>
-            {accounts.length !== 0 ? accounts?.map((result) =>
+            {accounts?.map((result) =>
                 <AccountItem key={result.id} data={result} />
-            ) : data?.map((result) =>
-                <AccountItem key={result.id} data={result} />)
-            }
+            )}
             <p className={styles['more-btn']} onClick={handleSeeMore}>
-                {data?.length === 0 ? "See less" : "See more"}
+                {(perpage % 5 !== 0 || perpage === 20) ? "See less" : "See more"}
             </p>
         </div>
     )
+
 }
 
 export default FollowingAccounts

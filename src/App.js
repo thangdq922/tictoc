@@ -5,11 +5,14 @@ import { publicR, errorR, privateR } from "./route/index";
 import Loader from "./component/Loader/Loader";
 import config from "./config";
 import ModalVideo from "./pages/Default/ModalVideo";
+import { getUser } from "./hooks/auth/user.localstore";
+import { ProtectedRoute } from "./component/ProtectedRoute";
 
 
 function App() {
   const location = useLocation();
   const videoDetail = location.state && location.state.videoDetail;
+  const userCurrent = getUser()?.data
 
   return (
 
@@ -41,7 +44,9 @@ function App() {
               key={index}
               element={
                 <Layout>
+                  <ProtectedRoute user={userCurrent}>
                   <Page />
+                  </ProtectedRoute>
                 </Layout>
               }
             />

@@ -10,18 +10,23 @@ function SuggestedAccounts({ label }) {
     const [perpage, setPerpage] = useState(5);
 
     const handleSeeMore = () => {
-        if (perpage !== 20) {
-            setPerpage((prev) => prev + 5);
-        } else {
+        if (perpage % 5 !== 0 || perpage === 20) {
             setPerpage(5);
+        } else {
+            setPerpage((prev) => prev + 5);
         }
     }
 
     const { data: accounts } = useQuery({
         queryKey: ['accountSuggested', perpage],
-        queryFn: () => userService.suggestedList(1, perpage)
+        queryFn: async () => {
+            const data = await userService.suggestedList(1, perpage)
+            if (data.length < perpage) {
+                setPerpage(data.length)
+            }
+            return data
+        }
     })
-
 
     return (
         <div className={styles.wrapper}>
@@ -30,7 +35,7 @@ function SuggestedAccounts({ label }) {
                 <AccountItem key={result.id} data={result} />
             )}
             <p className={styles['more-btn']} onClick={handleSeeMore}>
-            {perpage === 20  ? "See less" : "See more"}
+                {(perpage % 5 !== 0 || perpage === 20) ? "See less" : "See more"}
             </p>
         </div>
     )

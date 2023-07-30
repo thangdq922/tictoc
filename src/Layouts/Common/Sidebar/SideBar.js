@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 
 import Menu, { MenuItem } from "./Menu";
 import styles from "./Sidebar.module.css"
@@ -8,6 +7,7 @@ import SuggestedAccounts from "../../../component/Account/SuggestedAccounts";
 import Button from "../../../component/Button";
 import { getUser } from "../../../hooks/auth/user.localstore";
 import FollowingAccounts from "../../../component/Account/SuggestedAccounts/FollowingAccounts";
+import WrapperAuth from "../../../component/WrapperAuth";
 
 
 
@@ -30,11 +30,11 @@ function SideBar() {
                 <p className={styles.login_tip}>
                   Log in to follow creators, like videos, and view comments.
                 </p>
-                <Link to={config.login}>
+                <WrapperAuth>
                   <Button outline large className={styles.button_login}>
                     Log in
                   </Button>
-                </Link>
+                </WrapperAuth>
               </div>
             </div>
           </>

@@ -14,14 +14,14 @@ function AccountItem({ data }) {
             <Image
                 className={styles['avatar']}
                 src={data.avatar}
-                alt={data.full_name}
+                alt={data.name}
             />
             <div className={styles['info']}>
                 <h4 className={styles['name']}>
-                    <span>{data.full_name}</span>
+                    <span>{data.userName}</span>
                     {data.tick && < FontAwesomeIcon className={styles['check']} icon={faCheckCircle} />}
                 </h4>
-                <span className={styles['username']}>{data.userName}</span>
+                <span className={styles['username']}>{data.name}</span>
             </div>
         </Link>
     );

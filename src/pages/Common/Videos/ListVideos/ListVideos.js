@@ -17,6 +17,9 @@ function ListVideos({ type }) {
     useEffect(() => {
         async function getListVideo() {
             const result = await videosService.getListVideo(type,1);
+            if (result.length  < 15) {
+                setHasMore(false);
+            }
             setVideos(result)
         }
 

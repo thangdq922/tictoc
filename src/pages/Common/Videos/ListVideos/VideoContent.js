@@ -38,6 +38,20 @@ function VideoContent({ data }) {
         }
     }
 
+    const copy = async () => {
+        await navigator.clipboard.writeText(window.location + config.videoLink(dataChange));
+        alert('Link Copied');
+    }
+
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.title) {
+            case 'Copy link':
+                copy()
+                break;
+            default:
+        }
+    }
+
     return (
         <div className={styles['video-content']}>
             <div className={styles['video-container']}>
@@ -60,7 +74,7 @@ function VideoContent({ data }) {
                 <WrapperAuth>
                     <button className={styles['action-btn']} onClick={() => handleLike(dataChange)} >
                         <span className={styles['icon-btn']}>
-                            {<HeartIcon className={dataChange.isLiked ? styles.liked : ''} />}   </span>
+                            {<HeartIcon className={dataChange.liked ? styles.liked : ''} />}   </span>
                         <b>{dataChange.likesCount}</b>
                     </button>
 
@@ -81,11 +95,11 @@ function VideoContent({ data }) {
                         </button>
                     </Link>
 
-                    <Menu items={MENU_ITEMS_SHARE} offset={[150, 0]} >
+                    <Menu items={MENU_ITEMS_SHARE} offset={[150, 0]} onChange={handleMenuChange} >
                         <button className={styles['action-btn']} onClick={toLogin}>
                             <span className={styles['icon-btn']}>
                                 <ShareIcon /></span>
-                            <b>{dataChange.sharesCount}</b>
+                            <b>{dataChange.sharesCount}0</b>
                         </button>
                     </Menu>
                 </WrapperAuth>

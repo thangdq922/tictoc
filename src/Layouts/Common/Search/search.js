@@ -41,7 +41,6 @@ function Search() {
     }, [debouncedValue])
 
     const handleSubmit = (e) => {
-        console.log(searchUser)
         e.preventDefault();
     }
 

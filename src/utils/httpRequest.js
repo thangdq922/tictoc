@@ -8,7 +8,7 @@ const httpRequest = axios.create({
 
 httpRequest.interceptors.request.use(
   function (config) {
-    const token = "Bearer " + getUser()?.meta.token;
+    const token = "Bearer " + getUser()?.accessToken;
     if (!!token) {
       config.headers.Authorization = token;
     }

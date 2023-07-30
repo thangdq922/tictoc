@@ -50,7 +50,7 @@ function Profile() {
             return;
         }
         const isFollowed = await handleFollowFunc(user);
-        setUser((user) => ({ ...user, isFollowed: isFollowed }));
+        setUser((user) => ({ ...user, followed: isFollowed }));
     };
 
     if (data.isLoading) {
@@ -78,7 +78,7 @@ function Profile() {
                             {userCurrent?.id !== user?.id ? (
                                 <WrapperAuth>
                                     <div className={styles.button_container}>
-                                        {user.isFollowed ? (
+                                        {user.followed ? (
                                             <div className={styles.followed_container}>
                                                 <Button className={styles.button} outline large>
                                                     Messenges

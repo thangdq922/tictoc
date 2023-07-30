@@ -16,8 +16,8 @@ function EditProfile({ open, close }) {
     const userCurrent = getUser()?.data
 
     const defaultValues = {
-        username: userCurrent?.userName,
-        name: userCurrent?.first_name,
+        userName: userCurrent?.userName,
+        name: userCurrent?.name,
         bio: userCurrent?.bio
     }
     const [countWord, setCountWord] = useState(defaultValues.bio?.length);
@@ -35,13 +35,15 @@ function EditProfile({ open, close }) {
     };
 
     const submitForm = (data) => {
-        const fullData = { ...data, upload_file: file };
-        const formData = new FormData();
 
-        for (const key in fullData) {
-            console.log(key, fullData[key])
-            formData.append(key, fullData[key]);
-        }
+        
+        const formData = new FormData();
+        formData.append('user',  new Blob([JSON.stringify(data)], {
+            type: "application/json"
+        }));
+        formData.append('upAvatar', file)
+    
+        userEdit.mutate(formData)
     }
 
     return (
@@ -85,15 +87,14 @@ function EditProfile({ open, close }) {
                                         </div>
                                     </label>
                                 </div>
-                                <input type="hidden" defaultValue={userCurrent.id} {...register("id")} />
                                 <div className={styles.itemContainer}>
                                     <div className={styles.label}>Username</div>
                                     <div className={styles.inputContainer}>
                                         <input
                                             placeholder="Username"
                                             className={styles.input}
-                                            defaultValue={defaultValues.username}
-                                            {...register("username")}
+                                            defaultValue={defaultValues.userName}
+                                            {...register("userName")}
                                         />
                                         <p className={styles.link} >www.tiktok.com/@jakiedo922</p>
                                         <p className={styles.tip}>Usernames can only contain letters, numbers, underscores, and periods. Changing your username will also change your profile link.</p>
@@ -135,7 +136,7 @@ function EditProfile({ open, close }) {
                                 <button className={styles.cancel} type="reset"  >Cancel</button>
                                 <button
                                     className={styles.save}
-                                    disabled={userEdit.isLoading || !isDirty}
+                                    disabled={userEdit.isLoading || (!isDirty && !filePreview)}
                                     type="submit"
                                 >
                                     Save
