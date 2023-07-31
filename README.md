@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+  NOT AUTHENTICATED
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/810be2ab-5b0c-4025-8563-962342a39ddb)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/2cac6e10-dd76-4205-82b0-a385069935ad)
 
-## Available Scripts
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/07879fcf-d8c2-4ed3-b8c9-2dd1f6ca2ffd)
 
-In the project directory, you can run:
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/a23ad60c-ba13-4450-93cc-a9810f6e6b40)
 
-### `npm start`
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/801493e4-a154-473f-826c-86f222ee5d05)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/2cc060d1-b77c-4f55-99cd-bd2108ccb2db)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/cced83f1-c75c-4df5-931f-867f04c7606f)
 
-### `npm test`
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/03d66622-8f93-44c5-a1e9-f189a81bb188)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+AUTHENTICATED
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/a5be8a10-cf4a-45bc-9c7d-0da8958fdbd9)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/9f6691af-f247-4143-8913-47fbec70098a)
 
-### `npm run eject`
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/e0f9abb3-a363-4857-b947-afead17b2084)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/56f81b97-2d0f-474e-9fb9-43d323eb8be6)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/7d851752-0d3e-4a1b-a3ae-60434ee557d2)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/daf9d070-e83a-4c2c-8845-c08f038b14e5)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
