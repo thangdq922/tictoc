@@ -20,7 +20,7 @@ function SideBar() {
         <Menu>
           <MenuItem to={config.home} icon={<HomeIcon />} >For You</MenuItem>
           <MenuItem to={config.following} icon={<UserGroupIcon />} >Following</MenuItem>
-          <MenuItem to={config.live} icon={<LiveIcon />} >LIVE</MenuItem>
+          <MenuItem to="/error" icon={<LiveIcon />} >LIVE</MenuItem>
         </Menu>
         {!user ? (
           <>
@@ -47,9 +47,11 @@ function SideBar() {
           <p>Contact me</p>
           <a
             className={styles.facebook}
-            href="/"
+            href="https://www.facebook.com/profile.php?id=100013859865138"
+            target="_blank"
+            rel="noreferrer"
           >
-            CCCC
+            Thắng
           </a>
         </div>
       </div>
