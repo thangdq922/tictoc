@@ -5,13 +5,15 @@ import { UserIcon } from '../../../component/Icons'
 import { MenuItem } from '../../../layouts/Common/Sidebar/Menu'
 import Menu from '../../../layouts/Common/Sidebar/Menu/Menu'
 import styles from './Setting.module.css'
-import { getUser } from '../../../hooks/auth/user.localstore'
+import { getUser, removeUser } from '../../../hooks/auth/user.localstore'
 import Button from '../../../component/Button/Button'
 import useEdit from '../../../hooks/auth/useEdit'
-import * as userService from '../../../services/user/usersService'
+import * as usersService from '../../../services/user/usersService'
+import { useNavigate } from 'react-router-dom'
 
 function Setting() {
     const userCurrent = getUser()?.data
+    const navigate = useNavigate();
     const userEdit = useEdit()
     const defaultValues = {
         userName: userCurrent?.phone,
@@ -26,13 +28,17 @@ function Setting() {
 
     const submitForm = (data) => {
         const formData = new FormData();
-        formData.append('user',  new Blob([JSON.stringify(data)], {
+        formData.append('user', new Blob([JSON.stringify(data)], {
             type: "application/json"
         }));
         userEdit.mutate(formData)
     }
 
-    const deleteAccount = () => userService.deleteUser(userCurrent.id)
+    const deleteAccount = async () => {
+        await usersService.deleteUser(userCurrent.id)
+        removeUser()
+        return navigate("/")
+    }
 
     return (
         <div className={styles.container}>
@@ -86,7 +92,7 @@ function Setting() {
                                     maxLength="12"
                                     className={styles.input}
                                     defaultValue={defaultValues.phone}
-                                    // {...register("Phone")}
+                                // {...register("Phone")}
                                 />
                             </div>
                         </div>

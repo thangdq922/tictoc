@@ -115,7 +115,6 @@ export async function deleteUser(id) {
       method: 'delete',
       url: `users/${id}`,
     })
-    removeUser()
   } catch (err) {
     console.log(err);
   }

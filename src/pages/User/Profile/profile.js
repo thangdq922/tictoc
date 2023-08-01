@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { BiUserCheck, BiSolidCheckCircle } from "react-icons/bi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { BiUserCheck, BiSolidCheckCircle, BiUserMinus } from "react-icons/bi";
 import { FaRegEdit } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { FiPlay } from "react-icons/fi";
@@ -22,6 +22,7 @@ import EditProfile from "./EditProfile/EditProfile";
 function Profile() {
     const [user, setUser] = useState({});
     const params = useParams();
+    const navigate = useNavigate();
     const { isOpen, toggle } = useModal()
 
     const userCurrent = getUser()?.data
@@ -46,12 +47,17 @@ function Profile() {
     };
 
     const handleFollow = async () => {
-         if (!userCurrent) {
+        if (!userCurrent) {
             return;
         }
         const isFollowed = await handleFollowFunc(user);
         setUser((user) => ({ ...user, followed: isFollowed }));
     };
+
+    const deleteAccount = async () => {
+        await usersService.deleteUser(user.id)
+        return navigate("/")
+    }
 
     if (data.isLoading) {
         return <Loader />;
@@ -75,37 +81,49 @@ function Profile() {
                                 {user.tick && <BiSolidCheckCircle className={styles.verify} />}
                             </h2>
                             <h4 className={styles.user_fullname}>{user.name}</h4>
-                            {userCurrent?.id !== user?.id ? (
-                                <WrapperAuth>
-                                    <div className={styles.button_container}>
-                                        {user.followed ? (
-                                            <div className={styles.followed_container}>
-                                                <Button className={styles.button} outline large>
-                                                    Messenges
-                                                </Button>
-                                                <Tippy content="Unfollow" placement="bottom">
-                                                    <div className={styles.unfollow} onClick={handleFollow}>
-                                                        <BiUserCheck />
-                                                    </div>
-                                                </Tippy>
-                                            </div>
-                                        ) : (
-                                            <Button
-                                                large
-                                                className={styles.button_follow}
-                                                onClick={handleFollow}
-                                            >
-                                                Follow
-                                            </Button>
-                                        )}
-                                    </div>
-                                </WrapperAuth>
-                            ) : (
+                            {(userCurrent?.id === user?.id) ? (
                                 <div className={styles.button_container}>
                                     <Button text leftIcon={<FaRegEdit />} onClick={toggle}>
                                         Edit profile
                                     </Button>
                                 </div>
+                            ) : (
+                                <WrapperAuth>
+                                    <div className={styles.button_container}>
+                                        {userCurrent?.id === 1 ? (
+                                            <div className={styles.followed_container}>
+                                                <Button className={styles.button} outline large>
+                                                    Messenges
+                                                </Button>
+                                                <Tippy content="Delete" placement="bottom">
+                                                    <div className={styles.unfollow} onClick={deleteAccount}>
+                                                        <BiUserMinus />
+                                                    </div>
+                                                </Tippy>
+                                            </div>
+                                        ) : (
+                                            user.followed ? (
+                                                <div className={styles.followed_container}>
+                                                    <Button className={styles.button} outline large>
+                                                        Messenges
+                                                    </Button>
+                                                    <Tippy content="Unfollow" placement="bottom">
+                                                        <div className={styles.unfollow} onClick={handleFollow}>
+                                                            <BiUserCheck />
+                                                        </div>
+                                                    </Tippy>
+                                                </div>
+                                            ) : (
+                                                <Button
+                                                    large
+                                                    className={styles.button_follow}
+                                                    onClick={handleFollow}
+                                                >
+                                                    Follow
+                                                </Button>
+                                            ))}
+                                    </div>
+                                </WrapperAuth>
                             )}
                         </div>
                     </div>

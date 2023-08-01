@@ -54,7 +54,7 @@ function VideoInfo({ id, user, caption, music }) {
     menuItem.title === 'Delete' && deleteVideo()
   }
   const deleteVideo = async () => {
-    if (userCurrent.id === userChange.id) {
+    if (userCurrent.id === userChange.id || userCurrent?.id === 1) {
       await videosService.deleteVideo(id);
       const userProfile = config.profileLink(userCurrent.userName);
       navigate(userProfile);
@@ -91,7 +91,7 @@ function VideoInfo({ id, user, caption, music }) {
       </div>
       <Tippy interactive delay={[800, 200]} placement="bottom" render={renderPreview} singleton={source} />
 
-      {(userCurrent?.id === userChange.id) ?
+      {(userCurrent?.id === userChange.id || userCurrent?.id === 1) ?
         <Menu items={videoSetting} onChange={handleMenuChange} offset={[10,-70]} >
           <div style={{ marginTop: 10 }} >
             <HiOutlineDotsHorizontal size={24} style={{cursor: 'pointer'}} />

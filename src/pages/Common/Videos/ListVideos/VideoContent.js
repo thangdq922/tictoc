@@ -39,7 +39,7 @@ function VideoContent({ data }) {
     }
 
     const copy = async () => {
-        await navigator.clipboard.writeText(window.location + config.videoLink(dataChange));
+        await navigator.clipboard.writeText(window.location + `@${dataChange.user.userName}/video/${dataChange.id}`);
         alert('Link Copied');
     }
 

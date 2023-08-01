@@ -163,7 +163,7 @@ function ListComment({ video }) {
                   </div>
                   <div className={styles.action_container}>
                     <div style={{ display: 'flex', height: 20 }}>
-                      {userCurrent?.id === comment.user.id &&
+                      {(userCurrent?.id === comment.user.id || userCurrent?.id === 1) &&
                         <Menu
                           items={[{ icon: <BsTrash size={30}/>, title: "Delete", settingV: true, comment: comment }]}
                           onChange={handleMenuChange}

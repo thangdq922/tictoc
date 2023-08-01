@@ -1,7 +1,6 @@
 import httpRequest from '../../utils/httpRequest'
 
 export async function getListVideo(type = 'for-you', page) {
-    console.log('cc')
     try {
         const res = await httpRequest({
             method: 'get',
