@@ -1,37 +1,33 @@
 BACK-END : https://github.com/thangdq922/tictoc-BackEnd
   
   
-  NOT AUTHENTICATED
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/810be2ab-5b0c-4025-8563-962342a39ddb)
+NOT AUTHENTICATED
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/2b91b4cc-a283-420d-8efb-f0e5502abf5e)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/2cac6e10-dd76-4205-82b0-a385069935ad)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/163597e7-277c-465b-8fb8-b9d7fdd5b0cb)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/07879fcf-d8c2-4ed3-b8c9-2dd1f6ca2ffd)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/5e4ad55d-cbdb-4937-8fd5-227967d4f12c)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/a23ad60c-ba13-4450-93cc-a9810f6e6b40)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/9e03dafd-1fde-4cc1-acf4-178a930016bf)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/801493e4-a154-473f-826c-86f222ee5d05)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/82bcaaa6-72ff-4e6d-91b0-3d9fb8ccbe43)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/2cc060d1-b77c-4f55-99cd-bd2108ccb2db)
+search page
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/cec361e9-4079-4225-905a-1c3731d720b0)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/cced83f1-c75c-4df5-931f-867f04c7606f)
-
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/03d66622-8f93-44c5-a1e9-f189a81bb188)
-
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/840ffa25-54ce-4809-aa5d-073353e8f0e0)
 
 
 AUTHENTICATED
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/a5be8a10-cf4a-45bc-9c7d-0da8958fdbd9)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/bf3068bb-5ce4-4226-bae5-2790a68c83dd)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/9f6691af-f247-4143-8913-47fbec70098a)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/3ce122c8-0b97-43e7-a196-2c9e22de7d06)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/e0f9abb3-a363-4857-b947-afead17b2084)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/d90293cf-b34e-4da9-82a1-785e6280ecc1)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/56f81b97-2d0f-474e-9fb9-43d323eb8be6)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/7187f79a-b0e5-44ad-a014-5c1c6a467f5c)
 
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/7d851752-0d3e-4a1b-a3ae-60434ee557d2)
-
-![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/daf9d070-e83a-4c2c-8845-c08f038b14e5)
+![image](https://github.com/thangdq922/tictoc-FrontEnd/assets/127226811/9f54e831-6f66-4dde-9ad4-65e230cef304)
 
 
