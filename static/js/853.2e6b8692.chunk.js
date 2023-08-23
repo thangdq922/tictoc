@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktiktok=self.webpackChunktiktok||[]).push([[853],{3853:function(t,n,o){o.d(n,{KCr:function(){return e}});var r=o(9983);function e(t){return(0,r.w_)({tag:"svg",attr:{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round"},child:[{tag:"polygon",attr:{points:"5 3 19 12 5 21 5 3"}}]})(t)}}}]);
+//# sourceMappingURL=853.2e6b8692.chunk.js.map

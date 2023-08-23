@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktiktok=self.webpackChunktiktok||[]).push([[732],{7732:function(e,t,r){r.r(t),r.d(t,{default:function(){return a}});var n=r(2552),u="Home_wrapper__2IRZx",s=r(184);var a=function(){return(0,s.jsx)("div",{className:u,children:(0,s.jsx)(n.Z,{type:"for-you"})})}}}]);
+//# sourceMappingURL=732.9a4c5fb4.chunk.js.map

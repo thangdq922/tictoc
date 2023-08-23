@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktiktok=self.webpackChunktiktok||[]).push([[65],{1065:function(n,t,e){e.r(t),e.d(t,{default:function(){return u}});var i={},r=e(184);var u=function(){return(0,r.jsx)("div",{className:i.container,children:"Live"})}}}]);
+//# sourceMappingURL=65.e8cf64ba.chunk.js.map
