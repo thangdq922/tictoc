@@ -1,5 +1,5 @@
 
-https://thangdq922.github.io/tictoc/
+WEB: https://thangdq922.github.io/tictoc/
 
 BACK-END : https://github.com/thangdq922/tictoc-api/tree/main
 
