@@ -1,7 +1,7 @@
 
 https://thangdq922.github.io/tictoc/
 
-BACK-END : https://github.com/thangdq922/tictoc-BackEnd
+BACK-END : https://github.com/thangdq922/tictoc-api/tree/main
 
 
 NOT AUTHENTICATED
