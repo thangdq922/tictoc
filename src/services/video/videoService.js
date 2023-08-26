@@ -29,15 +29,13 @@ export async function getVideo(id) {
     }
 };
 
-export async function postVideo(formData) {
+export async function postVideo(data) {
     try {
         await httpRequest({
             method: 'post',
             url: "videos",
-            data: formData,
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
+            data: data,
+           
         })
     } catch (err) {
         console.log(err);

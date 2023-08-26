@@ -8,6 +8,8 @@ import styles from './EditProfile.module.css'
 import Image from '../../../../component/Image/Image'
 import { getUser } from '../../../../hooks/auth/user.localstore'
 import useEdit from '../../../../hooks/auth/useEdit'
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { storage } from '../../../../utils/firebase';
 
 function EditProfile({ open, close }) {
 
@@ -35,15 +37,14 @@ function EditProfile({ open, close }) {
     };
 
     const submitForm = (data) => {
+        const fileRef = ref(storage, `videos/${userCurrent.id}_${file.name}`)
+        uploadBytes(fileRef, file).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                userEdit.mutate({ ...data, avatar: url })
+            });
+        });
 
-        
-        const formData = new FormData();
-        formData.append('user',  new Blob([JSON.stringify(data)], {
-            type: "application/json"
-        }));
-        formData.append('upAvatar', file)
-    
-        userEdit.mutate(formData)
+
     }
 
     return (

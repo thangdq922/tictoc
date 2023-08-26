@@ -7,6 +7,9 @@ import Loader from "../../../component/Loader";
 import { UploadIcon } from "../../../component/Icons";
 import * as videosService from "../../../services/video/videoService";
 import styles from "./Upload.module.css";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { storage } from '../../../utils/firebase';
+import { getUser } from "../../../hooks/auth/user.localstore";
 
 function Upload() {
   const [filePreview, setFilePreview] = useState("");
@@ -14,6 +17,8 @@ function Upload() {
   const [caption, setCaption] = useState("");
   const { register, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const userCurrent = getUser()?.data
+
 
   const navigate = useNavigate();
 
@@ -32,13 +37,13 @@ function Upload() {
 
   const submitForm = (data) => {
 
-    const formData = new FormData();
+    const fileRef = ref(storage, `videos/${userCurrent.id}_${file.name}`)
 
-    formData.append('video', new Blob([JSON.stringify(data)], {
-      type: "application/json"
-    }));
-    formData.append('upFile', file)
-    handleUploadVideo(formData);
+    uploadBytes(fileRef, file).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        handleUploadVideo({ data, fileUrl: url });
+      });
+    });
   };
 
   return (

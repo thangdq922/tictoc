@@ -93,15 +93,13 @@ export async function userlogout() {
   removeUser()
 };
 
-export async function userEdit(formData) {
+export async function userEdit(data) {
   try {
     const res = await httpRequest({
       method: 'PATCH',
       url: authApi.me,
-      data: formData,
-      headers: {
-        'Content-Type': undefined
-      }
+      data: data,
+      
     })
     return res.data
   } catch (err) {

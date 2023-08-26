@@ -27,11 +27,7 @@ function Setting() {
     } = useForm({ defaultValues: defaultValues });
 
     const submitForm = (data) => {
-        const formData = new FormData();
-        formData.append('user', new Blob([JSON.stringify(data)], {
-            type: "application/json"
-        }));
-        userEdit.mutate(formData)
+        userEdit.mutate({...data})
     }
 
     const deleteAccount = async () => {

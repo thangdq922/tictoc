@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import './component/GlobalStyle/GlobalStyle.css';
 import App from './App';
-import {queryClient} from './react-query/client'
+import {queryClient} from './utils/react-query'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
