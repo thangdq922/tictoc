@@ -10,11 +10,12 @@ import styles from './notify.module.css'
 import NotifyItem from './notifyItem'
 import { InboxIcon } from '../../../component/Icons'
 import { StompContext } from '../../../utils/NotifProvider'
-import { saveStatus } from '../../../services/notifService'
+import { deleteNotifs, saveStatus } from '../../../services/notifService'
+import { getUser } from '../../../hooks/auth/user.localstore'
 
 function Notify() {
 
-    const stompClient = useContext(StompContext);
+    const client = useContext(StompContext);
     const [visible, setVisible] = useState(false);
     const [badge, setBadge] = useState()
 
@@ -24,14 +25,17 @@ function Notify() {
         setBadge(0)
     }
     useEffect(() => {
-        setBadge(stompClient.notifs?.length)
-        if (badge < stompClient.notifs?.length) {
-            setBadge(stompClient.notifs[0]?.countNotRead)
+        setBadge(client.notifs?.length)
+        if (badge < client.notifs?.length) {
+            setBadge(client.notifs[0]?.countNotRead)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [stompClient])
+    }, [client])
 
-
+    const deleteNotif = async () => {
+        await deleteNotifs()
+        client.stompClient.send('/app/notification', {}, getUser()?.data?.userName)
+    }
     const Item = (attrs) => {
         return (
             <div className={styles.container} tabIndex="-1" {...attrs}>
@@ -59,8 +63,14 @@ function Notify() {
                 </div>
 
                 <div className={styles['notify-list']}>
-                    <p className={styles.listTitle}> New</p>
-                    <NotifyItem notifs={stompClient.notifs} />
+                    <p className={styles.listTitle}>
+                        New
+                        <span onClick={deleteNotif} className={styles.clear}>
+                            Clear all
+                        </span>
+                    </p>
+
+                    <NotifyItem notifs={client.notifs} />
                 </div>
             </div>
         )
@@ -72,7 +82,7 @@ function Notify() {
             theme={'light'}
             interactive={true}
             visible={visible}
-            content={<Item notifs={stompClient.notifs} />}
+            content={<Item notifs={client.notifs} />}
             onClickOutside={controlVisible}
         >
             <Tippy delay={[0, 50]} content="Notification" >

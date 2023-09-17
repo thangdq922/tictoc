@@ -5,19 +5,11 @@ import Image from '../../../component/Image'
 import styles from './notify.module.css'
 import { Link, useLocation } from 'react-router-dom'
 import config from '../../../config'
-import { deleteNotifs } from '../../../services/notifService'
-import { useContext } from 'react'
-import { StompContext } from '../../../utils/NotifProvider'
-import { getUser } from '../../../hooks/auth/user.localstore'
+
 
 function NotifyItem({ notifs }) {
     const location = useLocation();
-    const client = useContext(StompContext)
 
-    const deleteNotif = async () => {
-       await deleteNotifs()
-       client.stompClient.send('/app/notification', {}, getUser()?.data?.userName)
-    }
     return (
         <ul className={styles.listItem}>
             {notifs?.map(notif =>
@@ -48,7 +40,6 @@ function NotifyItem({ notifs }) {
                     </div>
                 </Link>
             )}
-            <div onClick={deleteNotif}>clear all</div>
         </ul>
     )
 }

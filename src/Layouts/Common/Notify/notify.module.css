@@ -139,7 +139,12 @@
                 }
             }
         }
+    }
 
+    .clear {
+        color: deepskyblue;
+        margin-left: 210px;
+        cursor: pointer;
     }
 }
 
