@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,11 +8,12 @@ import Image from '../../Image/Image';
 import handleFollowFunc from '../../../services/user/followService';
 import WrapperAuth from '../../WrapperAuth';
 import { getUser } from '../../../hooks/auth/user.localstore';
-
+import { StompContext } from '../../../utils/NotifProvider'
 
 function AccountPreview({ data }) {
     const [userChange, setUserChange] = useState(data);
     const userCurrent = getUser()?.data
+    const client = useContext(StompContext);
 
     const handleFollow = async () => {
         if (!userCurrent) {
@@ -20,6 +21,7 @@ function AccountPreview({ data }) {
         }
         const isFollowed = await handleFollowFunc(userChange);
         setUserChange((user) => ({ ...user, followed: isFollowed }));
+        client.stompClient.send('/app/notification', {}, userChange.userName)
     };
 
     return (

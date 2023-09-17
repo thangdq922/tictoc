@@ -34,10 +34,10 @@ function AccountItem({ data: account }) {
                     />
                     <div className={styles['info']}>
                         <h4 className={styles['name']}>
-                            <span>{account.name}</span>
+                            <span>{account.userName}</span>
                             {account.tick && < FontAwesomeIcon className={styles['check']} icon={faCheckCircle} />}
                         </h4>
-                        <span className={styles['userName']}>{account.userName}</span>
+                        <span className={styles['userName']}>{account.name}</span>
                     </div>
                 </Link>
             </Tippy>

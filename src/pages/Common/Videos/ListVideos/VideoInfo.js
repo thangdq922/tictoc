@@ -3,7 +3,7 @@ import Tippy, { useSingleton } from "@tippyjs/react/headless"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 import { HiOutlineDotsHorizontal } from 'react-icons/hi'
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 import { MusicIcon } from "../../../../component/Icons"
 import Image from '../../../../component/Image'
@@ -17,14 +17,16 @@ import WrapperAuth from "../../../../component/WrapperAuth"
 import { getUser } from "../../../../hooks/auth/user.localstore"
 import Menu from "../../../../component/Popper/Menu/Menu"
 import * as videosService from '../../../../services/video/videoService'
-
+import { StompContext } from '../../../../utils/NotifProvider'
 
 
 function VideoInfo({ id, user, caption, music }) {
   const [source, target] = useSingleton({ overrides: ['offset'] });
   const [userChange, setUserChange] = useState(user);
+  const client = useContext(StompContext);
   const navigate = useNavigate();
   const userCurrent = getUser()?.data
+
 
   const videoSetting = [
     { title: "Privacy Settings", settingV: true },
@@ -37,6 +39,7 @@ function VideoInfo({ id, user, caption, music }) {
     }
     const isFollowed = await handleFollowFunc(userChange);
     setUserChange((user) => ({ ...user, followed: isFollowed }));
+    client.stompClient.send('/app/notification', {}, userChange.userName)
   };
 
   const renderPreview = (props) => {

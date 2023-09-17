@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { BiUserCheck, BiSolidCheckCircle, BiUserMinus } from "react-icons/bi";
 import { FaRegEdit } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
@@ -18,12 +18,16 @@ import config from "../../../config";
 import { getUser } from "../../../hooks/auth/user.localstore";
 import useModal from "../../../hooks/useModal";
 import EditProfile from "./EditProfile/EditProfile";
+import { StompContext } from '../../../utils/NotifProvider'
+
 
 function Profile() {
+    const location = useLocation();
     const [user, setUser] = useState({});
     const params = useParams();
     const navigate = useNavigate();
     const { isOpen, toggle } = useModal()
+    const client = useContext(StompContext);
 
     const userCurrent = getUser()?.data
     const userName = params.userName;
@@ -52,6 +56,7 @@ function Profile() {
         }
         const isFollowed = await handleFollowFunc(user);
         setUser((user) => ({ ...user, followed: isFollowed }));
+        client.stompClient.send('/app/notification', {}, user.userName)
     };
 
     const deleteAccount = async () => {
@@ -162,7 +167,7 @@ function Profile() {
                                     state={{
                                         videoDetail: true,
                                         video: video,
-                                        prevPath: window.location.pathname,
+                                        prevPath: location.pathname,
                                         openModel: true,
                                     }}
                                     className={styles.link}

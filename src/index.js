@@ -7,7 +7,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import './component/GlobalStyle/GlobalStyle.css';
 import App from './App';
-import {queryClient} from './utils/react-query'
+import { queryClient } from './utils/react-query'
+import { NotifProvider } from './utils/NotifProvider';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +16,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter basename="/tictoc">
       <QueryClientProvider client={queryClient}>
-        <App />
+        <NotifProvider>
+          <App />
+        </NotifProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </BrowserRouter>

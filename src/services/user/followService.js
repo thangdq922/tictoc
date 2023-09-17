@@ -1,5 +1,8 @@
 import httpRequest from "../../utils/httpRequest";
 
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
 async function follow(id) {
     try {
         const res = await httpRequest({
@@ -8,7 +11,7 @@ async function follow(id) {
             data: id
         })
         return res.data;
-        
+
     } catch (err) {
         console.log(err);
     }

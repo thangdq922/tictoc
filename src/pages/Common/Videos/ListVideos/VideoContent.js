@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { CommentIcon, HeartIcon, ShareIcon } from "../../../../component/Icons";
 import styles from './Video.module.css'
@@ -10,12 +10,14 @@ import { MENU_ITEMS_SHARE } from "../../../../component/DataMenu/dataMenu";
 import config from "../../../../config";
 import WrapperAuth from "../../../../component/WrapperAuth";
 import { getUser } from "../../../../hooks/auth/user.localstore";
+import { StompContext } from '../../../../utils/NotifProvider'
 
 
 function VideoContent({ data }) {
-
+    const location = useLocation();
     const [dataChange, setDataChange] = useState(data);
     const userCurrent = getUser()?.data
+    const client = useContext(StompContext);
     // handle actions
     useEffect(() => {
         setDataChange(dataChange);
@@ -26,10 +28,12 @@ function VideoContent({ data }) {
             return;
         }
         const newdataChange = await handleLikeFunc(dataChange);
+        userCurrent?.id !== dataChange.user.id &&  client.stompClient.send('/app/notification', {}, dataChange.user.userName)
         setDataChange((dataChange) => ({
             ...dataChange,
             ...newdataChange,
         }));
+
     };
 
     const toLogin = (e) => {
@@ -60,7 +64,7 @@ function VideoContent({ data }) {
                     state={{
                         videoDetail: true,
                         video: dataChange,
-                        prevPath: window.location.pathname,
+                        prevPath: location.pathname,
                         openModel: true,
                     }}
                 >
@@ -83,7 +87,7 @@ function VideoContent({ data }) {
                         state={{
                             videoDetail: true,
                             video: dataChange,
-                            prevPath: window.location.pathname,
+                            prevPath: location.pathname,
                             openModel: true,
                         }}
                         onClick={toLogin}

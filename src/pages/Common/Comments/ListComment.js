@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
@@ -18,6 +18,7 @@ import { useQuery } from "@tanstack/react-query";
 import handleLikeFunc from "../../../services/video/likeService";
 import { MENU_ITEMS_SHARE } from "../../../component/DataMenu/dataMenu";
 import { getUser } from "../../../hooks/auth/user.localstore";
+import { StompContext } from '../../../utils/NotifProvider'
 
 
 function ListComment({ video }) {
@@ -25,6 +26,7 @@ function ListComment({ video }) {
   const [dataChange, setDataChange] = useState(video);
   const [comment, setComment] = useState("");
   const userCurrent = getUser()?.data
+  const client = useContext(StompContext);
 
   const data = useQuery({
     queryKey: ['listComment', dataChange],
@@ -43,6 +45,7 @@ function ListComment({ video }) {
     const result = await commentService.postComment(dataChange.id, comment);
     setComment("");
     setListComment((prev) => [result, ...prev]);
+    client.stompClient.send('/app/notification', {}, dataChange.user.userName)
   };
 
   const onFormSubmit = (e) => {
@@ -66,6 +69,7 @@ function ListComment({ video }) {
       ...dataChange,
       ...newdataChange,
     }));
+     client.stompClient.send('/app/notification', {}, dataChange.user.userName)
   };
 
   const deleteComment = async (comment) => {
@@ -105,22 +109,11 @@ function ListComment({ video }) {
             <b>{dataChange.likesCount}</b>
           </button>
 
-          <Link
-            to={config.videoLink(dataChange)}
-            state={{
-              videoDetail: true,
-              video: dataChange,
-              prevPath: window.location.pathname,
-              openModel: true,
-            }}
-            onClick={toLogin}
-          >
-            <button className={styles['action-btn']}>
-              <span className={styles['icon-btn']}>
-                < CommentIcon /></span>
-              <b>{dataChange.commentsCount}</b>
-            </button>
-          </Link>
+          <button className={styles['action-btn']} onClick={toLogin}>
+            <span className={styles['icon-btn']}>
+              < CommentIcon /></span>
+            <b>{dataChange.commentsCount}</b>
+          </button>
 
           <Menu items={MENU_ITEMS_SHARE} offset={[150, 0]} onChange={handleMenuChange} >
             <button className={styles['action-btn']} onClick={toLogin}>
@@ -165,7 +158,7 @@ function ListComment({ video }) {
                     <div style={{ display: 'flex', height: 20 }}>
                       {(userCurrent?.id === comment.user.id || userCurrent?.id === 1) &&
                         <Menu
-                          items={[{ icon: <BsTrash size={30}/>, title: "Delete", settingV: true, comment: comment }]}
+                          items={[{ icon: <BsTrash size={30} />, title: "Delete", settingV: true, comment: comment }]}
                           onChange={handleMenuChange}
                         >
                           <div >
