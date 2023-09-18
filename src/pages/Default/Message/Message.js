@@ -1,13 +1,17 @@
 import { LuSettings } from 'react-icons/lu'
+import { useContext } from 'react'
 
 import styles from './Message.module.css'
 import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 import Image from '../../../component/Image'
 import ChatBox from './Chatbox'
+import { getUser } from '../../../hooks/auth/user.localstore';
+import { StompContext } from '../../../utils/StompClientProvider'
 
 function Message() {
+    const userCurrent = getUser()?.data
+    const client = useContext(StompContext);
 
-    const cc = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -23,16 +27,18 @@ function Message() {
                     <div className={styles.listUserContainer}>
                         <div className={styles.scrollContainer}>
                             <div className={styles.scrollWrapper}>
-                                {cc.map(c =>
-                                    <div className={styles.itemWrapper}>
+                                {client.messages?.map(message =>
+                                    <div className={styles.itemWrapper} key={message.id} >
                                         <div className={styles.itemInfo}>
                                             <Image
                                                 className={styles.avatar}
+                                                src={message.userTo.avatar}
+                                                alt={message.userTo.name}
                                             />
                                             <div className={styles.infoText}>
-                                                <p className={styles.userName}>jakiedi229</p>
+                                                <p className={styles.userName}>{message.userTo.userName}</p>
                                                 <p className={styles.infoExtractTime}>
-                                                    <span className={styles.infoExtract}>a</span>
+                                                    <span className={styles.infoExtract}>{message.content}</span>
                                                     <span className={styles.infoTime}>1:50 PM</span>
                                                 </p>
                                             </div>

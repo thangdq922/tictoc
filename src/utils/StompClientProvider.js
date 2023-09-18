@@ -6,14 +6,17 @@ import { getUser } from "../hooks/auth/user.localstore";
 const StompContext = createContext();
 var stompClient = null;
 
-function NotifProvider({ children }) {
+function StompClientProvider({ children }) {
 
     const [notifs, setNotifs] = useState([]);
+    const [messages, setMessages] = useState([]);
     const userCurrent = getUser()?.data
 
     const onConnected = () => {
-        stompClient.subscribe('/user/queue/notif', onMessageReceived);
+        stompClient.subscribe('/user/queue/notif', onNotifReceived);
+        stompClient.subscribe('/user/queue/messages', onMessageReceived);
         stompClient.send('/app/notification', {}, userCurrent?.userName)
+        stompClient.send('/app/messages', {}, userCurrent?.userName)
     }
 
     const onError = (err) => {
@@ -22,8 +25,14 @@ function NotifProvider({ children }) {
 
     const onMessageReceived = (payload) => {
         var payloadData = JSON.parse(payload.body);
+        setMessages(payloadData)
+    }
+
+    const onNotifReceived = (payload) => {
+        var payloadData = JSON.parse(payload.body);
         setNotifs(payloadData)
     }
+    
     useEffect(() => {
         if (stompClient) {
             return
@@ -40,10 +49,10 @@ function NotifProvider({ children }) {
 
 
     return (
-        <StompContext.Provider value={{ notifs, stompClient }}>
+        <StompContext.Provider value={{ notifs, messages, stompClient }}>
             {children}
         </StompContext.Provider>
     )
 }
 
-export { StompContext, NotifProvider }
+export { StompContext, StompClientProvider }

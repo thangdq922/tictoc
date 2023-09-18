@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from 'react'
 import styles from './notify.module.css'
 import NotifyItem from './notifyItem'
 import { InboxIcon } from '../../../component/Icons'
-import { StompContext } from '../../../utils/NotifProvider'
+import { StompContext } from '../../../utils/StompClientProvider'
 import { deleteNotifs, saveStatus } from '../../../services/notifService'
 import { getUser } from '../../../hooks/auth/user.localstore'
 

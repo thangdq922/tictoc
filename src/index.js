@@ -8,7 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './component/GlobalStyle/GlobalStyle.css';
 import App from './App';
 import { queryClient } from './utils/react-query'
-import { NotifProvider } from './utils/NotifProvider';
+import { StompClientProvider } from './utils/StompClientProvider';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,9 +16,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter basename="/tictoc">
       <QueryClientProvider client={queryClient}>
-        <NotifProvider>
+        <StompClientProvider>
           <App />
-        </NotifProvider>
+        </StompClientProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </BrowserRouter>

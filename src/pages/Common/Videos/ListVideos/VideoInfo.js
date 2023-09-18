@@ -17,7 +17,7 @@ import WrapperAuth from "../../../../component/WrapperAuth"
 import { getUser } from "../../../../hooks/auth/user.localstore"
 import Menu from "../../../../component/Popper/Menu/Menu"
 import * as videosService from '../../../../services/video/videoService'
-import { StompContext } from '../../../../utils/NotifProvider'
+import { StompContext } from '../../../../utils/StompClientProvider'
 
 
 function VideoInfo({ id, user, caption, music }) {

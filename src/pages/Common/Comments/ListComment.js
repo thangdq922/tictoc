@@ -18,7 +18,7 @@ import { useQuery } from "@tanstack/react-query";
 import handleLikeFunc from "../../../services/video/likeService";
 import { MENU_ITEMS_SHARE } from "../../../component/DataMenu/dataMenu";
 import { getUser } from "../../../hooks/auth/user.localstore";
-import { StompContext } from '../../../utils/NotifProvider'
+import { StompContext } from '../../../utils/StompClientProvider'
 
 
 function ListComment({ video }) {

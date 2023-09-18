@@ -10,7 +10,7 @@ import { MENU_ITEMS_SHARE } from "../../../../component/DataMenu/dataMenu";
 import config from "../../../../config";
 import WrapperAuth from "../../../../component/WrapperAuth";
 import { getUser } from "../../../../hooks/auth/user.localstore";
-import { StompContext } from '../../../../utils/NotifProvider'
+import { StompContext } from '../../../../utils/StompClientProvider'
 
 
 function VideoContent({ data }) {

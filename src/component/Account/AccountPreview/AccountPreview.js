@@ -8,7 +8,7 @@ import Image from '../../Image/Image';
 import handleFollowFunc from '../../../services/user/followService';
 import WrapperAuth from '../../WrapperAuth';
 import { getUser } from '../../../hooks/auth/user.localstore';
-import { StompContext } from '../../../utils/NotifProvider'
+import { StompContext } from '../../../utils/StompClientProvider'
 
 function AccountPreview({ data }) {
     const [userChange, setUserChange] = useState(data);

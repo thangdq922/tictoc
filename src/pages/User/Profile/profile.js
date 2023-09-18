@@ -18,7 +18,7 @@ import config from "../../../config";
 import { getUser } from "../../../hooks/auth/user.localstore";
 import useModal from "../../../hooks/useModal";
 import EditProfile from "./EditProfile/EditProfile";
-import { StompContext } from '../../../utils/NotifProvider'
+import { StompContext } from '../../../utils/StompClientProvider'
 
 
 function Profile() {
