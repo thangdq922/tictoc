@@ -6,8 +6,8 @@ import { BsEmojiLaughing } from 'react-icons/bs'
 import Image from '../../../component/Image'
 import styles from './Message.module.css'
 
-function ChatBox() {
-
+function ChatBox({data}) {
+console.log(data)
     return (
         <div className={styles.chatboxContainer}>
             <div className={styles.chatHeader}>

@@ -25,7 +25,7 @@ function StompClientProvider({ children }) {
 
     const onMessageReceived = (payload) => {
         var payloadData = JSON.parse(payload.body);
-        setMessages(payloadData)
+        setMessages(payloadData.content)
     }
 
     const onNotifReceived = (payload) => {

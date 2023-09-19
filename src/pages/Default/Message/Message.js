@@ -5,12 +5,27 @@ import styles from './Message.module.css'
 import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 import Image from '../../../component/Image'
 import ChatBox from './Chatbox'
-import { getUser } from '../../../hooks/auth/user.localstore';
 import { StompContext } from '../../../utils/StompClientProvider'
+import httpRequest from '../../../utils/httpRequest'
+import { useState } from 'react'
 
 function Message() {
-    const userCurrent = getUser()?.data
     const client = useContext(StompContext);
+    const [allMessages, setAllMessages] = useState([])
+
+    const openChatBox = async (e) => {
+        console.log(typeof e.currentTarget.id)
+        try {
+            const res = await httpRequest({
+                method: 'get',
+                url: `users/${e.currentTarget.id}/messages`,
+            })
+            setAllMessages(res.data)
+            return res.data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
         <div className={styles.container}>
@@ -28,8 +43,10 @@ function Message() {
                         <div className={styles.scrollContainer}>
                             <div className={styles.scrollWrapper}>
                                 {client.messages?.map(message =>
-                                    <div className={styles.itemWrapper} key={message.id} >
-                                        <div className={styles.itemInfo}>
+                                    <div className={styles.itemWrapper}
+                                        key={message.id} onClick={openChatBox}
+                                        id={message.userTo.userName} >
+                                        <div className={styles.itemInfo} >
                                             <Image
                                                 className={styles.avatar}
                                                 src={message.userTo.avatar}
@@ -53,7 +70,7 @@ function Message() {
                         </div>
                     </div>
                 </div>
-                <ChatBox />
+                <ChatBox data={allMessages} />
             </div>
 
         </div>
