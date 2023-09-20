@@ -2,67 +2,72 @@
 import { Link } from 'react-router-dom'
 import { PiPaperPlaneTiltFill } from 'react-icons/pi'
 import { BsEmojiLaughing } from 'react-icons/bs'
+import dayjs from "dayjs";
 
 import Image from '../../../component/Image'
 import styles from './Message.module.css'
+import { getUser } from '../../../hooks/auth/user.localstore'
 
-function ChatBox({data}) {
-console.log(data)
+function ChatBox({ data }) {
+    const userCurrent = getUser()?.data
+
+    console.log(data)
     return (
-        <div className={styles.chatboxContainer}>
+        <>
             <div className={styles.chatHeader}>
                 <Link className={styles.headerWrapper}>
                     <Image
                         className={styles.avatar}
+                        src={data[0]?.userTo.avatar}
                     />
                     <div style={{ marginLeft: 12 }}>
-                        <p style={{ fontWeight: 600, fontSize: 19, lineHeight: 1.5 }}>jakiedi229</p>
-                        <p style={{ lineHeight: 1 }}>@jakiedi229</p>
+                        <p style={{ fontWeight: 600, fontSize: 19, lineHeight: 1.5 }}>{data[0]?.userTo.userName}</p>
+                        <p style={{ lineHeight: 1 }}>@{data[0]?.userTo.userName}</p>
                     </div>
                 </Link>
             </div>
             <div className={styles.chatMain}>
-                <div className={styles.chatCotent}>
-                    <div className={styles.timeContainer}>
-                        <span>7:34 PM</span>
-                    </div>
-                    <div className={styles.chatItem}>
-                        <div className={styles.messageContainer}>
-                            <Link>
-                                <Image className={styles.avatar} />
-                            </Link>
-                            <div className={styles.textContainer}
-                                style={{
-                                    background: 'rgba(22, 24, 35, 0.06)',
-                                    marginRight: 8,
-                                    marginLeft: 0,
-                                }}>
-                                <p className={styles.text}>aa</p>
+                {data.map((mess, index) =>
+                    <div className={styles.chatCotent} key={mess.id}>
+                        {dayjs(mess.createdDay).diff(data[index - 1].createdDay, 'day') === 0 &&
+                            <div className={styles.timeContainer}>
+                                <span>7:34 PM</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className={styles.chatItem}>
-                        <div className={styles.messageContainerReply}>
-                            <Link>
-                                <Image className={styles.avatar} />
-                            </Link>
-                            <div className={styles.textContainer}>
-                                <p className={styles.text}>aa</p>
+                        }
+                        {mess.userFrom.id === userCurrent?.id ?
+                            <div className={styles.chatItem}>
+                                <div className={styles.messageContainer}>
+                                    <Link>
+                                        <Image className={styles.avatar}
+                                            src={mess.userFrom.avatar}
+                                        />
+                                    </Link>
+                                    <div className={styles.textContainer}
+                                        style={{
+                                            background: 'rgba(22, 24, 35, 0.06)',
+                                            marginRight: 8,
+                                            marginLeft: 0,
+                                        }}>
+                                        <p className={styles.text}>{mess.content}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className={styles.chatItem}>
-                        <div className={styles.messageContainerReply}>
-                            <Link>
-                                <Image className={styles.avatar} />
-                            </Link>
-                            <div className={styles.textContainer}>
-                                <p className={styles.text}>aa</p>
+                            :
+                            <div className={styles.chatItem}>
+                                <div className={styles.messageContainerReply}>
+                                    <Link>
+                                        <Image className={styles.avatar}
+                                            src={mess.userFrom.avatar}
+                                        />
+                                    </Link>
+                                    <div className={styles.textContainer}>
+                                        <p className={styles.text}>{mess.content}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
-                </div>
-
+                )}
             </div>
             <div className={styles.chatBottom}>
                 <div className={styles.inputContainer}>
@@ -73,7 +78,7 @@ console.log(data)
                 </div>
                 <PiPaperPlaneTiltFill size={35} className={styles.sendButton} />
             </div>
-        </div >
+        </>
     )
 }
 

@@ -1,5 +1,6 @@
 import { LuSettings } from 'react-icons/lu'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import dayjs from "dayjs";
 
 import styles from './Message.module.css'
 import { HiOutlineDotsHorizontal } from 'react-icons/hi'
@@ -7,24 +8,30 @@ import Image from '../../../component/Image'
 import ChatBox from './Chatbox'
 import { StompContext } from '../../../utils/StompClientProvider'
 import httpRequest from '../../../utils/httpRequest'
-import { useState } from 'react'
 
 function Message() {
     const client = useContext(StompContext);
     const [allMessages, setAllMessages] = useState([])
-
+console.log(dayjs('2023-09-23' - dayjs('2023-09-23')) === 0)
     const openChatBox = async (e) => {
-        console.log(typeof e.currentTarget.id)
         try {
             const res = await httpRequest({
                 method: 'get',
                 url: `users/${e.currentTarget.id}/messages`,
             })
             setAllMessages(res.data)
-            return res.data;
         } catch (err) {
             console.log(err);
         }
+    }
+
+    const setDay = (createdDay) => {
+        if (dayjs().diff(createdDay, 'day') === 0) {
+           return dayjs(createdDay).format('H:mm A')
+        } else {
+           return dayjs(createdDay).format('YYYY MMM DD')
+        }
+       
     }
 
     return (
@@ -35,7 +42,7 @@ function Message() {
                     </div>
                     <div className={styles.conversationHeader}>
                         <h1 className={styles.h1Header}>Messages</h1>
-                        <div className={styles.buttonSetting}>
+                        <div className={styles.buttonSetting} >
                             <LuSettings size={27} />
                         </div>
                     </div>
@@ -56,7 +63,9 @@ function Message() {
                                                 <p className={styles.userName}>{message.userTo.userName}</p>
                                                 <p className={styles.infoExtractTime}>
                                                     <span className={styles.infoExtract}>{message.content}</span>
-                                                    <span className={styles.infoTime}>1:50 PM</span>
+                                                    <span className={styles.infoTime}>
+                                                        { setDay(message.createdDay)}
+                                                    </span>
                                                 </p>
                                             </div>
                                         </div>
@@ -70,7 +79,9 @@ function Message() {
                         </div>
                     </div>
                 </div>
-                <ChatBox data={allMessages} />
+                <div className={styles.chatboxContainer}>
+                    {allMessages?.length !== 0 && <ChatBox data={allMessages} />}
+                </div>
             </div>
 
         </div>
