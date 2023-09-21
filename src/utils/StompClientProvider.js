@@ -15,6 +15,7 @@ function StompClientProvider({ children }) {
     const onConnected = () => {
         stompClient.subscribe('/user/queue/notif', onNotifReceived);
         stompClient.subscribe('/user/queue/messages', onMessageReceived);
+        
         stompClient.send('/app/notification', {}, userCurrent?.userName)
         stompClient.send('/app/messages', {}, userCurrent?.userName)
     }
@@ -34,6 +35,8 @@ function StompClientProvider({ children }) {
         setNotifs(payloadData)
     }
 
+   
+
     useEffect(() => {
         if (stompClient) {
             return
@@ -50,7 +53,7 @@ function StompClientProvider({ children }) {
 
 
     return (
-        <StompContext.Provider value={{ notifs, messages, stompClient }}>
+        <StompContext.Provider value={{ stompClient, notifs, messages }}>
             {children}
         </StompContext.Provider>
     )

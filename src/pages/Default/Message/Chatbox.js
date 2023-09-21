@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { PiPaperPlaneTiltFill } from 'react-icons/pi'
 import { BsEmojiLaughing } from 'react-icons/bs'
 import dayjs from "dayjs";
+import { useEffect, useState } from 'react';
 
 import Image from '../../../component/Image'
 import styles from './Message.module.css'
@@ -9,48 +10,61 @@ import { getUser } from '../../../hooks/auth/user.localstore'
 import config from "../../../config/routes";
 
 
-function ChatBox({ data, client }) {
+function ChatBox({ data, stompClient }) {
     const userCurrent = getUser()?.data
+    const [messages, setMessages] = useState(data);
+    const [message, setMessage] = useState("");
+    const userTo = messages[0]?.userTo.id === userCurrent.id ? messages[0]?.userFrom : messages[0]?.userTo
 
     const setDay = (createdDate) => {
         if (dayjs().diff(createdDate, 'day') === 0) {
             return dayjs(createdDate).format('H:mm A')
         } else {
-            return dayjs(createdDate).format('D MMM YYYY H:m')
+            return dayjs(createdDate).format('D MMM YYYY H:mm')
         }
     }
 
-    const sendMessage =() =>{
-        client.send('/app/messages', {}, userCurrent?.userName)
+    const sendMessage = () => {
+        stompClient.subscribe('/user/queue/chatrooms', onMessageReceived);
+        stompClient.send('/app/messages.sendMessage', { userName: userTo.userName }, message)
+    }
+    const onMessageReceived = (payload) => {
+        var payloadData = JSON.parse(payload.body);
+        messages.push(payloadData)
+        setMessages([...messages])
+        console.log(messages)
+
     }
 
-    console.log(data)
+    useEffect(() => {
+        setMessages(data)
+    }, [data])
     return (
         <>
             <div className={styles.chatHeader}>
-                <Link className={styles.headerWrapper} to={config.profileLink(data[0]?.userTo.userName)} target='_blank'>
+                <Link className={styles.headerWrapper} to={config.profileLink(userTo.userName)} target='_blank'>
                     <Image
                         className={styles.avatar}
-                        src={data[0]?.userTo.avatar}
+                        src={userTo.avatar}
                     />
                     <div style={{ marginLeft: 12 }}>
-                        <p style={{ fontWeight: 600, fontSize: 19, lineHeight: 1.5 }}>{data[0]?.userTo.userName}</p>
-                        <p style={{ lineHeight: 1 }}>@{data[0]?.userTo.userName}</p>
+                        <p style={{ fontWeight: 600, fontSize: 19, lineHeight: 1.5 }}>{userTo.userName}</p>
+                        <p style={{ lineHeight: 1 }}>@{userTo.userName}</p>
                     </div>
                 </Link>
             </div>
             <div className={styles.chatMain}>
-                {data.map((mess, index) =>
+                {messages?.map((mess, index) =>
                     <div className={styles.chatCotent} key={mess.id}>
-                        {dayjs(mess.createdDate).diff(data[index !== 0 ? index - 1 : 0].createdDate, 'day') === 0 &&
+                        {dayjs(mess.createdDate).diff(messages[index !== 0 ? index - 1 : 0].createdDate, 'day') !== 0 &&
                             <div className={styles.timeContainer}>
-                                <span style={{fontSize : 14}}>{setDay(mess.createdDate)}</span>
+                                <span >{setDay(mess.createdDate)}</span>
                             </div>
                         }
                         {mess.userFrom.id === userCurrent?.id ?
                             <div className={styles.chatItem}>
                                 <div className={styles.messageContainer}>
-                                    <Link>
+                                    <Link to={config.profileLink(mess.userFrom.userName)}>
                                         <Image className={styles.avatar}
                                             src={mess.userFrom.avatar}
                                         />
@@ -68,7 +82,7 @@ function ChatBox({ data, client }) {
                             :
                             <div className={styles.chatItem}>
                                 <div className={styles.messageContainerReply}>
-                                    <Link>
+                                    <Link to={config.profileLink(mess.userTo.userName)}>
                                         <Image className={styles.avatar}
                                             src={mess.userFrom.avatar}
                                         />
@@ -84,7 +98,11 @@ function ChatBox({ data, client }) {
             </div>
             <div className={styles.chatBottom}>
                 <div className={styles.inputContainer}>
-                    <input className={styles.input} />
+                    <input
+                        className={styles.input}
+                        value={message}
+                        onChange={(e) => { setMessage(e.target.value) }}
+                    />
                     <div className={styles.iconContainer}>
                         <BsEmojiLaughing className={styles.icon} />
                     </div>

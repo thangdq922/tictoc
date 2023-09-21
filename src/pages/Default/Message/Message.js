@@ -2,6 +2,7 @@ import { LuSettings } from 'react-icons/lu'
 import { useContext, useState } from 'react'
 import dayjs from "dayjs";
 
+
 import styles from './Message.module.css'
 import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 import Image from '../../../component/Image'
@@ -11,12 +12,17 @@ import { getUser } from '../../../hooks/auth/user.localstore';
 
 function Message() {
     const client = useContext(StompContext);
-    const [allMessages, setAllMessages] = useState([])
+    const [chatroom, setChatroom] = useState([])
     const userCurrent = getUser()?.data
 
-    const openChatBox =  (e) => {
-        client.stompClient.subscribe('/user/queue/chatroom', (data) => console.log(data));
-        client.stompClient.send('/app/messages.chatroom', {userName: userCurrent.userName}, e.currentTarget.id)
+    const openChatBox = (e) => {
+        client.stompClient.subscribe('/user/queue/chatroom', onChatroomReceived);
+        client.stompClient.send('/app/messages.chatroom', { userName: userCurrent.userName }, e.currentTarget.id)
+    }
+
+    const onChatroomReceived = (payload) => {
+        var payloadData = JSON.parse(payload.body);
+        setChatroom(payloadData)
     }
 
     const setDay = (createdDate) => {
@@ -74,7 +80,7 @@ function Message() {
                     </div>
                 </div>
                 <div className={styles.chatboxContainer}>
-                    {allMessages?.length !== 0 && <ChatBox data={allMessages} stompClient={client.stompClient} />}
+                    {chatroom?.length !== 0 && <ChatBox data={chatroom} stompClient={client.stompClient} />}
                 </div>
             </div>
 
