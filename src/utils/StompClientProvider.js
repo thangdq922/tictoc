@@ -25,14 +25,15 @@ function StompClientProvider({ children }) {
 
     const onMessageReceived = (payload) => {
         var payloadData = JSON.parse(payload.body);
-        setMessages(payloadData.content)
+        messages.push(payloadData.content)
+        setMessages(...messages)
     }
 
     const onNotifReceived = (payload) => {
         var payloadData = JSON.parse(payload.body);
         setNotifs(payloadData)
     }
-    
+
     useEffect(() => {
         if (stompClient) {
             return
@@ -40,7 +41,7 @@ function StompClientProvider({ children }) {
         let Sock = new SockJS('http://localhost:8080/ws');
         stompClient = over(Sock);
         stompClient.connect(
-            { Authorization: `Bearer ${getUser()?.accessToken}`, username: userCurrent?.userName },
+            { Authorization: `Bearer ${getUser()?.accessToken}` },
             onConnected,
             onError
         );

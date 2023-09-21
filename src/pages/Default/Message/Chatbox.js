@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom'
 import { PiPaperPlaneTiltFill } from 'react-icons/pi'
 import { BsEmojiLaughing } from 'react-icons/bs'
@@ -7,15 +6,29 @@ import dayjs from "dayjs";
 import Image from '../../../component/Image'
 import styles from './Message.module.css'
 import { getUser } from '../../../hooks/auth/user.localstore'
+import config from "../../../config/routes";
 
-function ChatBox({ data }) {
+
+function ChatBox({ data, client }) {
     const userCurrent = getUser()?.data
+
+    const setDay = (createdDate) => {
+        if (dayjs().diff(createdDate, 'day') === 0) {
+            return dayjs(createdDate).format('H:mm A')
+        } else {
+            return dayjs(createdDate).format('D MMM YYYY H:m')
+        }
+    }
+
+    const sendMessage =() =>{
+        client.send('/app/messages', {}, userCurrent?.userName)
+    }
 
     console.log(data)
     return (
         <>
             <div className={styles.chatHeader}>
-                <Link className={styles.headerWrapper}>
+                <Link className={styles.headerWrapper} to={config.profileLink(data[0]?.userTo.userName)} target='_blank'>
                     <Image
                         className={styles.avatar}
                         src={data[0]?.userTo.avatar}
@@ -29,9 +42,9 @@ function ChatBox({ data }) {
             <div className={styles.chatMain}>
                 {data.map((mess, index) =>
                     <div className={styles.chatCotent} key={mess.id}>
-                        {dayjs(mess.createdDay).diff(data[index - 1].createdDay, 'day') === 0 &&
+                        {dayjs(mess.createdDate).diff(data[index !== 0 ? index - 1 : 0].createdDate, 'day') === 0 &&
                             <div className={styles.timeContainer}>
-                                <span>7:34 PM</span>
+                                <span style={{fontSize : 14}}>{setDay(mess.createdDate)}</span>
                             </div>
                         }
                         {mess.userFrom.id === userCurrent?.id ?
@@ -76,7 +89,7 @@ function ChatBox({ data }) {
                         <BsEmojiLaughing className={styles.icon} />
                     </div>
                 </div>
-                <PiPaperPlaneTiltFill size={35} className={styles.sendButton} />
+                <PiPaperPlaneTiltFill size={35} className={styles.sendButton} onClick={sendMessage} />
             </div>
         </>
     )

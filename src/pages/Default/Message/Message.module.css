@@ -149,6 +149,7 @@
 
                                     .infoExtractTime {
                                         display: flex;
+                                        font-family: ProximaNova, sans-serif;
                                         max-width: 224px;
                                         padding-top: 4px;
                                         line-height: 20px;
@@ -161,6 +162,7 @@
                                         }
 
                                         .infoTime {
+                                           
                                             display: inline-block;
                                             flex-shrink: 0;
                                             line-height: 20px;

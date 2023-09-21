@@ -7,33 +7,25 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 import Image from '../../../component/Image'
 import ChatBox from './Chatbox'
 import { StompContext } from '../../../utils/StompClientProvider'
-import httpRequest from '../../../utils/httpRequest'
+import { getUser } from '../../../hooks/auth/user.localstore';
 
 function Message() {
     const client = useContext(StompContext);
     const [allMessages, setAllMessages] = useState([])
-console.log(dayjs('2023-09-23' - dayjs('2023-09-23')) === 0)
-    const openChatBox = async (e) => {
-        try {
-            const res = await httpRequest({
-                method: 'get',
-                url: `users/${e.currentTarget.id}/messages`,
-            })
-            setAllMessages(res.data)
-        } catch (err) {
-            console.log(err);
-        }
+    const userCurrent = getUser()?.data
+
+    const openChatBox =  (e) => {
+        client.stompClient.subscribe('/user/queue/chatroom', (data) => console.log(data));
+        client.stompClient.send('/app/messages.chatroom', {userName: userCurrent.userName}, e.currentTarget.id)
     }
 
-    const setDay = (createdDay) => {
-        if (dayjs().diff(createdDay, 'day') === 0) {
-           return dayjs(createdDay).format('H:mm A')
+    const setDay = (createdDate) => {
+        if (dayjs().diff(createdDate, 'day') === 0) {
+            return dayjs(createdDate).format('H:mm A')
         } else {
-           return dayjs(createdDay).format('YYYY MMM DD')
+            return dayjs(createdDate).format('D/M/YYYY')
         }
-       
     }
-
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -52,7 +44,7 @@ console.log(dayjs('2023-09-23' - dayjs('2023-09-23')) === 0)
                                 {client.messages?.map(message =>
                                     <div className={styles.itemWrapper}
                                         key={message.id} onClick={openChatBox}
-                                        id={message.userTo.userName} >
+                                        id={message.userTo.id !== userCurrent?.id ? message.userTo.userName : message.userFrom.userName} >
                                         <div className={styles.itemInfo} >
                                             <Image
                                                 className={styles.avatar}
@@ -60,11 +52,13 @@ console.log(dayjs('2023-09-23' - dayjs('2023-09-23')) === 0)
                                                 alt={message.userTo.name}
                                             />
                                             <div className={styles.infoText}>
-                                                <p className={styles.userName}>{message.userTo.userName}</p>
+                                                <p className={styles.userName}>
+                                                    {message.userTo.id !== userCurrent.id ? message.userTo.userName : message.userFrom.userName}
+                                                </p>
                                                 <p className={styles.infoExtractTime}>
                                                     <span className={styles.infoExtract}>{message.content}</span>
                                                     <span className={styles.infoTime}>
-                                                        { setDay(message.createdDay)}
+                                                        {setDay(message.createdDate)}
                                                     </span>
                                                 </p>
                                             </div>
@@ -80,7 +74,7 @@ console.log(dayjs('2023-09-23' - dayjs('2023-09-23')) === 0)
                     </div>
                 </div>
                 <div className={styles.chatboxContainer}>
-                    {allMessages?.length !== 0 && <ChatBox data={allMessages} />}
+                    {allMessages?.length !== 0 && <ChatBox data={allMessages} stompClient={client.stompClient} />}
                 </div>
             </div>
 
