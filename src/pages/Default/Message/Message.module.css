@@ -162,7 +162,7 @@
                                         }
 
                                         .infoTime {
-                                           
+
                                             display: inline-block;
                                             flex-shrink: 0;
                                             line-height: 20px;
@@ -265,7 +265,7 @@
                 font-size: 13px;
                 margin-top: 0px;
                 padding-top: 20px;
-                margin-bottom: 8px;              
+                margin-bottom: 8px;
                 line-height: 15px;
                 text-align: center;
             }
@@ -327,8 +327,12 @@
                         word-break: break-word;
                     }
                 }
-
             }
+        }
+
+        .seen{
+            position: absolute;
+            bottom: 75px;
         }
     }
 

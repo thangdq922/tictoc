@@ -17,7 +17,13 @@ function Message() {
 
     const openChatBox = (e) => {
         client.stompClient.subscribe('/user/queue/chatroom', onChatroomReceived);
+        client.stompClient.subscribe('/user/queue/chatroom/mess', onMessReceived);
         client.stompClient.send('/app/messages.chatroom', { userName: userCurrent.userName }, e.currentTarget.id)
+    }
+
+    const onMessReceived = (payload) => {
+        var payloadData = JSON.parse(payload.body);
+        setChatroom((prev) => [payloadData, ...prev ])
     }
 
     const onChatroomReceived = (payload) => {
@@ -80,7 +86,8 @@ function Message() {
                     </div>
                 </div>
                 <div className={styles.chatboxContainer}>
-                    {chatroom?.length !== 0 && <ChatBox data={chatroom} stompClient={client.stompClient} />}
+                    {chatroom?.length !== 0 &&
+                        <ChatBox data={chatroom} stompClient={client.stompClient} receiveMess={onMessReceived} />}
                 </div>
             </div>
 

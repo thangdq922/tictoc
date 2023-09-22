@@ -10,11 +10,16 @@ import { getUser } from '../../../hooks/auth/user.localstore'
 import config from "../../../config/routes";
 
 
-function ChatBox({ data, stompClient }) {
+function ChatBox({ data, stompClient, receiveMess }) {
     const userCurrent = getUser()?.data
     const [messages, setMessages] = useState(data);
     const [message, setMessage] = useState("");
     const userTo = messages[0]?.userTo.id === userCurrent.id ? messages[0]?.userFrom : messages[0]?.userTo
+console.log(messages)
+    
+    useEffect(() => {
+        setMessages(data)
+    }, [data])
 
     const setDay = (createdDate) => {
         if (dayjs().diff(createdDate, 'day') === 0) {
@@ -24,21 +29,12 @@ function ChatBox({ data, stompClient }) {
         }
     }
 
-    const sendMessage = () => {
-        stompClient.subscribe('/user/queue/chatrooms', onMessageReceived);
+    const sendMessage = () => {       
+        stompClient.subscribe('/user/queue/chatroom', receiveMess);
         stompClient.send('/app/messages.sendMessage', { userName: userTo.userName }, message)
-    }
-    const onMessageReceived = (payload) => {
-        var payloadData = JSON.parse(payload.body);
-        messages.push(payloadData)
-        setMessages([...messages])
-        console.log(messages)
-
+        setMessage("")
     }
 
-    useEffect(() => {
-        setMessages(data)
-    }, [data])
     return (
         <>
             <div className={styles.chatHeader}>
@@ -75,9 +71,9 @@ function ChatBox({ data, stompClient }) {
                                             marginRight: 8,
                                             marginLeft: 0,
                                         }}>
-                                        <p className={styles.text}>{mess.content}</p>
-                                    </div>
-                                </div>
+                                        <p className={styles.text}>{mess.content}</p>                                       
+                                    </div>                                   
+                                </div>                              
                             </div>
                             :
                             <div className={styles.chatItem}>
@@ -93,8 +89,10 @@ function ChatBox({ data, stompClient }) {
                                 </div>
                             </div>
                         }
+                        <div className={styles.seen}> seen</div>
                     </div>
                 )}
+                
             </div>
             <div className={styles.chatBottom}>
                 <div className={styles.inputContainer}>
