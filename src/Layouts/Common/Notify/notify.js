@@ -77,7 +77,8 @@ function Notify() {
     }
 
     return (
-        <Tippy placement='bottom'
+        <Tippy
+            placement='bottom'
             animation='perspective'
             theme={'light'}
             interactive={true}

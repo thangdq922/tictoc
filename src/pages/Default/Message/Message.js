@@ -1,35 +1,50 @@
 import { LuSettings } from 'react-icons/lu'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import dayjs from "dayjs";
 
 
 import styles from './Message.module.css'
-import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 import Image from '../../../component/Image'
 import ChatBox from './Chatbox'
 import { StompContext } from '../../../utils/StompClientProvider'
 import { getUser } from '../../../hooks/auth/user.localstore';
+import { useLocation } from 'react-router-dom';
 
 function Message() {
     const client = useContext(StompContext);
+    const location = useLocation();
     const [chatroom, setChatroom] = useState([])
+    const [messages, setMessages] = useState([]);
+
     const userCurrent = getUser()?.data
+    const userRoom = location.state && location.state?.userRoom;
+    const userTo = (mess) => mess.userTo.id === userCurrent.id ? mess.userFrom : mess.userTo
+
+    useEffect(() => {
+        setMessages(client.messages)
+    }, [client.messages])
+
+    useEffect(() => {
+        userRoom?.constructor === Array && setChatroom(userRoom)
+    }, [userRoom])
 
     const openChatBox = (e) => {
         client.stompClient.subscribe('/user/queue/chatroom', onChatroomReceived);
-        client.stompClient.subscribe('/user/queue/chatroom/mess', onMessReceived);
-        client.stompClient.send('/app/messages.chatroom', { userName: userCurrent.userName }, e.currentTarget.id)
-    }
-
-    const onMessReceived = (payload) => {
-        var payloadData = JSON.parse(payload.body);
-        setChatroom((prev) => [payloadData, ...prev ])
+        client.stompClient.send('/app/messages.chatroom', { page: 1 }, e.currentTarget.id)
     }
 
     const onChatroomReceived = (payload) => {
         var payloadData = JSON.parse(payload.body);
-        setChatroom(payloadData)
+        console.log(payloadData)
+        setChatroom(payloadData.content.slice().reverse())
     }
+    // const onMessReceived = (payload) => {
+    //     var payloadData = JSON.parse(payload.body);
+    //     console.log(payloadData)
+    //     console.log(chatroom[0])
+    //     payloadData.id !== chatroom[0]?.id && setChatroom((prev) => [payloadData, ...prev ])
+    //     console.log(chatroom)
+    // }
 
     const setDay = (createdDate) => {
         if (dayjs().diff(createdDate, 'day') === 0) {
@@ -38,6 +53,7 @@ function Message() {
             return dayjs(createdDate).format('D/M/YYYY')
         }
     }
+
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -53,29 +69,58 @@ function Message() {
                     <div className={styles.listUserContainer}>
                         <div className={styles.scrollContainer}>
                             <div className={styles.scrollWrapper}>
-                                {client.messages?.map(message =>
+                                {(userRoom && userRoom?.constructor !== Array) &&
                                     <div className={styles.itemWrapper}
-                                        key={message.id} onClick={openChatBox}
-                                        id={message.userTo.id !== userCurrent?.id ? message.userTo.userName : message.userFrom.userName} >
+                                        key={userRoom?.id} 
+                                        onClick={openChatBox}
+                                        id={userRoom?.userName} 
+                                        tabIndex="1"
+                                        >
                                         <div className={styles.itemInfo} >
                                             <Image
                                                 className={styles.avatar}
-                                                src={message.userTo.avatar}
-                                                alt={message.userTo.name}
+                                                src={userRoom?.avatar}
+                                                alt={userRoom?.name}
                                             />
                                             <div className={styles.infoText}>
                                                 <p className={styles.userName}>
-                                                    {message.userTo.id !== userCurrent.id ? message.userTo.userName : message.userFrom.userName}
+                                                    {userRoom?.userName}
                                                 </p>
                                                 <p className={styles.infoExtractTime}>
-                                                    <span className={styles.infoExtract}>{message.content}</span>
+                                                    <span className={styles.infoExtract}></span>
                                                     <span className={styles.infoTime}>
-                                                        {setDay(message.createdDate)}
+                                                        {dayjs().format('H:mm A')}
                                                     </span>
                                                 </p>
                                             </div>
                                         </div>
-                                        <HiOutlineDotsHorizontal size={20} style={{ cursor: 'pointer', }} />
+                                    </div>
+                                }
+                                {messages?.map(mess =>
+                                    <div className={styles.itemWrapper}
+                                        key={mess.id} 
+                                        onClick={openChatBox}
+                                        id={userTo(mess).userName} 
+                                        tabIndex="1"
+                                        >
+                                        <div className={styles.itemInfo} >
+                                            <Image
+                                                className={styles.avatar}
+                                                src={userTo(mess).avatar}
+                                                alt={userTo(mess).name}
+                                            />
+                                            <div className={styles.infoText}>
+                                                <p className={styles.userName}>
+                                                    {userTo(mess).userName}
+                                                </p>
+                                                <p className={styles.infoExtractTime}>
+                                                    <span className={styles.infoExtract}>{mess.content}</span>
+                                                    <span className={styles.infoTime}>
+                                                        {setDay(mess.createdDate)}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -86,8 +131,8 @@ function Message() {
                     </div>
                 </div>
                 <div className={styles.chatboxContainer}>
-                    {chatroom?.length !== 0 &&
-                        <ChatBox data={chatroom} stompClient={client.stompClient} receiveMess={onMessReceived} />}
+                    {(chatroom?.length !== 0 || userRoom) &&
+                        <ChatBox data={chatroom} stompClient={client.stompClient} userRoom={userRoom} />}
                 </div>
             </div>
 

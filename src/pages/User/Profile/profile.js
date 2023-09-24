@@ -7,6 +7,7 @@ import { FiPlay } from "react-icons/fi";
 import { BiSolidLockAlt } from "react-icons/bi"
 import Tippy from "@tippyjs/react";
 
+
 import styles from "./Profile.module.css";
 import Image from "../../../component/Image";
 import Button from "../../../component/Button";
@@ -64,6 +65,21 @@ function Profile() {
         return navigate("/")
     }
 
+    const onChatroomReceived = (payload) => {
+        var payloadData = JSON.parse(payload.body).content;
+        if (payloadData.length === 0) {
+            return navigate(config.messages, { state: { userRoom: user }, replace: true });
+        } else {
+            return navigate(config.messages, { state: { userRoom: payloadData }, replace: true });
+        }
+    }
+
+    const chat = () => {
+        client.stompClient.subscribe('/user/queue/chatroom', onChatroomReceived);
+        client.stompClient.send('/app/messages.chatroom', {} , user.userName)
+        
+    }
+
     if (data.isLoading) {
         return <Loader />;
     }
@@ -97,7 +113,7 @@ function Profile() {
                                     <div className={styles.button_container}>
                                         {userCurrent?.id === 1 ? (
                                             <div className={styles.followed_container}>
-                                                <Button className={styles.button} outline large>
+                                                <Button className={styles.button} outline large to={config.home}>
                                                     Messenges
                                                 </Button>
                                                 <Tippy content="Delete" placement="bottom">
@@ -109,7 +125,11 @@ function Profile() {
                                         ) : (
                                             user.followed ? (
                                                 <div className={styles.followed_container}>
-                                                    <Button className={styles.button} outline large>
+                                                    <Button
+                                                        className={styles.button}
+                                                        outline large
+                                                        onClick={chat}
+                                                    >
                                                         Messenges
                                                     </Button>
                                                     <Tippy content="Unfollow" placement="bottom">
