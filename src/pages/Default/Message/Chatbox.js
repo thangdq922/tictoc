@@ -53,7 +53,8 @@ function ChatBox({ data, stompClient, userRoom }) {
     }
 
     const setStatus = () => {
-        (!messages[0].status && messages[0].userTo.id === userCurrent.id) && stompClient.send('/app/messages.setStatus', {}, userTo.userName)
+        (!messages[messages.length - 1]?.status && messages[messages.length - 1]?.userTo.id === userCurrent.id) &&
+            stompClient.send('/app/messages.setStatus', {}, userTo.userName)
     }
 
     const deletMessage = (mess) => {
@@ -83,7 +84,6 @@ function ChatBox({ data, stompClient, userRoom }) {
     };
 
     console.log(messages.slice().reverse())
-    console.log(hasMore)
     return (
         <>
             <div className={styles.chatHeader}>
@@ -140,7 +140,7 @@ function ChatBox({ data, stompClient, userRoom }) {
                                         </Tippy>
                                     </div>
 
-                                    {(mess.id === messages[0].id && mess.status) &&
+                                    {(mess.id === messages[messages.length - 1].id && mess.status) &&
                                         <Image className={styles.seen} src={mess.userTo.avatar} />
                                     }
 

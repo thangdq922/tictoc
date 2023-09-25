@@ -12,10 +12,10 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { storage } from '../../../../utils/firebase';
 
 function EditProfile({ open, close }) {
-
-    const [filePreview, setFilePreview] = useState("");
-    const [file, setFile] = useState("");
     const userCurrent = getUser()?.data
+    const [filePreview, setFilePreview] = useState(userCurrent?.avatar);
+    const [file, setFile] = useState("");
+    
 
     const defaultValues = {
         userName: userCurrent?.userName,
@@ -37,7 +37,7 @@ function EditProfile({ open, close }) {
     };
 
     const submitForm = (data) => {
-        const fileRef = ref(storage, `videos/${userCurrent.id}_${file.name}`)
+        const fileRef = ref(storage, `avatars/${userCurrent.id}_${file.name}`)
         uploadBytes(fileRef, file).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 userEdit.mutate({ ...data, avatar: url })

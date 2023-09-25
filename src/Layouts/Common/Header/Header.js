@@ -4,6 +4,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlinePlus } from "react-icons/hi";
+import { useContext, useEffect, useState } from 'react';
 
 import styles from './Header.module.css'
 import images from '../../../assets/image';
@@ -19,12 +20,16 @@ import useLogout from '../../../hooks/auth/useLogOut';
 import useModal from '../../../hooks/useModal';
 import ModalAuth from '../../../pages/Default/ModalAuth/ModalAuth';
 import Notify from '../Notify';
+import { StompContext } from '../../../utils/StompClientProvider'
+
 
 function Header() {
   const navigate = useNavigate();
   const userCurrent = getUser()?.data
   const logout = useLogout()
   const { isOpen, toggle } = useModal()
+  const client = useContext(StompContext);
+  const [badge, setBadge] = useState(1)
 
 
   const handleMenuChange = (menuItem) => {
@@ -44,6 +49,11 @@ function Header() {
       default:
     }
   };
+
+  useEffect(() => {
+    setBadge(client.messages[0]?.countNotRead)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [client.messages])
 
   return (
     <>
@@ -70,6 +80,7 @@ function Header() {
                 <Tippy delay={[0, 50]} content="Message" placement="bottom">
                   <Link className={styles['action-btn']} to={config.messages}>
                     <MessageIcon />
+                    {badge !== 0 && <span className={styles['badge']}>{badge}</span>}
                   </Link>
                 </Tippy>
                 <div>

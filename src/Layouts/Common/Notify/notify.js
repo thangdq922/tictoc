@@ -25,12 +25,9 @@ function Notify() {
         setBadge(0)
     }
     useEffect(() => {
-        setBadge(client.notifs?.length)
-        if (badge < client.notifs?.length) {
-            setBadge(client.notifs[0]?.countNotRead)
-        }
+        setBadge(client.notifs[0]?.countNotRead)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [client])
+    }, [client.notifs])
 
     const deleteNotif = async () => {
         await deleteNotifs()

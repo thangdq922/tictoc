@@ -71,11 +71,11 @@ function Message() {
                             <div className={styles.scrollWrapper}>
                                 {(userRoom && userRoom?.constructor !== Array) &&
                                     <div className={styles.itemWrapper}
-                                        key={userRoom?.id} 
+                                        key={userRoom?.id}
                                         onClick={openChatBox}
-                                        id={userRoom?.userName} 
+                                        id={userRoom?.userName}
                                         tabIndex="1"
-                                        >
+                                    >
                                         <div className={styles.itemInfo} >
                                             <Image
                                                 className={styles.avatar}
@@ -97,23 +97,29 @@ function Message() {
                                     </div>
                                 }
                                 {messages?.map(mess =>
-                                    <div className={styles.itemWrapper}
-                                        key={mess.id} 
+                                    <div
+                                        className={styles.itemWrapper}
+                                        key={mess.id}
                                         onClick={openChatBox}
-                                        id={userTo(mess).userName} 
+                                        id={userTo(mess).userName}
                                         tabIndex="1"
-                                        >
+                                    >
                                         <div className={styles.itemInfo} >
                                             <Image
                                                 className={styles.avatar}
                                                 src={userTo(mess).avatar}
                                                 alt={userTo(mess).name}
                                             />
-                                            <div className={styles.infoText}>
+                                            <div
+                                                className={styles.infoText}>
                                                 <p className={styles.userName}>
                                                     {userTo(mess).userName}
                                                 </p>
-                                                <p className={styles.infoExtractTime}>
+                                                <p
+                                                    className={styles.infoExtractTime}
+                                                    style={(!mess.status && mess.userFrom.id !== userCurrent.id) ?
+                                                        { fontWeight: 700, color: 'black' } : {}}
+                                                >
                                                     <span className={styles.infoExtract}>{mess.content}</span>
                                                     <span className={styles.infoTime}>
                                                         {setDay(mess.createdDate)}
