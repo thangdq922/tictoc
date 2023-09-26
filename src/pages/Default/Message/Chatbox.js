@@ -69,7 +69,6 @@ function ChatBox({ data, stompClient, userRoom }) {
 
     const fetchListMessages = async () => {
         const result = await getChatroom(userTo.userName, page);
-        console.log(result)
         return result.content.slice().reverse();
     };
 
@@ -83,7 +82,6 @@ function ChatBox({ data, stompClient, userRoom }) {
         setPage((prev) => prev + 1);
     };
 
-    console.log(messages.slice().reverse())
     return (
         <>
             <div className={styles.chatHeader}>

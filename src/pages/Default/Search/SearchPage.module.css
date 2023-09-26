@@ -220,6 +220,10 @@
             margin-top: 8px;
             align-items: center;
 
+            &:hover{
+                background-color: rgb(241, 241, 241);
+            }
+
             .avatar-container {
                 flex: 0 0 60px;
                 margin: 16px;

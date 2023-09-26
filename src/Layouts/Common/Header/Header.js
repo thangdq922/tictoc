@@ -80,7 +80,7 @@ function Header() {
                 <Tippy delay={[0, 50]} content="Message" placement="bottom">
                   <Link className={styles['action-btn']} to={config.messages}>
                     <MessageIcon />
-                    {badge !== 0 && <span className={styles['badge']}>{badge}</span>}
+                    {(!!badge && badge !== 0) && <span className={styles['badge']}>{badge}</span>}
                   </Link>
                 </Tippy>
                 <div>

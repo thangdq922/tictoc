@@ -10,12 +10,13 @@ import { getUser } from '../../../../hooks/auth/user.localstore'
 import useEdit from '../../../../hooks/auth/useEdit'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { storage } from '../../../../utils/firebase';
+import Loading from '../../../../component/Loader/Loading'
 
 function EditProfile({ open, close }) {
     const userCurrent = getUser()?.data
     const [filePreview, setFilePreview] = useState(userCurrent?.avatar);
     const [file, setFile] = useState("");
-    
+    const [isLoading, setIsLoading] = useState(false);
 
     const defaultValues = {
         userName: userCurrent?.userName,
@@ -36,14 +37,15 @@ function EditProfile({ open, close }) {
         setFile(e.target.files[0]);
     };
 
-    const submitForm = (data) => {
+    const submitForm = async (data) => {
         const fileRef = ref(storage, `avatars/${userCurrent.id}_${file.name}`)
-        uploadBytes(fileRef, file).then((snapshot) => {
+        setIsLoading(true);
+        await uploadBytes(fileRef, file).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 userEdit.mutate({ ...data, avatar: url })
             });
         });
-
+        setIsLoading(false)
 
     }
 
@@ -137,10 +139,10 @@ function EditProfile({ open, close }) {
                                 <button className={styles.cancel} type="reset"  >Cancel</button>
                                 <button
                                     className={styles.save}
-                                    disabled={userEdit.isLoading || (!isDirty && !filePreview)}
+                                    disabled={isLoading || (!isDirty && !filePreview)}
                                     type="submit"
                                 >
-                                    Save
+                                    {!isLoading ? "Save" : <Loading />}
                                 </button>
                             </div>
                         </form>

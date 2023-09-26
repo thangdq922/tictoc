@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../../../component/Button";
-import Loader from "../../../component/Loader";
 import { UploadIcon } from "../../../component/Icons";
 import * as videosService from "../../../services/video/videoService";
 import styles from "./Upload.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { storage } from '../../../utils/firebase';
 import { getUser } from "../../../hooks/auth/user.localstore";
+import Loading from "../../../component/Loader/Loading";
 
 function Upload() {
   const [filePreview, setFilePreview] = useState("");
@@ -28,8 +28,7 @@ function Upload() {
     setFile(e.target.files[0]);
   };
 
-  const handleUploadVideo = async (data) => {
-    setIsLoading(true);
+  const handleUploadVideo = async (data) => {    
     await videosService.postVideo(data);
     setIsLoading(false);
     navigate("/");
@@ -38,7 +37,7 @@ function Upload() {
   const submitForm = (data) => {
 
     const fileRef = ref(storage, `videos/${userCurrent.id}_${file.name}`)
-
+    setIsLoading(true);
     uploadBytes(fileRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         handleUploadVideo({ data, fileUrl: url });
@@ -234,7 +233,7 @@ function Upload() {
                 disabled={!file || isLoading}
                 className={`${styles['post']} ${styles['button']}`}
                 type="submit"
-                leftIcon={isLoading ? <Loader /> : null}
+                leftIcon={isLoading ? <Loading /> : null}
               >
                 {!isLoading && "Post"}
               </Button>

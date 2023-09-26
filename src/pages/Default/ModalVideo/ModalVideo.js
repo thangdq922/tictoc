@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import styles from "./ModalVideo.module.css";
 import images from "../../../assets/image/";
@@ -12,7 +12,11 @@ function ModalVideo() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(location.state?.openModel);
-
+ 
+  if (!location.state?.video) {
+    return <Navigate to="/error" replace />
+  }
+  
   return (
     <>
       <CustomModal type='fullScreen' isOpen={isOpen}>

@@ -35,7 +35,6 @@ function StompClientProvider({ children }) {
     }
 
    
-
     useEffect(() => {
         if (stompClient) {
             return
@@ -49,7 +48,6 @@ function StompClientProvider({ children }) {
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
 
     return (
         <StompContext.Provider value={{ stompClient, notifs, messages }}>

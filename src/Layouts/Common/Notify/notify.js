@@ -86,7 +86,7 @@ function Notify() {
             <Tippy delay={[0, 50]} content="Notification" >
                 <div className={styles['action-btn']} onClick={controlVisible}>
                     <InboxIcon />
-                    {badge !== 0 && <span className={styles['badge']}>{badge}</span>}
+                    {(!!badge && badge !== 0) && <span className={styles['badge']}>{badge}</span>}
                 </div>
             </Tippy>
         </Tippy>

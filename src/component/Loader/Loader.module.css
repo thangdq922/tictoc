@@ -15,6 +15,12 @@
   left: calc(var(--circle-diameter) * -1);
 }
 
+.spinner{
+  animation: spinner 1.2s linear infinite;
+    font-size: 30px;
+    color: brown;
+}
+
 .loader:before,
 .loader:after {
   content: " ";
@@ -58,5 +64,14 @@
 
   100% {
     left: 0;
+  }
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

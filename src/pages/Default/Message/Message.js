@@ -27,7 +27,6 @@ function Message() {
     useEffect(() => {
         userRoom?.constructor === Array && setChatroom(userRoom)
     }, [userRoom])
-
     const openChatBox = (e) => {
         client.stompClient.subscribe('/user/queue/chatroom', onChatroomReceived);
         client.stompClient.send('/app/messages.chatroom', { page: 1 }, e.currentTarget.id)
@@ -35,15 +34,11 @@ function Message() {
 
     const onChatroomReceived = (payload) => {
         var payloadData = JSON.parse(payload.body);
-        console.log(payloadData)
         setChatroom(payloadData.content.slice().reverse())
     }
     // const onMessReceived = (payload) => {
     //     var payloadData = JSON.parse(payload.body);
-    //     console.log(payloadData)
-    //     console.log(chatroom[0])
     //     payloadData.id !== chatroom[0]?.id && setChatroom((prev) => [payloadData, ...prev ])
-    //     console.log(chatroom)
     // }
 
     const setDay = (createdDate) => {

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
 import { BiUserCheck, BiSolidCheckCircle, BiUserMinus } from "react-icons/bi";
 import { FaRegEdit } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
@@ -41,7 +41,6 @@ function Profile() {
             return user
         }
     })
-
     const handleVideoPlay = (e) => {
         e.target.play();
     };
@@ -76,12 +75,16 @@ function Profile() {
 
     const chat = () => {
         client.stompClient.subscribe('/user/queue/chatroom', onChatroomReceived);
-        client.stompClient.send('/app/messages.chatroom', {} , user.userName)
-        
+        client.stompClient.send('/app/messages.chatroom', {}, user.userName)
+
     }
 
     if (data.isLoading) {
         return <Loader />;
+    }
+
+    if (!user) {
+        return <Navigate to="/error" replace />
     }
 
     return (
