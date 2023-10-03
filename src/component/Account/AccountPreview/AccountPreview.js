@@ -32,7 +32,6 @@ function AccountPreview({ data }) {
                     src={userChange.avatar}
                     alt=""
                 />
-
                 <WrapperAuth>
                     <div onClick={handleFollow} style={{ cursor: 'pointer' }}>
                         {userChange.followed ? (
