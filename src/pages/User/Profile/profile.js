@@ -89,7 +89,7 @@ function Profile() {
 
     return (
         <>
-            {userCurrent && <EditProfile open={isOpen} close={toggle} />}
+            {(userCurrent && isOpen) && <EditProfile open={isOpen} close={toggle} />}
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <div className={styles.info}>
@@ -206,7 +206,18 @@ function Profile() {
                                             poster={video.thumb_url}
                                         />
                                         <div className={styles.video_desc}>
-                                            <p>{video.caption}</p>
+                                            {video.caption.split(" ").map((cap, index) =>
+                                                <span key={index}>
+                                                    {cap.charAt(0) !== '#' ?
+                                                        <span>{cap}</span>
+                                                        : <Link
+                                                            className={styles.hashtag}>
+                                                            {cap}
+                                                        </Link>
+                                                    }
+                                                    &nbsp;
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                     <div className={styles.cardFooter}>

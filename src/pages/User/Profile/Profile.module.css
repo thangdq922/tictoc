@@ -166,7 +166,8 @@
         text-align: center;
         color: rgb(22, 24, 35);
 
-        &:hover, &.active {
+        &:hover,
+        &.active {
           &::after {
             position: absolute;
             content: "";
@@ -225,6 +226,15 @@
               padding: 0px 4px;
               height: 28px;
               overflow: hidden;
+
+              .hashtag {
+                font-weight: 700;
+                color: #2b5db9;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
             }
           }
 

@@ -42,6 +42,19 @@ export async function postVideo(data) {
     }
 };
 
+export async function editVideo(data) {
+    try {
+        await httpRequest({
+            method: 'patch',
+            url: `videos/${data.id}`,
+            data: data,
+           
+        })
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 export async function deleteVideo(id) {
     try {
         await httpRequest({

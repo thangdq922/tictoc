@@ -136,7 +136,7 @@ function EditProfile({ open, close }) {
                                 </div>
                             </div>
                             <div className={styles.footer}>
-                                <button className={styles.cancel} type="reset"  >Cancel</button>
+                                <button className={styles.cancel} onClick={close}>Cancel</button>
                                 <button
                                     className={styles.save}
                                     disabled={isLoading || (!isDirty && !filePreview)}

@@ -18,20 +18,26 @@ import { getUser } from "../../../../hooks/auth/user.localstore"
 import Menu from "../../../../component/Popper/Menu/Menu"
 import * as videosService from '../../../../services/video/videoService'
 import { StompContext } from '../../../../utils/StompClientProvider'
+import EditVideo from "./EditVideo"
+import useModal from "../../../../hooks/useModal"
 
 
 function VideoInfo({ id, user, caption, music }) {
   const [source, target] = useSingleton({ overrides: ['offset'] });
   const [userChange, setUserChange] = useState(user);
+  const [capt, setcapt] = useState(caption);
+
   const client = useContext(StompContext);
   const navigate = useNavigate();
+  const { isOpen, toggle } = useModal()
   const userCurrent = getUser()?.data
 
-
   const videoSetting = [
-    { title: "Privacy Settings", settingV: true },
+    { title: "Video Settings", settingV: true },
     { title: "Delete", settingV: true, separate: true }
   ]
+
+  const editCapt = (data) => setcapt(data)
 
   const handleFollow = async () => {
     if (!userCurrent) {
@@ -54,6 +60,7 @@ function VideoInfo({ id, user, caption, music }) {
 
   // Delete a video
   const handleMenuChange = (menuItem) => {
+    menuItem.title === 'Video Settings' && toggle()
     menuItem.title === 'Delete' && deleteVideo()
   }
   const deleteVideo = async () => {
@@ -65,57 +72,66 @@ function VideoInfo({ id, user, caption, music }) {
   };
 
   return (
-    <div className={styles['video-info']}>
-      <Link to={config.profileLink(userChange.userName)} className={styles['author-name']} >
-        <Tippy singleton={target} offset={[130, 3]}>
-          <Image className={styles.avatar} src={userChange.avatar} alt="avt" />
-        </Tippy>
-      </Link>
-
-      <div className={styles['video-info-content']}>
-        <div className={styles['author-name']} >
-          <Tippy singleton={target} offset={[30, 30]}>
-            <Link to={config.profileLink(userChange.userName)}  >
-              <span className={styles.name}>{userChange.userName}</span>
-              {userChange.tick && < FontAwesomeIcon className={styles['check']} icon={faCheckCircle} />}
-              <span className={styles.userName}>{userChange.name}</span>
-            </Link>
+    <>
+      {(userCurrent && isOpen) && <EditVideo open={isOpen} close={toggle} caption={capt} id={id} edit={editCapt} />}
+      <div className={styles['video-info']}>
+        <Link to={config.profileLink(userChange.userName)} className={styles['author-name']} >
+          <Tippy singleton={target} offset={[130, 3]}>
+            <Image className={styles.avatar} src={userChange.avatar} alt="avt" />
           </Tippy>
-        </div>
+        </Link>
 
-        <div >{caption}</div>
-        <div className={styles.music}>
-          <Link style={{ color: 'rgba(43, 93, 185, 1)' }}>#gà</Link>
-          <p>
+        <div className={styles['video-info-content']}>
+          <div className={styles['author-name']} >
+            <Tippy singleton={target} offset={[30, 30]}>
+              <Link to={config.profileLink(userChange.userName)}  >
+                <span className={styles.name}>{userChange.userName}</span>
+                {userChange.tick && < FontAwesomeIcon className={styles['check']} icon={faCheckCircle} />}
+                <span className={styles.userName}>{userChange.name}</span>
+              </Link>
+            </Tippy>
+          </div>
+
+          {capt.split(" ").map((cap, index) =>
+            <span key={index}>
+              {cap.charAt(0) !== '#' ?
+                <span>{cap}</span>
+                : <Link style={{ color: '#2b5db9', marginBottom: 0 }} className={styles.music}>{cap}</Link>
+              }
+              &nbsp;
+            </span>
+          )}
+
+          <div className={styles.music}>
             <MusicIcon />
             <Link>{music || `Nhạc nền - ${userChange.userName}`}</Link>
-          </p>
-        </div>
-      </div>
-      <Tippy interactive delay={[800, 200]} placement="bottom" render={renderPreview} singleton={source} />
-
-      {(userCurrent?.id === userChange.id || userCurrent?.id === 1) ?
-        <Menu items={videoSetting} onChange={handleMenuChange} offset={[10,-70]} >
-          <div style={{ marginTop: 10 }} >
-            <HiOutlineDotsHorizontal size={24} style={{cursor: 'pointer'}} />
           </div>
-        </Menu>
-        : <div onClick={handleFollow} style={{ cursor: 'pointer' }}>
-          {userChange.followed ? (
-            <Button text small className={styles['follow-btn']}>
-              Following
-            </Button>
-          ) : (
-            <WrapperAuth>
-              <Button outline small className={styles['follow-btn']} >
-                Follow
-              </Button>
-            </WrapperAuth>
-          )}
         </div>
-      }
+        <Tippy interactive delay={[800, 200]} placement="bottom" render={renderPreview} singleton={source} />
 
-    </div>
+        {(userCurrent?.id === userChange.id || userCurrent?.id === 1) ?
+          <Menu items={videoSetting} onChange={handleMenuChange} offset={[10, -70]} >
+            <div style={{ marginTop: 10 }} >
+              <HiOutlineDotsHorizontal size={24} style={{ cursor: 'pointer' }} />
+            </div>
+          </Menu>
+          : <div onClick={handleFollow} style={{ cursor: 'pointer' }}>
+            {userChange.followed ? (
+              <Button text small className={styles['follow-btn']}>
+                Following
+              </Button>
+            ) : (
+              <WrapperAuth>
+                <Button outline small className={styles['follow-btn']} >
+                  Follow
+                </Button>
+              </WrapperAuth>
+            )}
+          </div>
+        }
+
+      </div>
+    </>
   )
 }
 

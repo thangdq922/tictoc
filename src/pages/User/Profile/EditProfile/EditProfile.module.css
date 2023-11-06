@@ -51,10 +51,20 @@
                 }
 
                 .close-button {
-                    width: 24px;
-                    height: 24px;
+                    width: 36px;
+                    height: 36px;
                     cursor: pointer;
                     margin-right: 12px;
+                    border-radius: 50%;
+                    background-color: #f1f2f4;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    &:hover {
+                        border-color: #f1f2f4;
+                        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #f1f2f4;
+                    }
                 }
             }
 
